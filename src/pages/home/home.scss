@@ -1,4 +1,5 @@
-$firstColor: #ff993d;
+$orangeColor: #ff993d;
+$blueColor: #2A2F39;
 page-home {  
   * {
     padding: 0;
@@ -25,9 +26,10 @@ page-home {
     font-size: 20px;
     font-family: 'Open Sans', sans-serif;
   }
-  .selectedCity {
+  #selectedCity {
     font-size: 40px;
     color: $firstColor;
     font-weight: bold;
+    padding-left: 19px;
   }
 }
