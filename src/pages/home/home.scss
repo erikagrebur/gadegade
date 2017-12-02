@@ -14,10 +14,10 @@ page-home {
     padding: 0px !important;
   }
   .darkBluePolygon {
-    height:736px;
+    height:340px;
     width: 100%;
-    -webkit-clip-path: polygon(0 0, 100% 0, 100% 36%, 0 46%);
-    clip-path: polygon(0 0, 100% 0, 100% 36%, 0 46%);
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 78%, 0 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 78%, 0 100%);
     background-color: $blueColor;
   }
   #firstTitle {
@@ -38,6 +38,7 @@ page-home {
     background-color: $fadedGreyColor;
     margin-left: $horizontalSideSpace;
     margin-top: 3px;
+    height: 1px;
   }
 
   .homePagelogo {
@@ -56,5 +57,95 @@ page-home {
     font-size: 15px;
     margin: 48px 0 0 $horizontalSideSpace;
 
+  }
+
+  .gameCardContainer {
+    margin: 0 $horizontalSideSpace;
+    position: relative;
+    top: -129px;
+  }
+
+  .gameCardContainer .card-md, .gameCardContainer .card {
+    margin: 0px;
+    width: 100%;
+    border-radius: 10px 10px 0 0;
+  }
+
+  .gameCardImgContainer {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    border-radius: 10px 10px 0 0;
+  }
+
+  .gameCardImg {
+    border-radius: 10px 10px 0 0;
+  }
+
+  .gameCardImgFade {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 10px 10px 0 0;
+  }
+
+  .gameCardContent {
+    position: relative;
+  }
+
+  .gameCardTitle {
+    font-size: 20px;
+    color: $fontColorOnWhite;
+    margin: 0px;
+    padding: 0px;
+  }
+
+  .gameCardInformation {
+    color: $fontGreyColor;
+    font-size: 10px;
+    margin-top: 0px;
+    padding-top: 0px;
+  }
+
+  .gameCardDescription {
+    color: $fontColorOnWhite;
+    font-size: 12px;
+    margin-top: 10px;
+  }
+
+  .gameCardRatingField {
+    position: absolute;
+    top: 13px;
+    right: 10px;
+  }
+
+  .gameCardStarsItem {
+    width: 15px;
+    display: inline-block;
+  }
+
+  .gameCardRatingCount {
+    font-size: 8px;
+    color: $fontGreyColor;
+    float: right;
+    margin: -2px;
+  }
+
+  .gameCardDifficulty {
+    background-color: #FF603D;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 13px;
+    text-align: center;
+    width: 67px;
+    color: white;
+    padding: 6px 0px 4px 0;
+    border-radius: 5px;
+    position: absolute;
+    top: 15px;
+    right: 15px;
   }
 }
