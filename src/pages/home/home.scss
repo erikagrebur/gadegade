@@ -17,18 +17,18 @@ page-home {
     width: 100%;
     -webkit-clip-path: polygon(0 0, 100% 0, 100% 36%, 0 46%);
     clip-path: polygon(0 0, 100% 0, 100% 36%, 0 46%);
-    background-color: #2A2F39;
+    background-color: $blueColor;
   }
   #firstTitle {
     padding: 39px 0 0 19px;
-    color: $firstColor;
+    color: $orangeColor;
     font-weight: normal;
     font-size: 20px;
     font-family: 'Open Sans', sans-serif;
   }
   #selectedCity {
     font-size: 40px;
-    color: $firstColor;
+    color: $orangeColor;
     font-weight: bold;
     padding-left: 19px;
   }
