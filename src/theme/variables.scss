@@ -22,7 +22,10 @@ $app-direction: ltr;
 // To view all the possible Ionic variables, see:
 // http://ionicframework.com/docs/theming/overriding-ionic-variables/
 
-
+$orangeColor: #ff993d;
+$blueColor: #2A2F39;
+$fadedGreyColor: rgba(148, 151, 153, 0.45);
+$horizontalSideSpace: 19px;
 
 
 // Named Color Variables
@@ -86,3 +89,4 @@ $colors: (
 
 @import "roboto";
 @import "noto-sans";
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');

@@ -1,6 +1,7 @@
-$orangeColor: #ff993d;
-$blueColor: #2A2F39;
-page-home {  
+page-home { 
+  body {
+    font-family: 'Open Sans', sans-serif;
+  } 
   * {
     padding: 0;
     margin: 0;
@@ -20,16 +21,40 @@ page-home {
     background-color: $blueColor;
   }
   #firstTitle {
-    padding: 39px 0 0 19px;
+    padding: 39px 0 0 $horizontalSideSpace;
     color: $orangeColor;
     font-weight: normal;
     font-size: 20px;
-    font-family: 'Open Sans', sans-serif;
   }
   #selectedCity {
     font-size: 40px;
     color: $orangeColor;
     font-weight: bold;
-    padding-left: 19px;
+    padding-left: $horizontalSideSpace;
+  }
+
+  .selectedCityLine {
+    width: 150px;
+    background-color: $fadedGreyColor;
+    margin-left: $horizontalSideSpace;
+    margin-top: 3px;
+  }
+
+  .homePagelogo {
+    float: right;
+    width: 110px;
+    margin-top: 39px;
+    margin-right: $horizontalSideSpace;
+  }
+
+  .titleDiv {
+    display: inline-block;
+  }
+
+  .signupLine {
+    color: $orangeColor;
+    font-size: 15px;
+    margin: 48px 0 0 $horizontalSideSpace;
+
   }
 }
