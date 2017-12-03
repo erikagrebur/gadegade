@@ -18,20 +18,20 @@
     <div class="wordSearchItem" id="mLetter" (tap)="tapped('mLetter')">
       <p class="wordSearchLetter">M</p>
     </div>
-    <div class="wordSearchItem" id="gLetter" (tap)="tapped('gLetter')">
+    <div class="wordSearchItem" id="gLetter" (press)="tapped('gLetter')">
       <p class="wordSearchLetter">G</p>
     </div>
-    <div class="wordSearchItem">
+    <div class="wordSearchItem" id="aLetter" (pan)="tapped('aLetter')">
       <p class="wordSearchLetter">Å</p>
     </div>
     <div class="clearFloat"></div>
-    <div class="wordSearchItem">
+    <div class="wordSearchItem" id="jLetter" (swipe)="tapped('jLetter')">
       <p class="wordSearchLetter">J</p>
     </div>
-    <div class="wordSearchItem">
+    <div class="wordSearchItem" id="rLetter" (rotate)="tapped('rLetter')">
       <p class="wordSearchLetter">R</p>
     </div>
-    <div class="wordSearchItem">
+    <div class="wordSearchItem" id="iLetter" (pinch)="tapped('iLetter')">
       <p class="wordSearchLetter">I</p>
     </div>
     <div class="clearFloat"></div>
