@@ -1,0 +1,125 @@
+<!--
+  Generated template for the GameDetailsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+
+<!-- <ion-header>
+  <ion-navbar>
+    <ion-title>gameDetails</ion-title>
+  </ion-navbar>
+</ion-header>-->
+
+
+<ion-content>
+  <div class="coverImgContainer">
+    <img src="../../assets/imgs/homePageImgs/asgard.JPG" alt="cover image" class="coverImg">
+    <div class="coverImgFade"></div>
+    <div class="coverImgDifficulty">easy</div>
+  </div>
+  <div class="gameDetailsContent">
+    <div class="gameDetailsTitle">
+      <h1 class="gameDetailsTitle leftSideSpace">A God in Esbjerg</h1>
+      <p class="gameDetailsCreator leftSideSpace">by Gåde Gade Team</p>
+    </div>
+    <div class="gameDetailsRatingField rightSideSpace">
+      <div class="gameDetailsStars">
+        <img src="../../assets/imgs/homePageImgs/star_full.png" alt="rating star" class="gameDetailsStarsItem">
+        <img src="../../assets/imgs/homePageImgs/star_full.png" alt="rating star" class="gameDetailsStarsItem">
+        <img src="../../assets/imgs/homePageImgs/star_full.png" alt="rating star" class="gameDetailsStarsItem">
+        <img src="../../assets/imgs/homePageImgs/star_full.png" alt="rating star" class="gameDetailsStarsItem">
+        <img src="../../assets/imgs/homePageImgs/star_full.png" alt="rating star" class="gameDetailsStarsItem">
+      </div>
+      <p class="gameDetailsRatingCount">3,456 rating</p>
+    </div>
+    <div class="gameDetailsInformationsContainer leftSideSpace rightSideSpace">
+      <div class="gameDetailsOneInfo">
+        <hr class="gameDetailsSeparateLine">
+          <ion-row class="gameDetailsRow">
+            <ion-col col-1 class="firstColumn">
+                <ion-icon name="icon-ownDurationIcon" class="gameDetailsIcon"></ion-icon>
+            </ion-col>
+            <ion-col col-3 class="secondColumn">
+                <p class="gameDetailsInformationTitle">Duration</p>
+            </ion-col>
+            <ion-col col-8 align-self-end>
+                <p class="gameDetailsInformationValue">45 min</p>
+            </ion-col>
+          </ion-row>
+      </div>
+      <div class="gameDetailsOneInfo">
+        <hr class="gameDetailsSeparateLine">
+          <ion-row class="gameDetailsRow separateRow">
+            <ion-col col-1 class="firstColumn">
+                <ion-icon name="icon-ownStartingIcon" class="gameDetailsIcon"></ion-icon>
+            </ion-col>
+            <ion-col col-5 class="secondColumn">
+                <p class="gameDetailsInformationTitle">Starting point</p>
+            </ion-col>
+            <ion-col col-6 class="streetDown">
+                <p class="gameDetailsInformationValue">Spangsbjerg Kirkevej 103</p>
+            </ion-col>
+          </ion-row>
+          <ion-row align-items-end>
+            <ion-col class="cityUp">
+                <p class="gameDetailsInformationValue">6700 Esbjerg</p>
+            </ion-col>
+          </ion-row>
+      </div>
+      <div class="gameDetailsOneInfo">
+        <hr class="gameDetailsSeparateLine">
+          <ion-row class="gameDetailsRow separateRow">
+            <ion-col col-1 class="firstColumn">
+                <ion-icon name="icon-ownEndingIcon" class="gameDetailsIcon"></ion-icon>
+            </ion-col>
+            <ion-col col-3 class="secondColumn">
+                <p class="gameDetailsInformationTitle">Ending point</p>
+            </ion-col>
+            <ion-col col-8 class="streetDown">
+                <p class="gameDetailsInformationValue">Havnegade 22</p>
+            </ion-col>
+          </ion-row>
+          <ion-row align-items-end>
+              <ion-col class="cityUp">
+                  <p class="gameDetailsInformationValue">6700 Esbjerg</p>
+              </ion-col>
+            </ion-row>
+      </div>
+      <div class="gameDetailsOneInfo">
+        <hr class="gameDetailsSeparateLine">
+          <ion-row class="gameDetailsRow">
+            <ion-col col-1 class="firstColumn">
+                <ion-icon name="icon-ownTimeIcon" class="gameDetailsIcon"></ion-icon>
+            </ion-col>
+            <ion-col col-4 class="secondColumn">
+                <p class="gameDetailsInformationTitle">Best time to play</p>
+            </ion-col>
+            <ion-col col-7 align-self-end>
+                <p class="gameDetailsInformationValue">Tuesday - Sunday: 10:00 - 16:00</p>
+            </ion-col>
+          </ion-row>
+      </div>
+      <div class="gameDetailsOneInfo">
+        <hr class="gameDetailsSeparateLine">
+        <ion-row class="gameDetailsRow">
+          <ion-col col-1 class="firstColumn">
+              <ion-icon name="icon-ownLanguageIcon" class="gameDetailsIcon"></ion-icon>
+          </ion-col>
+          <ion-col col-5 class="secondColumn">
+              <p class="gameDetailsInformationTitle">Available languages</p>
+          </ion-col>
+          <ion-col col-6 align-self-end>
+              <p class="gameDetailsInformationValue">English</p>
+          </ion-col>
+        </ion-row>
+        <hr class="gameDetailsSeparateLine"> 
+      </div>
+      <p>A God need some help because he lost his power. He think that you are the best person for searching but you have to prove your bravery. Go through the city and find clues which can help him.</p>
+      <button class="startButton" (click)="getGameDescription()">Start</button>
+
+      <ion-icon name="ownDurationIcon"></ion-icon>
+    </div>
+  </div>
+
+</ion-content>

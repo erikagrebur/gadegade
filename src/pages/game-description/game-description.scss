@@ -1,0 +1,54 @@
+page-game-description {
+    * {
+        font-family: 'Open Sans', sans-serif;
+    }
+
+    .leftSideSpace {
+        margin-left: $horizontalSideSpace;
+    }
+
+    .rightSideSpace {
+        margin-right: $horizontalSideSpace;
+    }
+
+    .headerDiv {
+        height: auto;
+        background: $blueColor;
+    }
+
+    .headerDiv h1 {
+        font-size: 30px;
+        font-weight: bold;
+        color: $orangeColor;
+        text-align: center;
+        margin: 0px;
+        padding: 10px 0;
+    }
+
+    .descriptionImgContainer {
+        border: 1px solid rgba(148, 151, 153, 0.45);
+        width: 150px;
+        padding: 8px 7px 4px 7px;
+        border-radius: 10px;
+        box-shadow: 1px 1px 20px rgba(0,0,0,0.1);
+        margin: 20px auto;
+    }
+
+    .descriptionImg {
+        width: auto;
+    }
+
+    .descriptionContent {
+        font-size: 12px;
+        line-height: 1.5em;
+        text-align: justify;
+    }
+
+    .slide {
+      margin-top: 80px;
+      float: right;
+      color: $orangeColor;
+      margin-right: $horizontalSideSpace;
+      margin-bottom: 20px;
+    }
+}

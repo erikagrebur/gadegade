@@ -1,0 +1,123 @@
+page-game-details {
+    * {
+        font-family: 'Open Sans', sans-serif;
+      } 
+
+    .coverImgContainer {
+      width: 100%;
+      position: relative;
+    }
+
+    .coverImgFade {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: rgba(255, 255, 255, 0.4);
+    }
+
+    .coverImgDifficulty {
+      background-color: #FF603D;
+      text-transform: uppercase;
+      font-weight: bold;
+      font-size: 13px;
+      text-align: center;
+      width: 67px;
+      color: white;
+      padding: 6px 0px 4px 0;
+      border-radius: 5px;
+      position: absolute;
+      top: 15px;
+      right: 15px;
+    }
+
+    .gameDetailsContent {
+        position: relative;
+    }
+
+    .gameDetailsRatingField {
+      position: absolute;
+      top: 13px;
+      right: 10px;
+    }
+
+    .gameDetailsStarsItem {
+      width: 15px;
+      display: inline-block;
+    }
+
+    .gameDetailsRatingCount {
+      font-size: 8px;
+      color: $fontGreyColor;
+      float: right;
+      margin: -2px 1px 0 0;
+    }
+
+    .gameDetailsTitle {
+        margin-bottom: 0px;
+    }
+
+    .gameDetailsCreator {
+      font-size: 12px;
+      color: $fontColorOnWhite;
+      margin-top: 5px;
+    }
+
+    .leftSideSpace {
+        margin-left: $horizontalSideSpace;
+    }
+
+    .rightSideSpace {
+        margin-right: $horizontalSideSpace;
+    }
+
+    .gameDetailsSeparateLine {
+        background: $fadedGreyColor;
+        margin: 2px 0;
+    }
+
+    .gameDetailsInformationTitle {
+      font-weight: bold;
+      margin: 2px 0;
+      font-size: 12px;
+    }
+
+    .gameDetailsInformationValue {
+        margin: 3px 0;
+        float: right;
+        font-size: 12px;
+    }
+
+    .firstColumn {
+        padding-right: 0px;
+    }
+
+    .secondColumn {
+        padding-left: 0px;
+    }
+
+    .streetDown {
+        padding-bottom: 0px;
+    }
+
+    .separateRow {
+        height: 24px;
+    }
+
+    .cityUp {
+        padding-top: 0px;
+    }
+
+    .startButton {
+        width: 100%;
+        background-color: #ff993d;
+        padding: 10px 0px;
+        color: white;
+        font-weight: 900;
+        letter-spacing: 1px;
+        border-radius: 10px;
+        text-transform: uppercase;
+    }
+
+}

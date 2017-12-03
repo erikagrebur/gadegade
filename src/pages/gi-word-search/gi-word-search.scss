@@ -1,0 +1,60 @@
+page-gi-word-search {
+    * {
+        font-family: 'Open Sans', sans-serif;
+      }
+    
+    .leftSideSpace {
+        margin-left: $horizontalSideSpace;
+    }
+
+    .rightSideSpace {
+        margin-right: $horizontalSideSpace;
+    }
+
+    .headerDiv {
+        height: auto;
+        background: $blueColor;
+    }
+
+    .headerDiv h1 {
+        font-size: 30px;
+        font-weight: bold;
+        color: $orangeColor;
+        text-align: center;
+        margin: 0px;
+        padding: 10px 0;
+    }
+
+    .giWordSearch {
+        font-size: 12px;
+        line-height: 1.5em;
+        text-align: justify;
+    }
+
+    .wordSearchPad {
+        width: 225px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 40px;
+    }
+
+    .wordSearchItem {
+        width: 75px;
+        height: 75px;
+        background: $blueColor;
+        border: 1px solid $fadedGreyColor;
+        float: left;
+    }
+
+    .wordSearchLetter {
+        color: $orangeColor;
+        font-size: 15px;
+        font-weight: bold;
+        text-align: center;
+        margin: 27.5px 0px;
+    }
+
+    .clearFloat {
+        clear: both;
+    }
+}

@@ -7,9 +7,12 @@ import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
+import { GameDetailsPage } from '../pages/game-details/game-details';
+import { GameDescriptionPage } from '../pages/game-description/game-description';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { GiWordSearchPage } from '../pages/gi-word-search/gi-word-search';
 
 @NgModule({
   declarations: [
@@ -17,7 +20,10 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage
+    TabsPage,
+    GameDetailsPage,
+    GameDescriptionPage,
+    GiWordSearchPage
   ],
   imports: [
     BrowserModule,
@@ -29,7 +35,10 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage
+    TabsPage,
+    GameDetailsPage,
+    GameDescriptionPage,
+    GiWordSearchPage
   ],
   providers: [
     StatusBar,

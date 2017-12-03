@@ -92,6 +92,21 @@ page-home {
     border-radius: 10px 10px 0 0;
   }
 
+  .gameCardDifficulty {
+    background-color: #FF603D;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 13px;
+    text-align: center;
+    width: 67px;
+    color: white;
+    padding: 6px 0px 4px 0;
+    border-radius: 5px;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+  }
+
   .gameCardContent {
     position: relative;
   }
@@ -132,20 +147,5 @@ page-home {
     color: $fontGreyColor;
     float: right;
     margin: -2px 1px 0 0;
-  }
-
-  .gameCardDifficulty {
-    background-color: #FF603D;
-    text-transform: uppercase;
-    font-weight: bold;
-    font-size: 13px;
-    text-align: center;
-    width: 67px;
-    color: white;
-    padding: 6px 0px 4px 0;
-    border-radius: 5px;
-    position: absolute;
-    top: 15px;
-    right: 15px;
   }
 }
