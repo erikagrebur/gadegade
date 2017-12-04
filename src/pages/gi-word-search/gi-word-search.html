@@ -15,33 +15,33 @@
   </div>
   <p class="giWordSearchContent leftSideSpace rightSideSpace">You offer your help to Thor, because the mission sounds exciting. But Thor want to test whether you are worthy of help. He ask a question: <strong>do you remember the name of his hammer?</strong></p>
   <div class="wordSearchPad">
-    <div class="wordSearchItem" id="mLetter" (mouseover)="tapped('mLetter')">
+    <div class="wordSearchItem" id="mLetter" (mousedown)="tapped('mLetter')">
       <p class="wordSearchLetter">M</p>
     </div>
-    <div class="wordSearchItem" id="gLetter" (mouseover)="tapped('gLetter')">
+    <div class="wordSearchItem" id="gLetter" (mousedown)="tapped('gLetter')">
       <p class="wordSearchLetter">G</p>
     </div>
-    <div class="wordSearchItem" id="aLetter" (mouseover)="tapped('aLetter')">
+    <div class="wordSearchItem" id="aLetter" (mousedown)="tapped('aLetter')">
       <p class="wordSearchLetter">Å</p>
     </div>
     <div class="clearFloat"></div>
-    <div class="wordSearchItem" id="jLetter" (mouseover)="tapped('jLetter')">
+    <div class="wordSearchItem" id="jLetter" (mousemove)="tapped('jLetter')">
       <p class="wordSearchLetter">J</p>
     </div>
-    <div class="wordSearchItem" id="rLetter" (mouseover)="tapped('rLetter')">
+    <div class="wordSearchItem" id="rLetter" (mousemove)="tapped('rLetter')">
       <p class="wordSearchLetter">R</p>
     </div>
-    <div class="wordSearchItem" id="iLetter" (mouseover)="tapped('iLetter')">
+    <div class="wordSearchItem" id="iLetter" (mousemove)="tapped('iLetter')">
       <p class="wordSearchLetter">I</p>
     </div>
     <div class="clearFloat"></div>
-    <div class="wordSearchItem" id="oLetter" (mouseover)="tapped('oLetter')">
+    <div class="wordSearchItem" id="oLetter" (dragstart)="tapped('oLetter')">
       <p class="wordSearchLetter">O</p>
     </div>
-    <div class="wordSearchItem" id="lLetter" (mouseover)="tapped('lLetter')">
+    <div class="wordSearchItem" id="lLetter" (dragstart)="tapped('lLetter')">
       <p class="wordSearchLetter">L</p>
     </div>
-    <div class="wordSearchItem" id="nLetter" (mouseover)="tapped('nLetter')">
+    <div class="wordSearchItem" id="nLetter" (dragstart)="tapped('nLetter')">
       <p class="wordSearchLetter">N</p>
     </div>
   </div>
