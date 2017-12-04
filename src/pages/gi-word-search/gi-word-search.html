@@ -15,33 +15,33 @@
   </div>
   <p class="giWordSearchContent leftSideSpace rightSideSpace">You offer your help to Thor, because the mission sounds exciting. But Thor want to test whether you are worthy of help. He ask a question: <strong>do you remember the name of his hammer?</strong></p>
   <div class="wordSearchPad">
-    <div class="wordSearchItem" id="mLetter" (touchstart)="tapped('mLetter')">
+    <div class="wordSearchItem" id="oneOneLetter" (touchstart)="tapDown('oneOneLetter')" (touchend)="tapUp('oneOneLetter', 'M')">
       <p class="wordSearchLetter">M</p>
     </div>
-    <div class="wordSearchItem" id="gLetter" (touchstart)="tapped('gLetter')">
+    <div class="wordSearchItem" id="oneTwoLetter" (touchstart)="tapDown('oneTwoLetter')" (touchend)="tapUp('oneTwoLetter', 'G')">
       <p class="wordSearchLetter">G</p>
     </div>
-    <div class="wordSearchItem" id="aLetter" (touchstart)="tapped('aLetter')">
+    <div class="wordSearchItem" id="oneThreeLetter" (touchstart)="tapDown('oneThreeLetter')" (touchend)="tapUp('oneThreeLetter', 'Å')">
       <p class="wordSearchLetter">Å</p>
     </div>
     <div class="clearFloat"></div>
-    <div class="wordSearchItem" id="jLetter" (touchmove)="tapped('jLetter')">
+    <div class="wordSearchItem" id="twoOneLetter" (touchstart)="tapDown('twoOneLetter')" (touchend)="tapUp('twoOneLetter', 'J')">
       <p class="wordSearchLetter">J</p>
     </div>
-    <div class="wordSearchItem" id="rLetter" (touchmove)="tapped('rLetter')">
+    <div class="wordSearchItem" id="twoTwoLetter" (touchstart)="tapDown('twoTwoLetter')" (touchend)="tapUp('twoTwoLetter', 'R')">
       <p class="wordSearchLetter">R</p>
     </div>
-    <div class="wordSearchItem" id="iLetter" (touchmove)="tapped('iLetter')">
+    <div class="wordSearchItem" id="twoThreeLetter" (touchstart)="tapDown('twoThreeLetter')" (touchend)="tapUp('twoThreeLetter', 'I')">
       <p class="wordSearchLetter">I</p>
     </div>
     <div class="clearFloat"></div>
-    <div class="wordSearchItem" id="oLetter" (touchenter)="tapped('oLetter')">
+    <div class="wordSearchItem" id="threeOneLetter" (touchstart)="tapDown('threeOneLetter')" (touchend)="tapUp('threeOneLetter', 'O')">
       <p class="wordSearchLetter">O</p>
     </div>
-    <div class="wordSearchItem" id="lLetter" (touchenter)="tapped('lLetter')">
+    <div class="wordSearchItem" id="threeTwoLetter" (touchstart)="tapDown('threeTwoLetter')" (touchend)="tapUp('threeTwoLetter', 'L')">
       <p class="wordSearchLetter">L</p>
     </div>
-    <div class="wordSearchItem" id="nLetter" (touchenter)="tapped('nLetter')">
+    <div class="wordSearchItem" id="threeThreeLetter" (touchstart)="tapDown('threeThreeLetter')" (touchend)="tapUp('threeThreeLetter', 'N')">
       <p class="wordSearchLetter">N</p>
     </div>
   </div>
