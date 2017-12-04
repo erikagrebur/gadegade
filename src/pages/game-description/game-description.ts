@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { GiWordSearchPage } from '../gi-word-search/gi-word-search';
+import { HomePage } from '../home/home';
 
 /**
  * Generated class for the GameDescriptionPage page.
@@ -27,15 +28,7 @@ export class GameDescriptionPage {
     if ( tabs !== null ) {
       Object.keys(tabs).map((key) => {
         tabs[ key ].style.transform = 'translateY(56px)';
-      });
-    } // end if
-  }
-
-  ionViewDidLeave() {
-    let tabs = document.querySelectorAll('.tabbar');
-    if ( tabs !== null ) {
-      Object.keys(tabs).map((key) => {
-        tabs[ key ].style.transform = 'translateY(0)';
+        tabs[ key ].style.display = 'none';
       });
     } // end if
   }

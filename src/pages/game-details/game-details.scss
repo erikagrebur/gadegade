@@ -118,6 +118,30 @@ page-game-details {
         letter-spacing: 1px;
         border-radius: 10px;
         text-transform: uppercase;
+        margin-bottom: 100px;
+    }
+
+    .fakeBottomMenu {
+        height: 56px;
+        width: 100%;
+        position: fixed;
+        bottom: 0;
+        background: rgb(248,248,248);
+        border-top: 1px solid rgb(237,237,237);
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+
+    .bottomMenuIconContainer {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+    }
+
+    .bottomMenuIconContainer img {
+        width: 37px;
+        height: auto;
     }
 
 }

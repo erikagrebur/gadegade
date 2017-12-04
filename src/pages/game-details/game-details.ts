@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { GameDescriptionPage } from '../game-description/game-description';
+import { HomePage } from '../home/home';
 
 /**
  * Generated class for the GameDetailsPage page.
@@ -22,4 +23,18 @@ export class GameDetailsPage {
     this.navCtrl.push(GameDescriptionPage);
   }
 
+  getHomePage() {
+    this.navCtrl.push(HomePage);
+  }
+
+  ionViewWillEnter() {
+    let tabs = document.querySelectorAll('.tabbar');
+    if ( tabs !== null ) {
+      Object.keys(tabs).map((key) => {
+        tabs[ key ].style.transform = 'translateY(56px)';
+        tabs[ key ].style.display = 'none';
+      });
+    } // end if
+  }
+  
 }
