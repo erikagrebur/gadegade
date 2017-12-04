@@ -57,4 +57,13 @@ page-gi-word-search {
     .clearFloat {
         clear: both;
     }
+
+    #slide {
+        bottom: 20px;
+        position: fixed;
+        float: right;
+        color: rgba(148, 151, 153, 0.45);
+        right: 25px;
+        margin: 0px;
+      }
 }

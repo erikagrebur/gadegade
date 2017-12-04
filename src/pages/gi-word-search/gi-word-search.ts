@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { HomePage } from '../home/home';
 
 /**
  * Generated class for the GiWordSearchPage page.
@@ -35,10 +36,8 @@ export class GiWordSearchPage {
           this.typedWord += value;
           if(value === this.answer[this.selectedLetters.length - 1]) {
             if(this.typedWord === this.answer) {
-              console.log(this.typedWord);
-              console.log(this.answer);
+              document.getElementById("slide").style.color = "#ff993d";
               this.answered = true;
-              console.log(this.answered);
             }
           } else {
             for(let i =0; i < this.selectedLetters.length; i++) {
@@ -61,6 +60,10 @@ export class GiWordSearchPage {
   
       console.log("type: " + this.typedWord);
     }
+  }
+
+  getNextGameItem() {
+    this.navCtrl.push(HomePage);
   }
 
 }
