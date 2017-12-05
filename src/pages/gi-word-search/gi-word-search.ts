@@ -64,9 +64,8 @@ export class GiWordSearchPage {
 
   getNextGameItem() {
     if(this.answered) {
-      this.navCtrl.push(HomePage).then(end => {
-        this.answered = false;
-      });
+      this.answered = false;
+      this.navCtrl.push(HomePage);
     }
   }
 
