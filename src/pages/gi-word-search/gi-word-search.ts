@@ -22,7 +22,9 @@ export class GiWordSearchPage {
   }
 
   tapDown(e) {
+    console.log("előtte");
     if(!this.answered) {
+      console.log("utánna");
       document.getElementById(e).style.backgroundColor = "#ff993d";
       document.getElementById(e).getElementsByTagName("p")[0].style.color = "#2A2F39";
     }
