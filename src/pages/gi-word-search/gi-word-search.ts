@@ -63,7 +63,11 @@ export class GiWordSearchPage {
   }
 
   getNextGameItem() {
-    this.navCtrl.push(HomePage);
+    if(this.answered) {
+      this.navCtrl.push(HomePage).then(end => {
+        this.answered = false;
+      });
+    }
   }
 
 }

@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { GiWordSearchPage } from '../gi-word-search/gi-word-search';
-import { HomePage } from '../home/home';
 
 /**
  * Generated class for the GameDescriptionPage page.
