@@ -18,13 +18,25 @@ export class GiWordSearchPage {
   answer : String = 'MJOLNIR';
   selectedLetters : String[] = [];
   answered : Boolean = false;
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    
+  }
+
+  ionViewWillEnter() {
+      for(let i = 0; i < document.getElementsByClassName('wordSearchPad')[0].getElementsByTagName('div').length; i++) {
+        document.getElementsByClassName('wordSearchPad')[0].getElementsByTagName('div')[i].style.backgroundColor = "#2A2F39";
+      }
+      for(let i = 0; i < document.getElementsByClassName('wordSearchItem').length; i++) {
+        document.getElementsByClassName('wordSearchItem')[i].getElementsByTagName('p')[0].style.color = "#ff993d";
+      }
+      this.selectedLetters = [];
+      this.typedWord = undefined;
+    this.answered = false;
   }
 
   tapDown(e) {
-    console.log("előtte");
     if(!this.answered) {
-      console.log("utánna");
       document.getElementById(e).style.backgroundColor = "#ff993d";
       document.getElementById(e).getElementsByTagName("p")[0].style.color = "#2A2F39";
     }
@@ -38,8 +50,10 @@ export class GiWordSearchPage {
           this.typedWord += value;
           if(value === this.answer[this.selectedLetters.length - 1]) {
             if(this.typedWord === this.answer) {
+              console.log(document.getElementById("slide").style.color);
               document.getElementById("slide").style.color = "#ff993d";
               this.answered = true;
+              console.log(document.getElementById("slide"));
             }
           } else {
             for(let i =0; i < this.selectedLetters.length; i++) {
@@ -59,8 +73,6 @@ export class GiWordSearchPage {
           document.getElementById(e).getElementsByTagName("p")[0].style.color = "#ff993d";
         }
       }
-  
-      console.log("type: " + this.typedWord);
     }
   }
 

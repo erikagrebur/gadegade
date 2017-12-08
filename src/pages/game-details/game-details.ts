@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { GameDescriptionPage } from '../game-description/game-description';
 import { HomePage } from '../home/home';
+import { GiStartGamePage } from '../gi-start-game/gi-start-game';
 
 /**
  * Generated class for the GameDetailsPage page.
@@ -19,8 +19,8 @@ export class GameDetailsPage {
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
-  getGameDescription() {
-    this.navCtrl.push(GameDescriptionPage);
+  getStartGame() {
+    this.navCtrl.push(GiStartGamePage);
   }
 
   getHomePage() {
