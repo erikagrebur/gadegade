@@ -15,8 +15,8 @@
     <div class="wordSearchItem" (touchstart)="tapDown('M')" (touchend)="tapUp()" [ngStyle]="{'backgroundColor': currentSquare === 'M' ? letterDivStyle : ''}">
       <p class="wordSearchLetter" [ngStyle]="{'color': currentSquare === 'M' ? letterStyle : ''}">M</p>
     </div>
-    <div class="wordSearchItem">
-      <p class="wordSearchLetter">G</p>
+    <div class="wordSearchItem" (touchstart)="tapDown('G')" (touchend)="tapUp()" [ngStyle]="{'backgroundColor': currentSquare === 'G' ? letterDivStyle : ''}">
+      <p class="wordSearchLetter" [ngStyle]="{'color': currentSquare === 'G' ? letterStyle : ''}">G</p>
     </div>
     <div class="wordSearchItem" (touchstart)="tapDown('A')" (touchend)="tapUp()" [ngStyle]="{'backgroundColor': currentSquare === 'A' ? letterDivStyle : ''}">
       <p class="wordSearchLetter"  [ngStyle]="{'color': currentSquare === 'A' ? letterStyle : ''}">Å</p>
