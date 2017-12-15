@@ -1,0 +1,55 @@
+<!--
+  Generated template for the ThreeQuestionPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="dark" hideBackButton="true">
+    <ion-title>A God in Esbjerg</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <p class="leftSide rightSide">You found the professor but unfortunatelly he don't belive that Thor is actually Thor. So you should <strong>answer</strong> his <strong>three questions correctly</strong> and with it you can provide that your friend is the real Thor.</p>
+  <div id="questionsContainer" class="leftSide rightSide">
+    <div class="questionDiv">
+      <div class="questionContainer">
+        <p class="questionTitle">Who is the guard of the Bifrost bridge?</p>
+      </div>
+      <div class="answerContainer">
+        <div id="firstLeftArrow" class="leftArrow" (click)="getPrevFirstOption()"></div>
+        <div class="optionContent">
+          <p id="firstOption" class="optionStyle">{{firstOptions[currentFirstOptionIndex]}}</p>
+        </div>
+        <div id="firstRightArrow" class="rightArrow" (click)="getNextFirstOption()"></div>
+      </div>
+    </div>
+    <div class="questionDiv">
+      <div class="questionContainer">
+        <p class="questionTitle">What is the name of Thor's father?</p>
+      </div>
+      <div class="answerContainer">
+        <div id="secondLeftArrow" class="leftArrow" (click)="getPrevSecondOption()"></div>
+        <div class="optionContent">
+          <p id="secondOption" class="optionStyle">{{secondOptions[currentSecondOptionIndex]}}</p>
+        </div>
+        <div id="secondRightArrow" class="rightArrow" (click)="getNextSecondOption()"></div>
+      </div>
+    </div>
+    <div class="questionDiv">
+      <div class="questionContainer">
+        <p class="questionTitle">Where does Loki come from?</p>
+      </div>
+      <div class="answerContainer">
+        <div id="thirdLeftArrow" class="leftArrow" (click)="getPrevThirdOption()"></div>
+        <div class="optionContent">
+          <p id="thirdOption" class="optionStyle">{{thirdOptions[currentThirdOptionIndex]}}</p>
+        </div>
+        <div id="thirdRightArrow" class="rightArrow" (click)="getNextThirdOption()"></div>
+      </div>
+    </div>
+  </div>
+  <p id="slide" class="rightSide" (click)="getNexGameItem()">Slide <ion-icon name="arrow-forward"></ion-icon></p>
+</ion-content>

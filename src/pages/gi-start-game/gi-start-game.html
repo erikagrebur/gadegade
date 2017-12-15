@@ -14,8 +14,30 @@
 
 
 <ion-content>
-  <button (click)="showAlert()">
+  <!-- <button (click)="showAlert()">
     Slide
-  </button>
+  </button> -->
+  <div id="map"></div>
+  <div class="startPointContainer leftSide rightSide">
+      <ion-row class="separateRow">
+        <ion-col col-1 class="firstColumn">
+            <ion-icon name="icon-ownStartingIcon" class="gameDetailsIcon"></ion-icon>
+        </ion-col>
+        <ion-col col-5 class="secondColumn">
+            <p class="gameDetailsInformationTitle">Starting point</p>
+        </ion-col>
+        <ion-col col-6 class="streetDown">
+            <p class="gameDetailsInformationValue">Spangsbjerg Kirkevej 103</p>
+        </ion-col>
+      </ion-row>
+      <ion-row align-items-end>
+        <ion-col class="cityUp">
+            <p class="gameDetailsInformationValue">6700 Esbjerg</p>
+        </ion-col>
+      </ion-row>
+      <hr class="separateLine">
+  </div>
+  <p class="information leftSide rightSide">For the continuous gaming experience you have to enable your GPS connection on your phone. (If you see the noGPS icon on the bottom of the screen, there is some problem with your phone. Please check your settings) Then go to the starting point and the game will start automatically.</p>
+  <img src="../../assets/imgs/gameImgs/00_start/noGPS.PNG" alt="no GPS icon" id="noGpsIcon">
   <p id="slide" (click)="getFirstGameItem()">Slide <ion-icon name="arrow-forward"></ion-icon></p>
 </ion-content>

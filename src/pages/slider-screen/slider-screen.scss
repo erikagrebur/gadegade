@@ -1,0 +1,120 @@
+page-slider-screen {
+    #sliderComponent {
+        height: 80%;
+    }
+
+    .slideIcon {
+        width: 100px;
+        position: absolute;
+        left: 50%;
+        margin-left: -50px;
+        top: 30px;
+        z-index: 5;
+    }
+
+    .slideContainer {
+        height: 100%;
+        position: relative;
+    }
+
+    .slideBackground {
+        height: 100%;
+    }
+
+    .slide-zoom {
+        height: 100%;
+    }
+
+    .slideFade {
+        height: 100%;
+        width: 100%;
+        background: rgba(0,0,0,0.6);
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 3;
+    }
+
+    .slideRoundedIconContainer {
+        position: absolute;
+        top: 60%;
+        z-index: 10;
+        height: 80px;
+        width: 80px;
+        border: 3px solid #ff993d;
+        border-radius: 50%;
+        background: white;
+        left: 50%;
+        margin-left: -40px;
+    }
+
+    .slideRoundedIconImg {
+        position: relative;
+        top: 17%;
+    }
+
+    .slideTitle {
+        color: #ff993d;
+        font-weight: bold;
+        position: absolute;
+        top: 76%;
+        z-index: 10;
+        margin: 0 0 0 -71px;
+        left: 50%;
+    }
+
+    .swiper-pagination-bullet-active {
+        background-color: white !important;
+        width: 12px;
+        height: 12px;
+    } 
+
+    .swiper-pagination-bullet {
+        border: 2px solid white !important;
+        width: 12px;
+        height: 12px;
+        box-sizing: border-box;
+        opacity: 1;
+        background: none;
+    }
+
+    .sameTitle {
+        color: $fontGreyColor;
+        text-align: center;
+    }
+
+    .sliderBottom {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        height: 20%;
+    }
+
+    .introScreen {
+        height: 100%;
+    }
+
+    .startButton {
+        width: 150px;
+        border-radius: 10px;
+        margin-right: $horizontalSideSpace;
+        margin-left: auto;
+        margin-bottom: 15px;
+    }
+
+    .secondIcon {
+        width: 43px;
+        top: 11px;
+    }
+
+    .maxWidthBackground {
+        max-width: none;  
+    }
+
+    .thirdIcon {
+        width: 59px;
+        top: 7px;
+    }
+
+
+}

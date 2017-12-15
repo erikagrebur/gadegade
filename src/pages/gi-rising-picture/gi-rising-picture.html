@@ -1,0 +1,35 @@
+<!--
+  Generated template for the GiRisingPicturePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="dark" hideBackButton="true">
+    <ion-title>A God in Esbjerg</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <input type="text" value="{{currentLng}}">
+  <input type="text" value="{{currentLat}}">
+  <p>{{distance}}</p>
+  <p>{{distanceMeter}}m</p>
+  <p>{{rangeLong}} - range</p>
+  <p>{{width}} - width</p>
+  <p>{{checkedValue}} - checked</p>
+  <p>{{checkPointDist}} - cPoint</p>
+  <p class="leftSide rightSide textJustify">You gave a correct answer! Now you earned Thor's trust.</p>
+  <p class="leftSide rightSide textJustify textDetails">Suddenly comes to your mind that you know a professof who teaches Asgardian history, so you should find him, because maybe he can help for your new friend. You can see some help below, as there is a small picture showing where you should go. <strong>As you approach</strong> the professor, <strong>the size of the picture will increase</strong> and you will be able to see it more and more clear.</p>
+ 
+  <div id="gameItemContainer" class="leftSide rightSide">
+    <div class="risingImgContainer">
+        <img src="assets/imgs/gameImgs/03_rising/library.jpg" alt="picture from library" id="clueImage" [ngStyle]="{'width': imageWidth}">
+    </div>
+    <div class="risingRangeContainer">
+      <ion-range [(ngModel)]="rangeLong" [ngStyle]="{'backgroundColor': rangeColor}" max='50' min='0'></ion-range>
+    </div>
+  </div>
+  <p class="slide" (click)="getNextGameItem()" [ngStyle]="{'color': slideStyle}">Slide <ion-icon name="arrow-forward"></ion-icon></p>
+</ion-content>

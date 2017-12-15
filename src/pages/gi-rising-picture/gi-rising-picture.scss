@@ -1,0 +1,52 @@
+page-gi-rising-picture {
+    .leftSide {
+        margin-left: $horizontalSideSpace;
+    }
+
+    .rightSide {
+        margin-right: $horizontalSideSpace;
+    }
+
+    .textJustify {
+        text-align: justify;
+    }
+
+    .textDetails {
+        margin-top: 20px;
+    }
+
+    #gameItemContainer {
+        height: 250px;
+        background: $blueColor;
+        position: relative;
+    }
+
+    #clueImage {
+       // width: 15px;
+    }
+
+    .risingImgContainer {
+        height: 220px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    .risingRangeContainer {
+        height: 30px;
+    }
+
+    .risingRangeContainer ion-range {
+        height: 100%;
+        padding: 0 12px;
+    }
+
+    .slide {
+        margin-top: 80px;
+        float: right;
+        color: $orangeColor;
+        margin-right: $horizontalSideSpace;
+        margin-bottom: 20px;
+      }
+}

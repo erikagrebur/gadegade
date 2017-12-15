@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { HomePage } from '../home/home';
+import { GiRisingPicturePage } from '../gi-rising-picture/gi-rising-picture';
 
 /**
  * Generated class for the GiWordSearchPage page.
@@ -15,30 +15,52 @@ import { HomePage } from '../home/home';
 })
 export class GiWordSearchPage {
   typedWord : String;
-  answer : String = 'MJOLNIR';
+  //answer : String = 'MJOLNIR';
+  answer : String = 'MJ';
   selectedLetters : String[] = [];
   answered : Boolean = false;
+  slideStyle : any = { 'color': 'rgba(148, 151, 153, 0.45)' };
+  letterDivStyle : any = '#2A2F39';
+  letterStyle : any = '#ff993d';
+  currentSquare: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     
   }
 
   ionViewWillEnter() {
-      for(let i = 0; i < document.getElementsByClassName('wordSearchPad')[0].getElementsByTagName('div').length; i++) {
+      /*for(let i = 0; i < document.getElementsByClassName('wordSearchPad')[0].getElementsByTagName('div').length; i++) {
         document.getElementsByClassName('wordSearchPad')[0].getElementsByTagName('div')[i].style.backgroundColor = "#2A2F39";
       }
       for(let i = 0; i < document.getElementsByClassName('wordSearchItem').length; i++) {
         document.getElementsByClassName('wordSearchItem')[i].getElementsByTagName('p')[0].style.color = "#ff993d";
-      }
-      this.selectedLetters = [];
+      }*/
+      /*this.selectedLetters = [];
       this.typedWord = undefined;
-    this.answered = false;
+      this.answered = false;*/
   }
 
-  tapDown(e) {
+  tapDown(letter) {
+    console.log("mükszik");
     if(!this.answered) {
-      document.getElementById(e).style.backgroundColor = "#ff993d";
-      document.getElementById(e).getElementsByTagName("p")[0].style.color = "#2A2F39";
+      console.log("mükszikBent");
+      this.currentSquare = letter;
+      console.log("sqr",this.currentSquare);
+      this.letterDivStyle = '#ff993d';
+      this.letterStyle = '#2A2F39';
+    }
+  }
+
+  tapUp() {
+
+  }
+
+  /*tapDown(e) {
+    if(!this.answered) {
+      this.currentSquare = e;
+      this.letterDivStyle.backgroundColor = '#ff993d';
+      this.letterStyle.color = '#2A2F39';
+      
     }
   }
 
@@ -50,15 +72,13 @@ export class GiWordSearchPage {
           this.typedWord += value;
           if(value === this.answer[this.selectedLetters.length - 1]) {
             if(this.typedWord === this.answer) {
-              console.log(document.getElementById("slide").style.color);
-              document.getElementById("slide").style.color = "#ff993d";
+              
+              this.slideStyle.color = '#ff993d';
               this.answered = true;
-              console.log(document.getElementById("slide"));
             }
           } else {
-            for(let i =0; i < this.selectedLetters.length; i++) {
-              document.getElementById(this.selectedLetters[i].toString()).style.backgroundColor = "#2A2F39";
-              document.getElementById(this.selectedLetters[i].toString()).getElementsByTagName('p')[0].style.color = "#ff993d";
+            for(let i =0; i < this.typedWord.length; i++) {
+              this.currentSquare = this.typedWord[i];
             }
             this.selectedLetters = [];
             this.typedWord = undefined;
@@ -69,18 +89,17 @@ export class GiWordSearchPage {
           this.typedWord = value;
           this.selectedLetters.push(e);
         } else {
-          document.getElementById(e).style.backgroundColor = "#2A2F39";
-          document.getElementById(e).getElementsByTagName("p")[0].style.color = "#ff993d";
+          this.currentSquare = value;
         }
       }
     }
-  }
+  } */
 
   getNextGameItem() {
-    if(this.answered) {
-      this.answered = false;
-      this.navCtrl.push(HomePage);
-    }
+    /*if(this.answered) {
+      this.answered = false;*/
+      this.navCtrl.push(GiRisingPicturePage);
+    /*}*/
   }
 
 }

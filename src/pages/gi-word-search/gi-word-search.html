@@ -12,35 +12,35 @@
 <ion-content>
   <p class="giWordSearchContent leftSideSpace rightSideSpace">You offer your help to Thor, because the mission sounds exciting. But Thor want to test whether you are worthy of help. He ask a question: <strong>do you remember the name of his hammer?</strong></p>
   <div class="wordSearchPad">
-    <div class="wordSearchItem" id="oneOneLetter" (touchstart)="tapDown('oneOneLetter')" (touchend)="tapUp('oneOneLetter', 'M')">
-      <p class="wordSearchLetter">M</p>
+    <div class="wordSearchItem" (touchstart)="tapDown('M')" (touchend)="tapUp()" [ngStyle]="{'backgroundColor': currentSquare === 'M' ? letterDivStyle : ''}">
+      <p class="wordSearchLetter" [ngStyle]="{'color': currentSquare === 'M' ? letterStyle : ''}">M</p>
     </div>
-    <div class="wordSearchItem" id="oneTwoLetter" (touchstart)="tapDown('oneTwoLetter')" (touchend)="tapUp('oneTwoLetter', 'G')">
+    <div class="wordSearchItem">
       <p class="wordSearchLetter">G</p>
     </div>
-    <div class="wordSearchItem" id="oneThreeLetter" (touchstart)="tapDown('oneThreeLetter')" (touchend)="tapUp('oneThreeLetter', 'Å')">
-      <p class="wordSearchLetter">Å</p>
+    <div class="wordSearchItem" (touchstart)="tapDown('A')" (touchend)="tapUp()" [ngStyle]="{'backgroundColor': currentSquare === 'A' ? letterDivStyle : ''}">
+      <p class="wordSearchLetter"  [ngStyle]="{'color': currentSquare === 'A' ? letterStyle : ''}">Å</p>
     </div>
     <div class="clearFloat"></div>
-    <div class="wordSearchItem" id="twoOneLetter" (touchstart)="tapDown('twoOneLetter')" (touchend)="tapUp('twoOneLetter', 'J')">
+    <div class="wordSearchItem">
       <p class="wordSearchLetter">J</p>
     </div>
-    <div class="wordSearchItem" id="twoTwoLetter" (touchstart)="tapDown('twoTwoLetter')" (touchend)="tapUp('twoTwoLetter', 'R')">
+    <div class="wordSearchItem">
       <p class="wordSearchLetter">R</p>
     </div>
-    <div class="wordSearchItem" id="twoThreeLetter" (touchstart)="tapDown('twoThreeLetter')" (touchend)="tapUp('twoThreeLetter', 'I')">
+    <div class="wordSearchItem">
       <p class="wordSearchLetter">I</p>
     </div>
     <div class="clearFloat"></div>
-    <div class="wordSearchItem" id="threeOneLetter" (touchstart)="tapDown('threeOneLetter')" (touchend)="tapUp('threeOneLetter', 'O')">
+    <div class="wordSearchItem">
       <p class="wordSearchLetter">O</p>
     </div>
-    <div class="wordSearchItem" id="threeTwoLetter" (touchstart)="tapDown('threeTwoLetter')" (touchend)="tapUp('threeTwoLetter', 'L')">
+    <div class="wordSearchItem">
       <p class="wordSearchLetter">L</p>
     </div>
-    <div class="wordSearchItem" id="threeThreeLetter" (touchstart)="tapDown('threeThreeLetter')" (touchend)="tapUp('threeThreeLetter', 'N')">
+    <div class="wordSearchItem">
       <p class="wordSearchLetter">N</p>
     </div>
   </div>
-  <p id="slide" (click)="getNextGameItem()">Slide <ion-icon name="arrow-forward"></ion-icon></p>
+  <p id="slide" (click)="getNextGameItem()"  [ngStyle]="slideStyle">Slide <ion-icon name="arrow-forward"></ion-icon></p>
 </ion-content>

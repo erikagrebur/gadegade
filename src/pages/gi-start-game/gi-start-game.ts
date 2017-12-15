@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import { GiWordSearchPage } from '../gi-word-search/gi-word-search';
-
+import { GameDescriptionPage } from '../game-description/game-description';
+import { GoogleMaps, GoogleMap, GoogleMapsEvent } from '@ionic-native/google-maps';
 /**
  * Generated class for the GiStartGamePage page.
  *
@@ -15,16 +16,18 @@ import { GiWordSearchPage } from '../gi-word-search/gi-word-search';
   templateUrl: 'gi-start-game.html',
 })
 export class GiStartGamePage {
+  map: GoogleMap;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, private googleMaps: GoogleMaps) {
+    
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad GiStartGamePage');
+    this.loadMap();
   }
 
   getFirstGameItem() {
-    this.navCtrl.push(GiWordSearchPage);
+    this.navCtrl.push(GameDescriptionPage);
   }
 
   showAlert() {
@@ -34,6 +37,37 @@ export class GiStartGamePage {
       buttons: ['OK']
     });
     alert.present();
+  }
+
+  loadMap() {
+    console.log("megye");
+    this.map = new GoogleMap('map', {
+      'controls': {
+        'compass': true,
+        'myLocationButton': true,
+        'indoorPicker': true,
+        'zoom': true
+      },
+      'gestures': {
+        'scroll': true,
+        'rotate': true,
+        'zoom': true
+      },
+      'camera': {
+        'target': {
+          lat: 55.4702663,
+          lng: 8.4420635 
+        },
+        'tilt': 0,
+        'zoom': 17
+      }
+    });
+    console.info('this.map', JSON.stringify(this.map));
+    this.map.on(GoogleMapsEvent.MAP_READY)
+    .subscribe(() => {
+      console.log('Map is ready');
+    
+    });
   }
 
 }

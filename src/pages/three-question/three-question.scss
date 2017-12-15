@@ -1,0 +1,80 @@
+page-three-question {
+
+    .scroll-content {
+        padding: 0px !important;
+    }
+
+    .leftSide {
+        margin-left: $horizontalSideSpace;
+    }
+
+    .rightSide {
+        margin-right: $horizontalSideSpace;
+    }
+
+    .questionContainer {
+        background: $blueColor;
+        padding: 6px 0px;
+        width: 100%;
+        height: auto;
+        margin-top: 15px;
+    }
+
+    .questionTitle {
+        margin: 0;
+        padding: 0;
+        text-align: center;
+        color: $orangeColor;
+    }
+
+    .answerContainer {
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 10px 0; 
+    }
+
+    .leftArrow {
+        width: 50px;
+        height: 50px;
+        background: $orangeColor;
+        -webkit-clip-path: polygon(100% 0%, 100% 100%, 0% 50%);
+        clip-path: polygon(100% 0%, 100% 100%, 0% 50%);
+    }
+
+    .rightArrow {
+        width: 50px;
+        height: 50px;
+        background: $orangeColor;
+        -webkit-clip-path: polygon(0% 0%, 100% 50%, 0% 100%);
+        clip-path: polygon(0% 0%, 100% 50%, 0% 100%);
+    }
+
+    .optionContent {
+        height: 50px;
+        width: 100%;
+        margin: 0 10px;
+        border: 2px solid $fadedGreyColor;
+        box-sizing: border-box;
+        -webkit-clip-path: polygon(0% 66%, 10% 100%, 90% 100%, 100% 66%, 100% 33%, 90% 0%, 10% 0%, 0% 33%);
+        clip-path: polygon(0% 66%, 10% 100%, 90% 100%, 100% 66%, 100% 33%, 90% 0%, 10% 0%, 0% 33%);
+    }
+
+    .optionStyle {
+        height: 100%;
+        margin: 0;
+        padding: 12px 0 0 0;
+        text-align: center;
+        color: $blueColor;
+    }
+
+    #slide {
+        margin-top: 80px;
+        float: right;
+        color: $orangeColor;
+        margin-right: $horizontalSideSpace;
+        margin-bottom: 20px;
+      }
+}

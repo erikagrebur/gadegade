@@ -1,10 +1,86 @@
 page-gi-start-game {
+
+    #map {
+        height: 350px;
+        width: 100%;
+        //background: black;
+    }
+
     #slide {
-        bottom: 20px;
-        position: fixed;
+        position: relative;
         float: right;
         color: rgba(148, 151, 153, 0.45);
-        right: 25px;
-        margin: 0px;
+        margin: 10px 25px 30px 0;
       }
+    
+      #noGpsIcon {
+        position: fixed;
+        float: left;
+        left: 25px;
+        bottom: 25px;
+        margin: 0px;
+        width: 40px;
+      }
+
+      .noGpsContainer {
+          height: auto;
+          width: auto;
+          padding: 5px;
+          background: white;
+          box-shadow: 0px 0px 10px white;
+      }
+
+      .separateLine {
+        background: $fadedGreyColor;
+        margin: 2px 0;
+    }
+
+    .leftSide {
+        margin-left: $horizontalSideSpace;
+    }
+
+    .rightSide {
+        margin-right: $horizontalSideSpace;
+    }
+
+    .separateRow {
+        height: 24px;
+    }
+
+    .firstColumn {
+        padding-right: 0px;
+    }
+
+    .gameDetailsIcon {
+        position: relative;
+        top: 3px;
+    }
+
+    .secondColumn {
+        padding-left: 0px;
+    }
+
+    .gameDetailsInformationTitle {
+        font-weight: bold;
+        margin: 2px 0;
+        font-size: 12px;
+      }
+
+      .gameDetailsInformationValue {
+        margin: 3px 0;
+        float: right;
+        font-size: 12px;
+    }
+
+    .cityUp {
+        padding-top: 0px;
+    }
+
+      .streetDown {
+        padding-bottom: 0px;
+    }
+
+    .information {
+        text-align: justify;
+    }
 }
