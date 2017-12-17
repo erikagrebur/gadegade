@@ -12,14 +12,16 @@
 
 
 <ion-content>
-  <input type="text" value="{{currentLng}}">
-  <input type="text" value="{{currentLat}}">
-  <p>{{distance}}</p>
-  <p>{{distanceMeter}}m</p>
-  <p>{{rangeLong}} - range</p>
-  <p>{{width}} - width</p>
-  <p>{{checkedValue}} - checked</p>
-  <p>{{checkPointDist}} - cPoint</p>
+  <p>Lng - {{currentLng}}</p>
+  <p>Lat - {{currentLat}}</p>
+  <p>firstDistance - {{firstDist}}</p>
+  <p>unit - {{unitDist}}</p>
+  <p>Céltól távolság: {{distance}}</p>
+  <p>Céltól táv. méterben: {{distanceMeter}}m</p>
+  <p>range értéke (0-50): {{rangeLong}}</p>
+  <p>kép szélessége(15-180): {{imageWidth}}</p>
+  <p>átlépett egységek: {{checkedValue}}</p>
+  <p>aktuális cpoint: {{checkPointDist}}</p>
   <p class="leftSide rightSide textJustify">You gave a correct answer! Now you earned Thor's trust.</p>
   <p class="leftSide rightSide textJustify textDetails">Suddenly comes to your mind that you know a professof who teaches Asgardian history, so you should find him, because maybe he can help for your new friend. You can see some help below, as there is a small picture showing where you should go. <strong>As you approach</strong> the professor, <strong>the size of the picture will increase</strong> and you will be able to see it more and more clear.</p>
  

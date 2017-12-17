@@ -20,8 +20,8 @@ export class GiWordSearchPage {
   selectedLetters : String[] = [];
   answered : Boolean = false;
   slideStyle : any = { 'color': 'rgba(148, 151, 153, 0.45)' };
-  letterDivStyle : any = '#2A2F39';
-  letterStyle : any = '#ff993d';
+  letterDivStyle : any = {'backgroundColor': '#2A2F39'};
+  letterStyle : any = {'color': '#ff993d'};
   currentSquare: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
@@ -41,14 +41,17 @@ export class GiWordSearchPage {
   }
 
   tapDown(letter) {
-    console.log("mükszik");
-    if(!this.answered) {
+    letter.style.backgroundColor = '#ff993d';
+    letter.style.color = '#2A2F39';
+    
+    console.info(letter);
+    /*if(!this.answered) {
       console.log("mükszikBent");
       this.currentSquare = letter;
       console.log("sqr",this.currentSquare);
       this.letterDivStyle = '#ff993d';
       this.letterStyle = '#2A2F39';
-    }
+    }*/
   }
 
   tapUp() {
