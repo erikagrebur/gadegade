@@ -5,6 +5,13 @@ page-gi-start-game {
         width: 100%;
         //background: black;
     }
+    ion-nav.has-views {
+      background-color: transparent !important;
+      }
+
+      ion-app.gmapscdv_ .nav-decor{
+      background-color: transparent !important;
+      }
 
     #slide {
         position: relative;
@@ -12,7 +19,7 @@ page-gi-start-game {
         color: rgba(148, 151, 153, 0.45);
         margin: 10px 25px 30px 0;
       }
-    
+
       #noGpsIcon {
         position: fixed;
         float: left;

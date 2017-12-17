@@ -35,13 +35,40 @@ export class GiStartGamePage {
 
   loadMap() {
     console.log("megye");
-    this.map = GoogleMaps.create('map');
-
-
-    this.map.one(GoogleMapsEvent.MAP_READY)
-    .then(() => {
+    this.map = new GoogleMap('map', {
+      'controls': {
+        'compass': true,
+        'myLocationButton': true,
+        'indoorPicker': true,
+        'zoom': true
+      },
+      'gestures': {
+        'scroll': true,
+        'rotate': true,
+        'zoom': true
+      },
+      'camera': {
+        'target': {
+          lat: 47.1457479,
+          lng: 18.409079
+        },
+        'tilt': 0,
+        'zoom': 17
+      }
+    });
+    console.info('this.map', JSON.stringify(this.map));
+    this.map.on(GoogleMapsEvent.MAP_READY)
+    .subscribe(() => {
       console.log('Map is ready');
-
+      this.map.addMarker({
+        title: 'FuckYouMaps',
+        icon: 'red',
+        animation: 'DROP',
+        position: {
+          lat: 47.1457479,
+          lng: 18.409079
+        }
+      });
     });
   }
 
