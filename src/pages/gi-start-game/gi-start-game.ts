@@ -4,12 +4,6 @@ import { AlertController } from 'ionic-angular';
 import { GiWordSearchPage } from '../gi-word-search/gi-word-search';
 import { GameDescriptionPage } from '../game-description/game-description';
 import { GoogleMaps, GoogleMap, GoogleMapsEvent } from '@ionic-native/google-maps';
-/**
- * Generated class for the GiStartGamePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @Component({
   selector: 'page-gi-start-game',
@@ -19,7 +13,7 @@ export class GiStartGamePage {
   map: GoogleMap;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, private googleMaps: GoogleMaps) {
-    
+
   }
 
   ionViewDidLoad() {
@@ -41,32 +35,13 @@ export class GiStartGamePage {
 
   loadMap() {
     console.log("megye");
-    this.map = new GoogleMap('map', {
-      'controls': {
-        'compass': true,
-        'myLocationButton': true,
-        'indoorPicker': true,
-        'zoom': true
-      },
-      'gestures': {
-        'scroll': true,
-        'rotate': true,
-        'zoom': true
-      },
-      'camera': {
-        'target': {
-          lat: 55.4702663,
-          lng: 8.4420635 
-        },
-        'tilt': 0,
-        'zoom': 17
-      }
-    });
-    console.info('this.map', JSON.stringify(this.map));
-    this.map.on(GoogleMapsEvent.MAP_READY)
-    .subscribe(() => {
+    this.map = GoogleMaps.create('map');
+
+
+    this.map.one(GoogleMapsEvent.MAP_READY)
+    .then(() => {
       console.log('Map is ready');
-    
+
     });
   }
 

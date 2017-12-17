@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { HomePage } from '../home/home';
+import { TabsPage } from '../tabs/tabs';
 
 /**
  * Generated class for the SliderScreenPage page.
@@ -24,7 +24,7 @@ export class SliderScreenPage {
   }
 
   getHomePage() {
-    this.navCtrl.push(HomePage);
+    this.navCtrl.push(TabsPage);
   }
 
 }

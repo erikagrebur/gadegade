@@ -5,8 +5,6 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { SliderScreenPage } from '../pages/slider-screen/slider-screen';
 import { GiWordSearchPage } from '../pages/gi-word-search/gi-word-search';
 
-import { TabsPage } from '../pages/tabs/tabs';
-
 @Component({
   templateUrl: 'app.html'
 })
