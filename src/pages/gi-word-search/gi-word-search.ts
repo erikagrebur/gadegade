@@ -15,94 +15,85 @@ import { GiRisingPicturePage } from '../gi-rising-picture/gi-rising-picture';
 })
 export class GiWordSearchPage {
   typedWord : String;
-  //answer : String = 'MJOLNIR';
-  answer : String = 'MJ';
+  answer : String = 'MJOLNIR';
+  //answer : String = 'MJ';
   selectedLetters : String[] = [];
   answered : Boolean = false;
   slideStyle : any = { 'color': 'rgba(148, 151, 153, 0.45)' };
-  letterDivStyle : any = {'backgroundColor': '#2A2F39'};
-  letterStyle : any = {'color': '#ff993d'};
-  currentSquare: string;
+  //giNgDivStyle : any = {'backgroundColor': '#2A2F39'};
+  //giNgPStyle : any = {'color': '#ff993d'};
+  currentSelectedValue: string;
+  currentSelectedIdentification: string;
+  currentSelectedDivTag: any;
+  currentSelectedPTag: any;
+  selectedDivTags: any[] = [];
+  selectedPTags: any[] = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     
   }
 
-  ionViewWillEnter() {
-      /*for(let i = 0; i < document.getElementsByClassName('wordSearchPad')[0].getElementsByTagName('div').length; i++) {
-        document.getElementsByClassName('wordSearchPad')[0].getElementsByTagName('div')[i].style.backgroundColor = "#2A2F39";
-      }
-      for(let i = 0; i < document.getElementsByClassName('wordSearchItem').length; i++) {
-        document.getElementsByClassName('wordSearchItem')[i].getElementsByTagName('p')[0].style.color = "#ff993d";
-      }*/
-      /*this.selectedLetters = [];
-      this.typedWord = undefined;
-      this.answered = false;*/
-  }
-
-  tapDown(letter) {
-    letter.style.backgroundColor = '#ff993d';
-    letter.style.color = '#2A2F39';
-    
-    console.info(letter);
-    /*if(!this.answered) {
-      console.log("mükszikBent");
-      this.currentSquare = letter;
-      console.log("sqr",this.currentSquare);
-      this.letterDivStyle = '#ff993d';
-      this.letterStyle = '#2A2F39';
-    }*/
-  }
-
-  tapUp() {
-
-  }
-
-  /*tapDown(e) {
+  tapDown(giDivTag, giPTag, giValue, giIdentification) {
     if(!this.answered) {
-      this.currentSquare = e;
-      this.letterDivStyle.backgroundColor = '#ff993d';
-      this.letterStyle.color = '#2A2F39';
-      
+      giDivTag.style.backgroundColor = '#ff993d';
+      giPTag.style.color = '#2A2F39';
+      this.currentSelectedValue = giValue;
+      this.currentSelectedIdentification = giIdentification;
+      this.currentSelectedDivTag = giDivTag;
+      this.currentSelectedPTag = giPTag;
     }
   }
 
-  tapUp(e, value) {
+  tapUp() {
     if(!this.answered) {
       if(this.typedWord) {
-        if(this.selectedLetters.indexOf(e) === -1) {
-          this.selectedLetters.push(e);
-          this.typedWord += value;
-          if(value === this.answer[this.selectedLetters.length - 1]) {
+        if(this.selectedLetters.indexOf(this.currentSelectedIdentification) === -1) {
+          this.selectedLetters.push(this.currentSelectedIdentification);
+          this.selectedDivTags.push(this.currentSelectedDivTag);
+          this.selectedPTags.push(this.currentSelectedPTag);
+          this.typedWord += this.currentSelectedValue;
+          console.log('cond', this.currentSelectedValue, this.answer[this.selectedLetters.length-1]);
+          if(this.currentSelectedValue === this.answer[this.selectedLetters.length-1]) {
+            console.log("ideugrik if?")
             if(this.typedWord === this.answer) {
-              
               this.slideStyle.color = '#ff993d';
               this.answered = true;
             }
           } else {
-            for(let i =0; i < this.typedWord.length; i++) {
-              this.currentSquare = this.typedWord[i];
+            console.log('ideugrik else?')
+            /*this.giNgDivStyle.backgroundColor = '#2A2F39 !important';
+            this.giNgPStyle.color = '#ff993d';*/
+            for(let i=0; i < this.selectedDivTags.length; i++) {
+              this.selectedDivTags[i].style.backgroundColor = '#2A2F39';
+              this.selectedPTags[i].style.color = '#ff993d';
             }
+            this.selectedDivTags = [];
             this.selectedLetters = [];
+            this.selectedPTags = [];
             this.typedWord = undefined;
           }
         }
       } else {
-        if(value === this.answer[0]) {
-          this.typedWord = value;
-          this.selectedLetters.push(e);
+        if(this.currentSelectedValue === this.answer[0]) {
+          this.typedWord = this.currentSelectedValue;
+          this.selectedLetters.push(this.currentSelectedIdentification);
+          this.selectedDivTags.push(this.currentSelectedDivTag);
+          this.selectedPTags.push(this.currentSelectedPTag);
         } else {
-          this.currentSquare = value;
+          this.currentSelectedDivTag.style.backgroundColor = '#2A2F39';
+          this.currentSelectedPTag.style.color = '#ff993d';
         }
       }
+      console.log(this.typedWord);
+      console.log('selectedletters', this.selectedLetters);
     }
-  } */
+  }
 
   getNextGameItem() {
-    /*if(this.answered) {
-      this.answered = false;*/
+    if(this.answered) {
+      this.answered = false;
       this.navCtrl.push(GiRisingPicturePage);
-    /*}*/
+    }
   }
 
 }

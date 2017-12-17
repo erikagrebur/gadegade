@@ -12,34 +12,34 @@
 <ion-content>
   <p class="giWordSearchContent leftSideSpace rightSideSpace">You offer your help to Thor, because the mission sounds exciting. But Thor want to test whether you are worthy of help. He ask a question: <strong>do you remember the name of his hammer?</strong></p>
   <div class="wordSearchPad">
-    <div class="wordSearchItem" (touchstart)="tapDown(letterFirst)" #letterFirst [ngStyle]="letterDivStyle">
-      <p class="wordSearchLetter" [ngStyle]="letterStyle">M</p>
+    <div class="wordSearchItem" (touchstart)="tapDown(giFirstDiv, giFirstLetter, 'M', 'FirstDiv')" (touchend)="tapUp()" #giFirstDiv>
+      <p class="wordSearchLetter" #giFirstLetter>M</p>
     </div>
-    <div class="wordSearchItem" (touchstart)="tapDown(letterSecond)" #letterSecond [ngStyle]="letterDivStyle">
-      <p class="wordSearchLetter" [ngStyle]="letterStyle">G</p>
+    <div class="wordSearchItem" (touchstart)="tapDown(giSecondDiv, giSecondLetter, 'G', 'SecondDiv')" (touchend)="tapUp()" #giSecondDiv>
+      <p class="wordSearchLetter" #giSecondLetter>G</p>
     </div>
-    <div class="wordSearchItem" (touchstart)="tapDown(letterThird)" #letterThird [ngStyle]="letterDivStyle">
-      <p class="wordSearchLetter" [ngStyle]="letterStyle">Å</p>
-    </div>
-    <div class="clearFloat"></div>
-    <div class="wordSearchItem">
-      <p class="wordSearchLetter">J</p>
-    </div>
-    <div class="wordSearchItem">
-      <p class="wordSearchLetter">R</p>
-    </div>
-    <div class="wordSearchItem">
-      <p class="wordSearchLetter">I</p>
+    <div class="wordSearchItem" (touchstart)="tapDown(giThirdDiv, giThirdLetter, 'A', 'ThirdDiv')" (touchend)="tapUp()" #giThirdDiv>
+      <p class="wordSearchLetter" #giThirdLetter>Å</p>
     </div>
     <div class="clearFloat"></div>
-    <div class="wordSearchItem">
-      <p class="wordSearchLetter">O</p>
+    <div class="wordSearchItem" (touchstart)="tapDown(giFourthDiv, giFourthLetter, 'J', 'FourthDiv')" (touchend)="tapUp()" #giFourthDiv>
+      <p class="wordSearchLetter" #giFourthLetter>J</p>
     </div>
-    <div class="wordSearchItem">
-      <p class="wordSearchLetter">L</p>
+    <div class="wordSearchItem" (touchstart)="tapDown(giFifthDiv, giFifthLetter, 'R', 'FifthDiv')" (touchend)="tapUp()" #giFifthDiv>
+      <p class="wordSearchLetter" #giFifthLetter>R</p>
     </div>
-    <div class="wordSearchItem">
-      <p class="wordSearchLetter">N</p>
+    <div class="wordSearchItem" (touchstart)="tapDown(giSixthDiv, giSixthLetter, 'I', 'SixthDiv')" (touchend)="tapUp()" #giSixthDiv>
+      <p class="wordSearchLetter" #giSixthLetter>I</p>
+    </div>
+    <div class="clearFloat"></div>
+    <div class="wordSearchItem" (touchstart)="tapDown(giSeventhDiv, giSeventhLetter, 'O', 'SeventhDiv')" (touchend)="tapUp()" #giSeventhDiv>
+      <p class="wordSearchLetter" #giSeventhLetter>O</p>
+    </div>
+    <div class="wordSearchItem" (touchstart)="tapDown(giEighthDiv, giEighthLetter, 'L', 'EighthDiv')" (touchend)="tapUp()" #giEighthDiv>
+      <p class="wordSearchLetter" #giEighthLetter>L</p>
+    </div>
+    <div class="wordSearchItem" (touchstart)="tapDown(giNinthDiv, giNinthLetter, 'N', 'NinthDiv')" (touchend)="tapUp()" #giNinthDiv>
+      <p class="wordSearchLetter" #giNinthLetter>N</p>
     </div>
   </div>
   <p id="slide" (click)="getNextGameItem()"  [ngStyle]="slideStyle">Slide <ion-icon name="arrow-forward"></ion-icon></p>

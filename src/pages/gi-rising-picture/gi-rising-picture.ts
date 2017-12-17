@@ -13,8 +13,8 @@ export class GiRisingPicturePage {
   currentLng: number;
   currentLat: number;
 
-  targetLat: number = 47.477255;
-  targetLng: number = 19.133472;
+  targetLat: number = 46.290388;
+  targetLng: number = 18.519389;
 
   distance: number;
   distanceMeter: number;
