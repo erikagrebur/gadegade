@@ -3,7 +3,8 @@ import { Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { SliderScreenPage } from '../pages/slider-screen/slider-screen';
-import { GiWordSearchPage } from '../pages/gi-word-search/gi-word-search';
+import { GiObscureImgPage } from '../pages/gi-obscure-img/gi-obscure-img';
+import { GiFinalScreenPage } from '../pages/gi-final-screen/gi-final-screen';
 
 @Component({
   templateUrl: 'app.html'

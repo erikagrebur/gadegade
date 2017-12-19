@@ -13,8 +13,8 @@ export class GiRisingPicturePage {
   currentLng: number;
   currentLat: number;
 
-  targetLat: number = 46.290388;
-  targetLng: number = 18.519389;
+  targetLat: number = 46.290340;
+  targetLng: number = 18.519392;
 
   distance: number;
   distanceMeter: number;
@@ -29,6 +29,8 @@ export class GiRisingPicturePage {
   unitDist: number; //the basic distance / 100, this will be the checkpoints distance
   checkedValue: number;
   checkPointDist: number; // this means the distance between the target and the checkpoint
+
+  wrongWayPTag: any = 'none';
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private locationTracker: LocationTrackerProvider, private ngZone: NgZone) {
     this.locationTracker.startTracking();
@@ -60,11 +62,14 @@ export class GiRisingPicturePage {
     if(this.isFirstDistance) {
       this.firstDist = this.distance;
       this.checkPointDist = this.firstDist;
+      this.unitDist = this.firstDist / this.distanceAccuracy;
       this.isFirstDistance = false;
     }
     this.checkDistance();
-    if(this.distance <= 0.008) {
+    if(this.distance <= 0.005) {
       this.slideStyle = '#ff993d';
+    } else {
+      this.slideStyle = 'rgba(148, 151, 153, 0.45)';
     }
   }
   
@@ -73,10 +78,10 @@ export class GiRisingPicturePage {
   }
 
   checkDistance() {
-    this.unitDist = this.firstDist / this.distanceAccuracy;
     this.checkedValue = Math.floor((this.checkPointDist - this.distance) / this.unitDist);
     
     if( this.checkedValue > 0 ) {
+      this.wrongWayPTag = 'none';
       this.rangeLong = this.checkedValue + (this.firstDist - this.checkPointDist)/this.unitDist;
       
       this.imageWidth = (this.imageUnit * (this.checkedValue + (this.firstDist - this.checkPointDist)/this.unitDist)).toString()+'px';
@@ -85,6 +90,7 @@ export class GiRisingPicturePage {
 
       //formázni a csúszka gömböt
     } else if(this.checkedValue < 0) {
+      this.wrongWayPTag = 'block';
       this.rangeLong = this.checkedValue + (this.firstDist - this.checkPointDist)/this.unitDist;
       
       if(this.checkPointDist !== this.firstDist) {

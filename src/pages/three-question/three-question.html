@@ -19,11 +19,15 @@
         <p class="questionTitle">Who is the guard of the Bifrost bridge?</p>
       </div>
       <div class="answerContainer">
-        <div id="firstLeftArrow" class="leftArrow" (click)="getPrevFirstOption()"></div>
+        <!-- <div class="arrowContainer"> -->
+            <div class="leftArrow" (click)="getPrevFirstOption(firstLeftArrow)" #firstLeftArrow></div>
+        <!-- </div> -->
         <div class="optionContent">
           <p id="firstOption" class="optionStyle">{{firstOptions[currentFirstOptionIndex]}}</p>
         </div>
-        <div id="firstRightArrow" class="rightArrow" (click)="getNextFirstOption()"></div>
+        <!-- <div class="arrowContainer"> -->
+            <div class="rightArrow" (click)="getNextFirstOption(firstRightArrow)" #firstRightArrow></div>
+        <!-- </div> -->
       </div>
     </div>
     <div class="questionDiv">
@@ -31,7 +35,7 @@
         <p class="questionTitle">What is the name of Thor's father?</p>
       </div>
       <div class="answerContainer">
-        <div id="secondLeftArrow" class="leftArrow" (click)="getPrevSecondOption()"></div>
+        <div class="leftArrow" (click)="getPrevSecondOption()"></div>
         <div class="optionContent">
           <p id="secondOption" class="optionStyle">{{secondOptions[currentSecondOptionIndex]}}</p>
         </div>
@@ -51,5 +55,5 @@
       </div>
     </div>
   </div>
-  <p id="slide" class="rightSide" (click)="getNexGameItem()">Slide <ion-icon name="arrow-forward"></ion-icon></p>
+  <p id="slide" class="rightSide" (click)="getNexGameItem()" [ngStyle]="slideStyle">Slide <ion-icon name="arrow-forward"></ion-icon></p>
 </ion-content>

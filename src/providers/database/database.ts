@@ -6,16 +6,34 @@ import { Observable } from 'rxjs/Observable';
 export class DatabaseProvider {
 
   private letterCollection: AngularFirestoreCollection<any>;
+  private mixedWordsCollection: AngularFirestoreCollection<any>;
+  
   constructor(public db: AngularFirestore) {
     this.letterCollection = db.collection<any>('letters');
+    this.mixedWordsCollection = db.collection<any>('mixedWords');
   }
+
   checkLettersChanges(): Observable<any> {
     return this.letterCollection.valueChanges();
   }
+
+  checkMixedWordsChanges(): Observable<any> {
+    return this.mixedWordsCollection.valueChanges();
+  }
+
   getLettersFromDataBase() : Observable<any> {
     return Observable.create( observable => {
       this.checkLettersChanges().subscribe(letters => {
         observable.next(letters);
+        observable.complete();
+      })
+    })
+  }
+
+  getMixedWordsFromDataBase() : Observable<any> {
+    return Observable.create( observable => {
+      this.checkMixedWordsChanges().subscribe(mixedwords => {
+        observable.next(mixedwords);
         observable.complete();
       })
     })

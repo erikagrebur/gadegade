@@ -35,17 +35,22 @@ page-slider-screen {
         z-index: 3;
     }
 
-    .slideRoundedIconContainer {
+    .slideElementsOnThePicture {
+        width: 100%;
+        height: auto;
         position: absolute;
-        top: 60%;
-        z-index: 10;
+        top: 61%;
+        z-index: 3;
+    }
+
+    .slideRoundedIconContainer {
         height: 80px;
         width: 80px;
         border: 3px solid #ff993d;
         border-radius: 50%;
         background: white;
-        left: 50%;
-        margin-left: -40px;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     .slideRoundedIconImg {
@@ -55,12 +60,8 @@ page-slider-screen {
 
     .slideTitle {
         color: #ff993d;
-        font-weight: bold;
-        position: absolute;
-        top: 76%;
-        z-index: 10;
-        margin: 0 0 0 -71px;
-        left: 50%;
+        font-weight: 900;
+        letter-spacing: 1px;
     }
 
     .swiper-pagination-bullet-active {

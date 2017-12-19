@@ -15,6 +15,10 @@ import { GiRisingPicturePage } from '../pages/gi-rising-picture/gi-rising-pictur
 import { SliderScreenPage } from '../pages/slider-screen/slider-screen';
 import { ThreeQuestionPage } from '../pages/three-question/three-question';
 import { GiMixedWordsPage } from '../pages/gi-mixed-words/gi-mixed-words';
+import { GiObscureImgPage } from '../pages/gi-obscure-img/gi-obscure-img';
+import { GiFinalScreenPage } from '../pages/gi-final-screen/gi-final-screen';
+import { GiRateScreenPage } from '../pages/gi-rate-screen/gi-rate-screen';
+import { SignUpScreenPage } from '../pages/sign-up-screen/sign-up-screen';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -31,12 +35,12 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 export const firebaseConfig = {
   production: false,
   firebase: {
-    apiKey: "AIzaSyC3y38y8eF4FFtHCprNC9N2yeLXCBYNSO4",
-    authDomain: "trytry-88c62.firebaseapp.com",
-    databaseURL: "https://trytry-88c62.firebaseio.com",
-    projectId: "trytry-88c62",
-    storageBucket: "trytry-88c62.appspot.com",
-    messagingSenderId: "48329241262"
+    apiKey: "AIzaSyB6Kyact4Y6iooiaKHPaFXCEmTl8DtlACY",
+    authDomain: "tryagain-b5737.firebaseapp.com",
+    databaseURL: "https://tryagain-b5737.firebaseio.com",
+    projectId: "tryagain-b5737",
+    storageBucket: "tryagain-b5737.appspot.com",
+    messagingSenderId: "158844905597"
   }
 };
 
@@ -54,7 +58,11 @@ export const firebaseConfig = {
     GiRisingPicturePage,
     SliderScreenPage,
     ThreeQuestionPage,
-    GiMixedWordsPage
+    GiMixedWordsPage,
+    GiObscureImgPage,
+    GiFinalScreenPage,
+    GiRateScreenPage,
+    SignUpScreenPage
   ],
   imports: [
     BrowserModule,
@@ -76,7 +84,11 @@ export const firebaseConfig = {
     GiRisingPicturePage,
     SliderScreenPage,
     ThreeQuestionPage,
-    GiMixedWordsPage
+    GiMixedWordsPage,
+    GiObscureImgPage,
+    GiFinalScreenPage,
+    GiRateScreenPage,
+    SignUpScreenPage
   ],
   providers: [
     StatusBar,

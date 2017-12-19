@@ -1,0 +1,71 @@
+page-gi-obscure-img {
+    .leftSide {
+        margin-left: $horizontalSideSpace;
+    }
+
+    .rightSide {
+        margin-right: $horizontalSideSpace;
+    }
+
+    .information {
+        text-align: justify;
+    }
+
+    #gameItemContainer {
+        height: 250px;
+        background: $blueColor;
+        position: relative;
+    }
+
+    .obscureImgsContainer {
+        height: 220px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        position: relative;
+    }
+
+    .obscureRangeContainer {
+        height: 30px;
+    }
+
+    .obscureRangeContainer ion-range {
+        height: 100%;
+        padding: 0 12px;
+    }
+
+    .slide {
+        margin-top: 80px;
+        float: right;
+        color: $orangeColor;
+        margin-right: $horizontalSideSpace;
+        margin-bottom: 20px;
+      }
+
+      .wrongWay {
+        position: absolute;
+        background: rgba(255,255,255,0.9);
+        padding: 15px 15px;
+        border-radius: 10px;
+        color: red;
+        letter-spacing: 1px;
+        top: 70px;
+        font-weight: 900;
+        box-shadow: 1px 1px 10px white;
+        z-index: 3;
+    }
+
+    .obscureImg {
+        position: absolute;
+        width: 180px;
+    }
+
+    .waterImg {
+        z-index: 1;
+    }
+
+    .horseImg {
+        z-index: 2;
+    }
+}

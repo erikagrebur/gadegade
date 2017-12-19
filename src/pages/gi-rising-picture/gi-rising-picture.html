@@ -28,6 +28,7 @@
   <div id="gameItemContainer" class="leftSide rightSide">
     <div class="risingImgContainer">
         <img src="assets/imgs/gameImgs/03_rising/library.jpg" alt="picture from library" id="clueImage" [ngStyle]="{'width': imageWidth}">
+        <p class="wrongWay" [ngStyle]="{'display': wrongWayPTag}">You're in the wrong direction!</p>
     </div>
     <div class="risingRangeContainer">
       <ion-range [(ngModel)]="rangeLong" [ngStyle]="{'backgroundColor': rangeColor}" max='50' min='0'></ion-range>

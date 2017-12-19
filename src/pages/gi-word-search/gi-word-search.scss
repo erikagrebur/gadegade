@@ -45,11 +45,8 @@ page-gi-word-search {
     }
 
     #slide {
-        bottom: 20px;
-        position: fixed;
+        margin: 50px $horizontalSideSpace 25px 0;
         float: right;
         color: rgba(148, 151, 153, 0.45);
-        right: 25px;
-        margin: 0px;
       }
 }

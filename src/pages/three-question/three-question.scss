@@ -58,8 +58,8 @@ page-three-question {
         margin: 0 10px;
         border: 2px solid $fadedGreyColor;
         box-sizing: border-box;
-        -webkit-clip-path: polygon(0% 66%, 10% 100%, 90% 100%, 100% 66%, 100% 33%, 90% 0%, 10% 0%, 0% 33%);
-        clip-path: polygon(0% 66%, 10% 100%, 90% 100%, 100% 66%, 100% 33%, 90% 0%, 10% 0%, 0% 33%);
+        -webkit-clip-path: polygon(10% 0, 90% 0, 100% 30%, 100% 70%, 90% 100%, 10% 100%, 0 66%, 0 33%);
+        clip-path: polygon(10% 0, 90% 0, 100% 30%, 100% 70%, 90% 100%, 10% 100%, 0 66%, 0 33%);
     }
 
     .optionStyle {

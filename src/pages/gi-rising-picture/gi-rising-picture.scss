@@ -31,6 +31,7 @@ page-gi-rising-picture {
         flex-direction: column;
         justify-content: space-around;
         align-items: center;
+        position: relative;
     }
 
     .risingRangeContainer {
@@ -43,10 +44,22 @@ page-gi-rising-picture {
     }
 
     .slide {
-        margin-top: 80px;
+        margin-top: 50px;
         float: right;
         color: $orangeColor;
         margin-right: $horizontalSideSpace;
         margin-bottom: 20px;
       }
+
+      .wrongWay {
+        position: absolute;
+        background: rgba(255,255,255,0.9);
+        padding: 15px 15px;
+        border-radius: 10px;
+        color: red;
+        letter-spacing: 1px;
+        top: 70px;
+        font-weight: 900;
+        box-shadow: 1px 1px 10px white;
+    }
 }

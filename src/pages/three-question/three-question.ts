@@ -19,44 +19,63 @@ export class ThreeQuestionPage {
   secondOptions: string[] = ['Hogun','Odin','Pukka'];
   thirdOptions: string[] = ['Jotunheim','Fehérvár','SOD'];
 
+  answer: number[] = [0, 1, 0]; 
+  answered: boolean = false;
+
   currentFirstOptionIndex: number;
   currentSecondOptionIndex: number;
   currentThirdOptionIndex: number;
 
-  nextFirstBool: boolean = true;
+  /*nextFirstBool: boolean = true;
   prevFirstBool: boolean = true;
   nextSecondBool: boolean = true;
   prevSecondBool: boolean = true;
   nextThirdBool: boolean = true;
-  prevThirdBool: boolean = true;
+  prevThirdBool: boolean = true;*/
+
+  slideStyle: any = {'color': 'rgba(148, 151, 153, 0.45)'}
   
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     
   }
 
   ionViewDidLoad() {
-    this.currentFirstOptionIndex = 1;
-    this.currentSecondOptionIndex = 1;
-    this.currentThirdOptionIndex = 1;
+    this.currentFirstOptionIndex = Math.floor(Math.random() * this.firstOptions.length);
+    this.currentSecondOptionIndex = Math.floor(Math.random() * this.secondOptions.length);
+    this.currentThirdOptionIndex = Math.floor(Math.random() * this.thirdOptions.length);
+    console.log(this.currentFirstOptionIndex);
   }
 
   getNextFirstOption() {
-    if(this.nextFirstBool) {
-      console.log("főfele");
+    if(!this.answered) {
+      if(this.currentFirstOptionIndex === this.firstOptions.length - 1) {
+        this.currentFirstOptionIndex = 0;
+      } else {
+        this.currentFirstOptionIndex += 1;
+      } 
+    }
+    /*if(this.nextFirstBool && !this.answered) {
       this.currentFirstOptionIndex += 1;
       if(this.currentFirstOptionIndex === this.firstOptions.length - 1) {
         this.nextFirstBool = false;
-        document.getElementById('firstRightArrow').style.background = 'rgba(148, 151, 153, 0.45)';
+        firstRightArrow'.style.background = 'rgba(148, 151, 153, 0.45)';
       } else if (this.currentFirstOptionIndex === 1) {
-        document.getElementById('firstLeftArrow').style.background = '#ff993d';
+        firstRightArrow'.style.background = '#ff993d';
         this.prevFirstBool = true;
       }
-    }
+    }*/
+    this.checkAnswers();
   }
 
   getPrevFirstOption() {
-    if(this.prevFirstBool) {
-      console.log("lefelő");
+    if(!this.answered) {
+      if(this.currentFirstOptionIndex === 0) {
+        this.currentFirstOptionIndex = this.firstOptions.length - 1;
+      } else {
+        this.currentFirstOptionIndex -= 1;
+      } 
+    }
+    /*if(this.prevFirstBool && !this.answered) {
       this.currentFirstOptionIndex -= 1;
       if(this.currentFirstOptionIndex === 0) {
         this.prevFirstBool = false;
@@ -65,67 +84,72 @@ export class ThreeQuestionPage {
         document.getElementById('firstRightArrow').style.background = '#ff993d';
         this.nextFirstBool = true;
       }
-    }
+    }*/
+    this.checkAnswers();
   }
 
   getNextSecondOption() {
-    if(this.nextSecondBool) {
-      console.log("főfele");
-      this.currentSecondOptionIndex += 1;
-      if(this.currentSecondOptionIndex === this.secondOptions.length - 1) {
-        this.nextSecondBool = false;
-        document.getElementById('secondRightArrow').style.background = 'rgba(148, 151, 153, 0.45)';
-      } else if (this.currentSecondOptionIndex === 1) {
-        document.getElementById('secondLeftArrow').style.background = '#ff993d';
-        this.prevSecondBool = true;
-      }
+    if(!this.answered) {
+      if(this.currentSecondOptionIndex === this.firstOptions.length - 1) {
+        this.currentSecondOptionIndex = 0;
+      } else {
+        this.currentSecondOptionIndex += 1;
+      } 
     }
+    this.checkAnswers();
   }
 
   getPrevSecondOption() {
-    if(this.prevSecondBool) {
-      console.log("lefelő");
-      this.currentSecondOptionIndex -= 1;
+    if(!this.answered) {
       if(this.currentSecondOptionIndex === 0) {
-        this.prevSecondBool = false;
-        document.getElementById('secondLeftArrow').style.background = 'rgba(148, 151, 153, 0.45)';
-      } else if(this.currentSecondOptionIndex === this.secondOptions.length - 2) {
-        document.getElementById('secondRightArrow').style.background = '#ff993d';
-        this.nextSecondBool = true;
-      }
+        this.currentSecondOptionIndex = this.firstOptions.length - 1;
+      } else {
+        this.currentSecondOptionIndex -= 1;
+      } 
     }
+    this.checkAnswers();
   }
 
   getNextThirdOption() {
-    if(this.nextThirdBool) {
-      console.log("főfele");
-      this.currentThirdOptionIndex += 1;
-      if(this.currentThirdOptionIndex === this.thirdOptions.length - 1) {
-        this.nextThirdBool = false;
-        document.getElementById('thirdRightArrow').style.background = 'rgba(148, 151, 153, 0.45)';
-      } else if (this.currentThirdOptionIndex === 1) {
-        document.getElementById('thirdLeftArrow').style.background = '#ff993d';
-        this.prevThirdBool = true;
-      }
+    if(!this.answered) {
+      if(this.currentThirdOptionIndex === this.firstOptions.length - 1) {
+        this.currentThirdOptionIndex = 0;
+      } else {
+        this.currentThirdOptionIndex += 1;
+      } 
     }
+    this.checkAnswers();
   }
 
   getPrevThirdOption() {
-    if(this.prevThirdBool) {
-      console.log("lefelő");
-      this.currentThirdOptionIndex -= 1;
+    if(!this.answered) {
       if(this.currentThirdOptionIndex === 0) {
-        this.prevThirdBool = false;
-        document.getElementById('thirdLeftArrow').style.background = 'rgba(148, 151, 153, 0.45)';
-      } else if(this.currentThirdOptionIndex === this.thirdOptions.length - 2) {
-        document.getElementById('thirdRightArrow').style.background = '#ff993d';
-        this.nextThirdBool = true;
-      }
+        this.currentThirdOptionIndex = this.firstOptions.length - 1;
+      } else {
+        this.currentThirdOptionIndex -= 1;
+      } 
+    }
+    this.checkAnswers();
+  }
+
+  checkAnswers() {
+    if(
+      this.currentFirstOptionIndex === this.answer[0] &&
+      this.currentSecondOptionIndex === this.answer[1] &&
+      this.currentThirdOptionIndex === this.answer[2]
+    ) {
+      console.log('cond1', this.currentFirstOptionIndex, this.answer[0]);
+      console.log('cond2', this.currentSecondOptionIndex, this.answer[1]);
+      console.log('cond3', this.currentThirdOptionIndex, this.answer[2]);
+      this.answered = true;
+      this.slideStyle.color = '#ff993d';
     }
   }
 
   getNexGameItem() {
-    this.navCtrl.push(GiMixedWordsPage);
+    if(this.answered) {
+      this.navCtrl.push(GiMixedWordsPage);
+    }
   }
 
 }

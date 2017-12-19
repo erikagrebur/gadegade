@@ -13,14 +13,19 @@
 
 <ion-content>
   <p class="leftSide rightSide textJustify">Professor now belive in you. He wants to help but unfortunatelly he can't give the correct location of the hammer. He just thinks that there is the greatest chance of finding it on the main square. Furthermore he has some Asgardian notes what maybe help you, although over time they mixed up a bit.</p>
-  <p class="leftSide rightSide textJustify">But you have to hurry because people maybe find the hammer before you and then the area will be closed. So let's go now and as long as you get there the text becomes more and more meaningful.</p>
+  <p class="leftSide rightSide textJustify">But you have to hurry because people maybe find the hammer before you and then the area will be closed. So let's go now and as long as you get there the <strong>text becomes more and more meaningful.</strong></p>
+  <p>első elem: - {{testLogFirstElem}}</p>
+  <p>második elem: - {{testLogSecondElem}}</p>
+  <p>harmadik elem: - {{testLogThirdElem}}</p>
+  <p>rangeLog: - {{rangeLong}}</p>
   <div id="gameItemContainer" class="leftSide rightSide">
-    <div class="risingImgContainer">
-        
+    <div class="mixedWordsContainer">
+        <p class="mixedWordsValue">{{mixedWordsValue}}</p>
+        <p class="wrongWay" [ngStyle]="{'display': wrongWayPTag}">You're in the wrong direction!</p>
     </div>
-    <div class="risingRangeContainer">
-      <ion-range [(ngModel)]="rangeLong"></ion-range>
+    <div class="mixedRangeContainer">
+      <ion-range [(ngModel)]="rangeLong" [ngStyle]="{'backgroundColor': rangeColor}" max='50' min='0'></ion-range>
     </div>
   </div>
-  <p class="slide" (click)="getNextGameItem()">Slide <ion-icon name="arrow-forward"></ion-icon></p>
+  <p class="slide" (click)="getNextGameItem()" [ngStyle]="{'color': slideStyle}">Slide <ion-icon name="arrow-forward"></ion-icon></p>
 </ion-content>

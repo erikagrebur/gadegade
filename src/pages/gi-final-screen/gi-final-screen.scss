@@ -1,0 +1,32 @@
+page-gi-final-screen {
+    .finishImg {
+        width: 200px;
+        position: relative;
+        left: 50%;
+        margin: 30px auto 20px -100px;
+    }
+
+    .congrat {
+        font-weight: 900;
+        font-size: 25px;
+        letter-spacing: 0.5px;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .leftSide {
+        margin-left: $horizontalSideSpace;
+    }
+
+    .rightSide {
+        margin-right: $horizontalSideSpace;
+    }
+
+    .slide {
+        margin-top: 50px;
+        float: right;
+        color: $orangeColor;
+        margin-right: $horizontalSideSpace;
+        margin-bottom: 20px;
+      }
+}
