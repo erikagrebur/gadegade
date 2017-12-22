@@ -1,29 +1,29 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { LogInScreenPage } from '../log-in-screen/log-in-screen';
+import { TabsPage } from '../tabs/tabs';
 
 /**
- * Generated class for the SignUpScreenPage page.
+ * Generated class for the CityPickerPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
 
 @Component({
-  selector: 'page-sign-up-screen',
-  templateUrl: 'sign-up-screen.html',
+  selector: 'page-city-picker',
+  templateUrl: 'city-picker.html',
 })
-export class SignUpScreenPage {
+export class CityPickerPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad SignUpScreenPage');
+    console.log('ionViewDidLoad CityPickerPage');
   }
 
-  getLoginPage() {
-    this.navCtrl.push(LogInScreenPage);
+  getCity() {
+    this.navCtrl.push(TabsPage);
   }
 
 }

@@ -10,13 +10,13 @@
   </ion-navbar>
 </ion-header>
 <ion-content>
-  <p class="giWordSearchContent leftSideSpace rightSideSpace">You offer your help to Thor, because the mission sounds exciting. But Thor want to test whether you are worthy of help. He ask a question: <strong>do you remember the name of his hammer?</strong></p>
+  <p class="giWordSearchContent leftSideSpace rightSideSpace" >{{database[2]}}</p>
   <div class="wordSearchPad">
     <div class="wordSearchItem" (touchstart)="tapDown(giFirstDiv, giFirstLetter, 'M', 'FirstDiv')" (touchend)="tapUp()" #giFirstDiv>
-      <p class="wordSearchLetter" #giFirstLetter>M</p>
+      <p class="wordSearchLetter" #giFirstLetter></p>
     </div>
-    <div class="wordSearchItem" (touchstart)="tapDown(giSecondDiv, giSecondLetter, 'G', 'SecondDiv')" (touchend)="tapUp()" #giSecondDiv>
-      <p class="wordSearchLetter" #giSecondLetter>G</p>
+    <div class="wordSearchItem" (touchstart)="tapDown(giSecondDiv, giSecondLetter, 'E', 'SecondDiv')" (touchend)="tapUp()" #giSecondDiv>
+      <p class="wordSearchLetter" #giSecondLetter></p>
     </div>
     <div class="wordSearchItem" (touchstart)="tapDown(giThirdDiv, giThirdLetter, 'A', 'ThirdDiv')" (touchend)="tapUp()" #giThirdDiv>
       <p class="wordSearchLetter" #giThirdLetter>Å</p>
@@ -42,5 +42,7 @@
       <p class="wordSearchLetter" #giNinthLetter>N</p>
     </div>
   </div>
-  <p id="slide" (click)="getNextGameItem()"  [ngStyle]="slideStyle">Slide <ion-icon name="arrow-forward"></ion-icon></p>
+  <div class="bottomContainer">
+      <p id="slide" class="rightSideSpace" (click)="getNextGameItem()"  [ngStyle]="slideStyle">Next <ion-icon name="arrow-forward"></ion-icon></p>
+  </div>
 </ion-content>

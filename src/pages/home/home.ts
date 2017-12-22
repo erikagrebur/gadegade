@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { GameDetailsPage } from '../game-details/game-details';
+import { CityPickerPage } from '../city-picker/city-picker';
 
 @Component({
   selector: 'page-home',
@@ -24,6 +25,10 @@ export class HomePage {
         tabs[ key ].style.display = 'flex';
       });
     } // end if
+  }
+
+  getSelectPage() {
+    this.navCtrl.push(CityPickerPage);
   }
 
 }

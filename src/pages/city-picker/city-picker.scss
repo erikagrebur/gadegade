@@ -1,0 +1,94 @@
+page-city-picker {
+    .darkBluePolygon {
+        height: 265px;
+        width: 100%;
+        -webkit-clip-path: polygon(0 0, 100% 0, 100% 78%, 0 100%);
+        clip-path: polygon(0 0, 100% 0, 100% 78%, 0 100%);
+        background-color: $blueColor;
+      }
+
+      #firstTitle {
+        padding: 39px 0 0 $horizontalSideSpace;
+        color: $orangeColor;
+        font-weight: normal;
+        font-size: 15px;
+      }
+      #selectedCity {
+        font-size: 40px;
+        color: $orangeColor;
+        font-weight: bold;
+        padding-left: $horizontalSideSpace;
+      }
+    
+      .selectedCityLine {
+        width: 150px;
+        background-color: $fadedGreyColor;
+        margin-left: $horizontalSideSpace;
+        margin-top: 3px;
+        height: 1px;
+      }
+    
+      .homePagelogo {
+        float: right;
+        width: 110px;
+        margin-top: 39px;
+        margin-right: $horizontalSideSpace;
+      }
+    
+      .titleDiv {
+        display: inline-block;
+      }
+
+      .citySelection {
+        background: #2A2F39 !important;
+        border: none;
+        border-bottom: 1px solid #6D6D6D;
+        width: 175px;
+        font-size: 20px;
+        color: $fontGreyColor;
+      }
+
+      .leftSide {
+          margin-left: $horizontalSideSpace;
+      }
+
+      datalist {
+          background: $fadedGreyColor;
+      }
+
+      .moreLine {
+        color: $orangeColor;
+        font-size: 15px;
+        margin: 60px 0 0 $horizontalSideSpace;
+    
+      }
+
+      .cityCrestIconContainer {
+        border: 5px solid $orangeColor;
+        border-radius: 50%;
+        width: 90px;
+        height: 90px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .cityCrestImg {
+        width: 70px;
+        height: auto;
+        /* margin-left: auto; */
+        /* margin-right: auto; */
+        /* align-items: center; */
+        position: relative;
+        left: 50%;
+        margin-left: -35px;
+        top: 50%;
+        margin-top: -33.25px;
+      }
+
+      .cityName {
+          color: $fontGreyColor;
+          font-size: 12px;
+          text-align: center;
+          margin-top: 1px;
+      }
+}

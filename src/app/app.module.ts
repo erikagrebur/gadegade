@@ -19,6 +19,8 @@ import { GiObscureImgPage } from '../pages/gi-obscure-img/gi-obscure-img';
 import { GiFinalScreenPage } from '../pages/gi-final-screen/gi-final-screen';
 import { GiRateScreenPage } from '../pages/gi-rate-screen/gi-rate-screen';
 import { SignUpScreenPage } from '../pages/sign-up-screen/sign-up-screen';
+import { CityPickerPage } from '../pages/city-picker/city-picker';
+import { LogInScreenPage } from '../pages/log-in-screen/log-in-screen';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -62,7 +64,9 @@ export const firebaseConfig = {
     GiObscureImgPage,
     GiFinalScreenPage,
     GiRateScreenPage,
-    SignUpScreenPage
+    SignUpScreenPage,
+    CityPickerPage,
+    LogInScreenPage
   ],
   imports: [
     BrowserModule,
@@ -88,7 +92,9 @@ export const firebaseConfig = {
     GiObscureImgPage,
     GiFinalScreenPage,
     GiRateScreenPage,
-    SignUpScreenPage
+    SignUpScreenPage,
+    CityPickerPage,
+    LogInScreenPage
   ],
   providers: [
     StatusBar,

@@ -25,5 +25,7 @@
       <ion-range [(ngModel)]="rangeLong" max='50' min='0'></ion-range>
     </div>
   </div>
-  <p class="slide" (click)="getNextGameItem()" [ngStyle]="{'color': slideStyle}">Slide <ion-icon name="arrow-forward"></ion-icon></p>
+  <div class="bottomContainer">
+      <p class="slide rightSide" (click)="getNextGameItem()" [ngStyle]="{'color': slideStyle}">Next <ion-icon name="arrow-forward"></ion-icon></p>
+  </div>
 </ion-content>

@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { GiRisingPicturePage } from '../gi-rising-picture/gi-rising-picture';
+import { DatabaseProvider } from '../../providers/database/database';
+import { LocationTrackerProvider } from '../../providers/location-tracker/location-tracker';
 
 /**
  * Generated class for the GiWordSearchPage page.
@@ -14,6 +16,7 @@ import { GiRisingPicturePage } from '../gi-rising-picture/gi-rising-picture';
   templateUrl: 'gi-word-search.html',
 })
 export class GiWordSearchPage {
+  database: String[] = [];
   typedWord : String;
   answer : String = 'MJOLNIR';
   //answer : String = 'MJ';
@@ -29,8 +32,17 @@ export class GiWordSearchPage {
   selectedDivTags: any[] = [];
   selectedPTags: any[] = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private databaseService: DatabaseProvider, private locationTracker: LocationTrackerProvider) {
     
+  }
+
+  ionViewDidLoad() {
+    this.databaseService.getWordSearchFromDataBase().subscribe(data => {
+      this.database = data;
+      console.log("data", data);
+      console.log("???", this.database[0][0]);
+    });
+    console.log('A', this.database);
   }
 
   tapDown(giDivTag, giPTag, giValue, giIdentification) {

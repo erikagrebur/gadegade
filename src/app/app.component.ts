@@ -5,12 +5,18 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { SliderScreenPage } from '../pages/slider-screen/slider-screen';
 import { GiObscureImgPage } from '../pages/gi-obscure-img/gi-obscure-img';
 import { GiFinalScreenPage } from '../pages/gi-final-screen/gi-final-screen';
+import { HomePage } from '../pages/home/home';
+import { GiRateScreenPage } from '../pages/gi-rate-screen/gi-rate-screen';
+import { GiStartGamePage } from '../pages/gi-start-game/gi-start-game';
+import { GiMixedWordsPage } from '../pages/gi-mixed-words/gi-mixed-words';
+import { GiWordSearchPage } from '../pages/gi-word-search/gi-word-search';
+import { GameDescriptionPage } from '../pages/game-description/game-description';
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = SliderScreenPage;
+  rootPage:any = GameDescriptionPage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     platform.ready().then(() => {

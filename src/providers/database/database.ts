@@ -7,10 +7,12 @@ export class DatabaseProvider {
 
   private letterCollection: AngularFirestoreCollection<any>;
   private mixedWordsCollection: AngularFirestoreCollection<any>;
+  private wordSearchCollection: AngularFirestoreCollection<any>;
   
   constructor(public db: AngularFirestore) {
     this.letterCollection = db.collection<any>('letters');
     this.mixedWordsCollection = db.collection<any>('mixedWords');
+    this.wordSearchCollection = db.collection<any>('wordSearch');
   }
 
   checkLettersChanges(): Observable<any> {
@@ -34,6 +36,19 @@ export class DatabaseProvider {
     return Observable.create( observable => {
       this.checkMixedWordsChanges().subscribe(mixedwords => {
         observable.next(mixedwords);
+        observable.complete();
+      })
+    })
+  }
+
+  checkWordSearchChanges(): Observable<any> {
+    return this.wordSearchCollection.valueChanges();
+  }
+
+  getWordSearchFromDataBase() : Observable<any> {
+    return Observable.create( observable => {
+      this.checkWordSearchChanges().subscribe(data => {
+        observable.next(data);
         observable.complete();
       })
     })

@@ -14,11 +14,9 @@
 <ion-content>
   <h1 id="screenTitle">Rating</h1>
   <div class="starsContainer">
-      <div class="stars"></div>
-      <div class="stars"></div>
-      <div class="stars"></div>
-      <div class="stars"></div>
-      <div class="stars"></div>
+      <div class="stars" *ngFor="let star of stars">
+        <img src={{star.src}} alt={{star.alt}} (click)="setRate(star.id)">
+      </div>
   </div>
   <p class="leftSide rightSide information">Please rate the story and if you want more fun then <span class="signUp" (click)="getSignUpScreen()">sign up</span> into Gade Gade.</p>
 </ion-content>

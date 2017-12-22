@@ -14,12 +14,23 @@ import { GiWordSearchPage } from '../gi-word-search/gi-word-search';
   templateUrl: 'game-description.html',
 })
 export class GameDescriptionPage {
-
+  image: string = '';
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    /*const storageRef = firebase.storage().ref().child('game_00/description/odin.JPG');
+    storageRef.getDownloadURL().then(url => this.image = url);
+    const thorRef = firebase.storage().ref().child('game_00/description/thor.png');
+    console.log("thorref", thorRef);
+    console.log("imageconstba", this.image);*/
   }
 
   getGiWordSearch() {
     this.navCtrl.push(GiWordSearchPage);
+  }
+
+  ionViewDidLoad() {
+   /* const storageRef = firebase.storage().ref().child('game_00/description/odin.JPG');
+    storageRef.getDownloadURL().then(url => this.image = url);
+    console.log("didloadbastorageref", this.image);*/
   }
 
   ionViewWillEnter() {

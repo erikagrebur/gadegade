@@ -14,10 +14,9 @@
 <ion-content>
   <p class="leftSide rightSide textJustify">Professor now belive in you. He wants to help but unfortunatelly he can't give the correct location of the hammer. He just thinks that there is the greatest chance of finding it on the main square. Furthermore he has some Asgardian notes what maybe help you, although over time they mixed up a bit.</p>
   <p class="leftSide rightSide textJustify">But you have to hurry because people maybe find the hammer before you and then the area will be closed. So let's go now and as long as you get there the <strong>text becomes more and more meaningful.</strong></p>
-  <p>első elem: - {{testLogFirstElem}}</p>
-  <p>második elem: - {{testLogSecondElem}}</p>
-  <p>harmadik elem: - {{testLogThirdElem}}</p>
-  <p>rangeLog: - {{rangeLong}}</p>
+  <p>Lat: {{currentLat}}</p>
+  <p>Lng: {{currentLng}}</p>
+  <p>Range: {{rangeLong}}</p>
   <div id="gameItemContainer" class="leftSide rightSide">
     <div class="mixedWordsContainer">
         <p class="mixedWordsValue">{{mixedWordsValue}}</p>
@@ -27,5 +26,7 @@
       <ion-range [(ngModel)]="rangeLong" [ngStyle]="{'backgroundColor': rangeColor}" max='50' min='0'></ion-range>
     </div>
   </div>
-  <p class="slide" (click)="getNextGameItem()" [ngStyle]="{'color': slideStyle}">Slide <ion-icon name="arrow-forward"></ion-icon></p>
+  <div class="bottomContainer">
+      <p class="slide rightSide" (click)="getNextGameItem()" [ngStyle]="{'color': slideStyle}">Next <ion-icon name="arrow-forward"></ion-icon></p>
+  </div>
 </ion-content>

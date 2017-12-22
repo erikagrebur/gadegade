@@ -16,16 +16,14 @@ import { GiObscureImgPage } from '../gi-obscure-img/gi-obscure-img';
   templateUrl: 'gi-mixed-words.html',
 })
 export class GiMixedWordsPage {
-  mixedWordsCollection: string[] = [
-    'Wfo!oll het sshero\' seey',
-    'wfooll hte sserho\' esey!',
-    'foollw the hssero\' esey!',
-    'Fololw the hosser\' eyes!',
-    'Follow the horse\'s eyes!'];
   mixedWordsValue: string;
+
+  mixedWordDatabaseValues:string[] = [];
 
   slideStyle: any = 'rgba(148, 151, 153, 0.45)';
   rangeLong: number = 0;
+
+  answered: boolean = false;
 
   currentLat: number;
   currentLng: number;
@@ -58,25 +56,16 @@ export class GiMixedWordsPage {
         this.getDistance(this.targetLat,this.targetLng,this.currentLat,this.currentLng);
       });
     });
-    
+  }
+
+  ionViewDidLoad() {
+    console.log("odaegyet");
     this.databaseService.getMixedWordsFromDataBase().subscribe(mixedwords => {
-      this. mixedWordsCollection = mixedwords;
-      console.log("ittvannak", this.mixedWordsCollection);
+      this.mixedWordDatabaseValues = mixedwords;
+      this.mixedWordsValue = this.mixedWordDatabaseValues[0]['01stStage'];
     });
-    
-    this.mixedWordsValue = this.mixedWordsCollection[0];
-    console.log('c', this.mixedWordsCollection);
-    console.log('c0', this.mixedWordsCollection[0]);
-    console.log('c1', this.mixedWordsCollection[1]);
-    console.log('c2', this.mixedWordsCollection[2]);
-    console.log('c3', this.mixedWordsCollection[3]);
-    console.log('c4', this.mixedWordsCollection[4]);
-    this.testLogFirstElem = this.mixedWordsCollection[0];
-    this.testLogSecondElem = this.mixedWordsCollection[1];
-    this.testLogThirdElem = this.mixedWordsCollection[2];
-    console.log('m', this.mixedWordsValue);
-    /*this.mixedWordsValue = this.mixedWordsCollection['0']['01stStage'];
-    console.log("szo", this.mixedWordsValue);*/
+    console.log("mixedvordsvalue", this.mixedWordDatabaseValues);
+    console.log("mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm", this.mixedWordsValue);
   }
 
   getDistance(tLat,tLng,cLat,cLng) {
@@ -102,8 +91,10 @@ export class GiMixedWordsPage {
     this.checkDistance();
     if(this.distance <= 0.005) {
       this.slideStyle = '#ff993d';
+      this.answered = true;
     } else {
       this.slideStyle = 'rgba(148, 151, 153, 0.45)';
+      this.answered = false;
     }
   }
   
@@ -122,17 +113,15 @@ export class GiMixedWordsPage {
       console.log('condii', this.rangeLong < this.distanceAccuracy / 5);
       
       if(this.rangeLong < this.distanceAccuracy / 5) {
-        this.mixedWordsValue = this.mixedWordsCollection[0];
-        console.log('ertek 00', this.mixedWordsCollection[0]);
+        this.mixedWordsValue = this.mixedWordDatabaseValues[0]['01stStage'];
       } else if(this.rangeLong >= this.distanceAccuracy / 5 && this.rangeLong < 2* this.distanceAccuracy / 5) {
-        this.mixedWordsValue = this.mixedWordsCollection[1];
-        console.log('ertek 01', this.mixedWordsCollection[1]);
+        this.mixedWordsValue = this.mixedWordDatabaseValues[0]['02ndStage'];
       } else if(this.rangeLong >= 2* this.distanceAccuracy / 5 && this.rangeLong < 3* this.distanceAccuracy / 5) {
-        this.mixedWordsValue = this.mixedWordsCollection[2];
+        this.mixedWordsValue = this.mixedWordDatabaseValues[0]['03rdStage'];
       } else if(this.rangeLong >= 3* this.distanceAccuracy / 5 && this.rangeLong < 4* this.distanceAccuracy / 5) {
-        this.mixedWordsValue = this.mixedWordsCollection[3];
+        this.mixedWordsValue = this.mixedWordDatabaseValues[0]['04thStage'];
       } else if(this.rangeLong >= 4* this.distanceAccuracy / 5 && this.rangeLong < 5* this.distanceAccuracy / 5) {
-        this.mixedWordsValue = this.mixedWordsCollection[4];
+        this.mixedWordsValue = this.mixedWordDatabaseValues[0]['05thStage'];
       }
       
       this.checkPointDist -= this.checkedValue * this.unitDist;
@@ -143,15 +132,15 @@ export class GiMixedWordsPage {
       this.rangeLong = this.checkedValue + (this.firstDist - this.checkPointDist)/this.unitDist;      
 
       if(this.rangeLong < this.distanceAccuracy / 5) {
-        this.mixedWordsValue = this.mixedWordsCollection[0];
+        this.mixedWordsValue = this.mixedWordDatabaseValues[0]['01stStage'];
       } else if(this.rangeLong >= this.distanceAccuracy / 5 && this.rangeLong < 2* this.distanceAccuracy / 5) {
-        this.mixedWordsValue = this.mixedWordsCollection[1];
+        this.mixedWordsValue = this.mixedWordDatabaseValues[0]['02ndStage'];
       } else if(this.rangeLong >= 2* this.distanceAccuracy / 5 && this.rangeLong < 3* this.distanceAccuracy / 5) {
-        this.mixedWordsValue = this.mixedWordsCollection[2];
+        this.mixedWordsValue = this.mixedWordDatabaseValues[0]['03rdStage'];
       } else if(this.rangeLong >= 3* this.distanceAccuracy / 5 && this.rangeLong < 4* this.distanceAccuracy / 5) {
-        this.mixedWordsValue = this.mixedWordsCollection[3];
+        this.mixedWordsValue = this.mixedWordDatabaseValues[0]['04thStage'];
       } else if(this.rangeLong >= 4* this.distanceAccuracy / 5 && this.rangeLong < 5* this.distanceAccuracy / 5) {
-        this.mixedWordsValue = this.mixedWordsCollection[4];
+        this.mixedWordsValue = this.mixedWordDatabaseValues[0]['05thStage'];
       }
 
       this.checkPointDist -= this.checkedValue * this.unitDist;
@@ -160,9 +149,8 @@ export class GiMixedWordsPage {
   }
 
   getNextGameItem() {
-    this.navCtrl.push(GiObscureImgPage);
+    //if(this.answered) {
+      this.navCtrl.push(GiObscureImgPage);
+    //}
   }
-
-
-
 }
