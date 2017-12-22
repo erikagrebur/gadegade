@@ -10,39 +10,41 @@
   </ion-navbar>
 </ion-header>
 <ion-content>
-  <p class="giWordSearchContent leftSideSpace rightSideSpace" >{{database[2]}}</p>
+  <div *ngFor="let data of database">
+  <p class="giWordSearchContent leftSideSpace rightSideSpace" >{{data[9]}}</p>
   <div class="wordSearchPad">
-    <div class="wordSearchItem" (touchstart)="tapDown(giFirstDiv, giFirstLetter, 'M', 'FirstDiv')" (touchend)="tapUp()" #giFirstDiv>
-      <p class="wordSearchLetter" #giFirstLetter></p>
+    <div class="wordSearchItem" (touchstart)="tapDown(giFirstDiv, giFirstLetter, data[0], 'FirstDiv')" (touchend)="tapUp()" #giFirstDiv>
+      <p class="wordSearchLetter" #giFirstLetter>{{data[0]}}</p>
     </div>
-    <div class="wordSearchItem" (touchstart)="tapDown(giSecondDiv, giSecondLetter, 'E', 'SecondDiv')" (touchend)="tapUp()" #giSecondDiv>
-      <p class="wordSearchLetter" #giSecondLetter></p>
+    <div class="wordSearchItem" (touchstart)="tapDown(giSecondDiv, giSecondLetter, data[1], 'SecondDiv')" (touchend)="tapUp()" #giSecondDiv>
+      <p class="wordSearchLetter" #giSecondLetter>{{data[1]}}</p>
     </div>
-    <div class="wordSearchItem" (touchstart)="tapDown(giThirdDiv, giThirdLetter, 'A', 'ThirdDiv')" (touchend)="tapUp()" #giThirdDiv>
-      <p class="wordSearchLetter" #giThirdLetter>Å</p>
-    </div>
-    <div class="clearFloat"></div>
-    <div class="wordSearchItem" (touchstart)="tapDown(giFourthDiv, giFourthLetter, 'J', 'FourthDiv')" (touchend)="tapUp()" #giFourthDiv>
-      <p class="wordSearchLetter" #giFourthLetter>J</p>
-    </div>
-    <div class="wordSearchItem" (touchstart)="tapDown(giFifthDiv, giFifthLetter, 'R', 'FifthDiv')" (touchend)="tapUp()" #giFifthDiv>
-      <p class="wordSearchLetter" #giFifthLetter>R</p>
-    </div>
-    <div class="wordSearchItem" (touchstart)="tapDown(giSixthDiv, giSixthLetter, 'I', 'SixthDiv')" (touchend)="tapUp()" #giSixthDiv>
-      <p class="wordSearchLetter" #giSixthLetter>I</p>
+    <div class="wordSearchItem" (touchstart)="tapDown(giThirdDiv, giThirdLetter, data[2], 'ThirdDiv')" (touchend)="tapUp()" #giThirdDiv>
+      <p class="wordSearchLetter" #giThirdLetter>{{data[2]}}</p>
     </div>
     <div class="clearFloat"></div>
-    <div class="wordSearchItem" (touchstart)="tapDown(giSeventhDiv, giSeventhLetter, 'O', 'SeventhDiv')" (touchend)="tapUp()" #giSeventhDiv>
-      <p class="wordSearchLetter" #giSeventhLetter>O</p>
+    <div class="wordSearchItem" (touchstart)="tapDown(giFourthDiv, giFourthLetter, data[3], 'FourthDiv')" (touchend)="tapUp()" #giFourthDiv>
+      <p class="wordSearchLetter" #giFourthLetter>{{data[3]}}</p>
     </div>
-    <div class="wordSearchItem" (touchstart)="tapDown(giEighthDiv, giEighthLetter, 'L', 'EighthDiv')" (touchend)="tapUp()" #giEighthDiv>
-      <p class="wordSearchLetter" #giEighthLetter>L</p>
+    <div class="wordSearchItem" (touchstart)="tapDown(giFifthDiv, giFifthLetter, data[4], 'FifthDiv')" (touchend)="tapUp()" #giFifthDiv>
+      <p class="wordSearchLetter" #giFifthLetter>{{data[4]}}</p>
     </div>
-    <div class="wordSearchItem" (touchstart)="tapDown(giNinthDiv, giNinthLetter, 'N', 'NinthDiv')" (touchend)="tapUp()" #giNinthDiv>
-      <p class="wordSearchLetter" #giNinthLetter>N</p>
+    <div class="wordSearchItem" (touchstart)="tapDown(giSixthDiv, giSixthLetter, data[5], 'SixthDiv')" (touchend)="tapUp()" #giSixthDiv>
+      <p class="wordSearchLetter" #giSixthLetter>{{data[5]}}</p>
+    </div>
+    <div class="clearFloat"></div>
+    <div class="wordSearchItem" (touchstart)="tapDown(giSeventhDiv, giSeventhLetter, data[6], 'SeventhDiv')" (touchend)="tapUp()" #giSeventhDiv>
+      <p class="wordSearchLetter" #giSeventhLetter>{{data[6]}}</p>
+    </div>
+    <div class="wordSearchItem" (touchstart)="tapDown(giEighthDiv, giEighthLetter, data[7], 'EighthDiv')" (touchend)="tapUp()" #giEighthDiv>
+      <p class="wordSearchLetter" #giEighthLetter>{{data[7]}}</p>
+    </div>
+    <div class="wordSearchItem" (touchstart)="tapDown(giNinthDiv, giNinthLetter, data[8], 'NinthDiv')" (touchend)="tapUp()" #giNinthDiv>
+      <p class="wordSearchLetter" #giNinthLetter>{{data[8]}}</p>
     </div>
   </div>
   <div class="bottomContainer">
       <p id="slide" class="rightSideSpace" (click)="getNextGameItem()"  [ngStyle]="slideStyle">Next <ion-icon name="arrow-forward"></ion-icon></p>
   </div>
+</div>
 </ion-content>

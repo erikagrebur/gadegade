@@ -16,7 +16,7 @@ import { GameDescriptionPage } from '../pages/game-description/game-description'
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = GameDescriptionPage;
+  rootPage:any = SliderScreenPage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     platform.ready().then(() => {

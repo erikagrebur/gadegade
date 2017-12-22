@@ -2,6 +2,7 @@ import { Component, NgZone} from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { LocationTrackerProvider } from '../../providers/location-tracker/location-tracker';
 import { ThreeQuestionPage } from '../three-question/three-question';
+import { DatabaseProvider } from '../../providers/database/database';
 
 @Component({
   selector: 'page-gi-rising-picture',
@@ -9,6 +10,7 @@ import { ThreeQuestionPage } from '../three-question/three-question';
 })
 export class GiRisingPicturePage {
 
+  database: string[] = [];
   rangeLong: number = 0;
   currentLng: number;
   currentLat: number;
@@ -32,7 +34,7 @@ export class GiRisingPicturePage {
 
   wrongWayPTag: any = 'none';
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private locationTracker: LocationTrackerProvider, private ngZone: NgZone) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private locationTracker: LocationTrackerProvider, private ngZone: NgZone, private databaseService: DatabaseProvider) {
     this.locationTracker.startTracking();
     this.locationTracker.backGeolocation.subscribe((location) => {
       this.ngZone.run(() => {
@@ -43,6 +45,17 @@ export class GiRisingPicturePage {
     });
 
     this.imageUnit = 180 / this.distanceAccuracy;
+
+
+  }
+
+  ionViewDidLoad() {
+    this.databaseService.getRisingPictureFromDataBase().subscribe(data => {
+      this.database = data;
+      console.log("data", data);
+      console.log("???", this.database[0][0]);
+    });
+    console.log('A', this.database);
   }
 
   getDistance(tLat,tLng,cLat,cLng) {
@@ -56,7 +69,6 @@ export class GiRisingPicturePage {
       ; 
     let c: number = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
     this.distance = R * c; // Distance in km
-    console.log("distance",this.distance);
     this.distanceMeter = this.distance*1000;
     
     if(this.isFirstDistance) {

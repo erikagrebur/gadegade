@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { GiMixedWordsPage } from '../gi-mixed-words/gi-mixed-words';
+import { DatabaseProvider } from '../../providers/database/database';
 
 /**
  * Generated class for the ThreeQuestionPage page.
@@ -15,27 +16,21 @@ import { GiMixedWordsPage } from '../gi-mixed-words/gi-mixed-words';
 })
 export class ThreeQuestionPage {
 
-  firstOptions: string[] = ['Volstagg','Heimdall','Pista'];
-  secondOptions: string[] = ['Hogun','Odin','Pukka'];
-  thirdOptions: string[] = ['Jotunheim','Fehérvár','SOD'];
+  database: string[] = [];
+  firstOptions: string[] = ["Volstagg", "Heimdall", "Sith"];
+  secondOptions: string[] = ["Odin", "Ace", "Hogun"];
+  thirdOptions: string[] = ["Jotunheim", "Earth", "Kree"];
 
-  answer: number[] = [0, 1, 0]; 
+  answer: number[] = [1, 0, 0]; 
   answered: boolean = false;
 
   currentFirstOptionIndex: number;
   currentSecondOptionIndex: number;
   currentThirdOptionIndex: number;
 
-  /*nextFirstBool: boolean = true;
-  prevFirstBool: boolean = true;
-  nextSecondBool: boolean = true;
-  prevSecondBool: boolean = true;
-  nextThirdBool: boolean = true;
-  prevThirdBool: boolean = true;*/
-
   slideStyle: any = {'color': 'rgba(148, 151, 153, 0.45)'}
   
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private databaseService: DatabaseProvider) {
     
   }
 
@@ -44,6 +39,13 @@ export class ThreeQuestionPage {
     this.currentSecondOptionIndex = Math.floor(Math.random() * this.secondOptions.length);
     this.currentThirdOptionIndex = Math.floor(Math.random() * this.thirdOptions.length);
     console.log(this.currentFirstOptionIndex);
+    
+    this.databaseService.getRisingPictureFromDataBase().subscribe(data => {
+      this.database = data;
+      console.log("data", data);
+      console.log("???", this.database[0][0]);
+    });
+    console.log('A', this.database);
   }
 
   getNextFirstOption() {
@@ -54,16 +56,6 @@ export class ThreeQuestionPage {
         this.currentFirstOptionIndex += 1;
       } 
     }
-    /*if(this.nextFirstBool && !this.answered) {
-      this.currentFirstOptionIndex += 1;
-      if(this.currentFirstOptionIndex === this.firstOptions.length - 1) {
-        this.nextFirstBool = false;
-        firstRightArrow'.style.background = 'rgba(148, 151, 153, 0.45)';
-      } else if (this.currentFirstOptionIndex === 1) {
-        firstRightArrow'.style.background = '#ff993d';
-        this.prevFirstBool = true;
-      }
-    }*/
     this.checkAnswers();
   }
 
@@ -75,16 +67,6 @@ export class ThreeQuestionPage {
         this.currentFirstOptionIndex -= 1;
       } 
     }
-    /*if(this.prevFirstBool && !this.answered) {
-      this.currentFirstOptionIndex -= 1;
-      if(this.currentFirstOptionIndex === 0) {
-        this.prevFirstBool = false;
-        document.getElementById('firstLeftArrow').style.background = 'rgba(148, 151, 153, 0.45)';
-      } else if(this.currentFirstOptionIndex === this.firstOptions.length - 2) {
-        document.getElementById('firstRightArrow').style.background = '#ff993d';
-        this.nextFirstBool = true;
-      }
-    }*/
     this.checkAnswers();
   }
 

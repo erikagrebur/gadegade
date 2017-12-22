@@ -37,7 +37,7 @@ export class GiWordSearchPage {
   }
 
   ionViewDidLoad() {
-    this.databaseService.getWordSearchFromDataBase().subscribe(data => {
+    this.databaseService.getRisingPictureFromDataBase().subscribe(data => {
       this.database = data;
       console.log("data", data);
       console.log("???", this.database[0][0]);
@@ -53,6 +53,7 @@ export class GiWordSearchPage {
       this.currentSelectedIdentification = giIdentification;
       this.currentSelectedDivTag = giDivTag;
       this.currentSelectedPTag = giPTag;
+      console.log("valuee", giValue);
     }
   }
 

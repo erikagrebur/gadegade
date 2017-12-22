@@ -1,6 +1,7 @@
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
+import { AngularFireModule } from 'angularfire2';
 
 @Injectable()
 export class DatabaseProvider {
@@ -8,11 +9,15 @@ export class DatabaseProvider {
   private letterCollection: AngularFirestoreCollection<any>;
   private mixedWordsCollection: AngularFirestoreCollection<any>;
   private wordSearchCollection: AngularFirestoreCollection<any>;
+  private risingPictureCollection: AngularFirestoreCollection<any>;
+  private threeQuestionCollection: AngularFirestoreCollection<any>;
   
   constructor(public db: AngularFirestore) {
     this.letterCollection = db.collection<any>('letters');
     this.mixedWordsCollection = db.collection<any>('mixedWords');
     this.wordSearchCollection = db.collection<any>('wordSearch');
+    this.risingPictureCollection = db.collection<any>('risingPicture');
+    this.threeQuestionCollection = db.collection<any>('threeQuestion');
   }
 
   checkLettersChanges(): Observable<any> {
@@ -48,6 +53,32 @@ export class DatabaseProvider {
   getWordSearchFromDataBase() : Observable<any> {
     return Observable.create( observable => {
       this.checkWordSearchChanges().subscribe(data => {
+        observable.next(data);
+        observable.complete();
+      })
+    })
+  }
+
+  checkRisingPictureChanges(): Observable<any> {
+    return this.risingPictureCollection.valueChanges();
+  }
+
+  getRisingPictureFromDataBase() : Observable<any> {
+    return Observable.create( observable => {
+      this.checkRisingPictureChanges().subscribe(data => {
+        observable.next(data);
+        observable.complete();
+      })
+    })
+  }
+
+  checkThreeQuestionChanges(): Observable<any> {
+    return this.threeQuestionCollection.valueChanges();
+  }
+
+  getThreeQuestionFromDataBase() : Observable<any> {
+    return Observable.create( observable => {
+      this.checkThreeQuestionChanges().subscribe(data => {
         observable.next(data);
         observable.complete();
       })
