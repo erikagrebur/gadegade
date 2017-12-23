@@ -16,7 +16,7 @@ export class DatabaseProvider {
     this.letterCollection = db.collection<any>('letters');
     this.mixedWordsCollection = db.collection<any>('mixedWords');
     this.wordSearchCollection = db.collection<any>('wordSearch');
-    this.risingPictureCollection = db.collection<any>('risingPicture');
+    this.risingPictureCollection = db.collection<any>('realRisingPicture');
     this.threeQuestionCollection = db.collection<any>('threeQuestion');
   }
 

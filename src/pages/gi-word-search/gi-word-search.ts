@@ -33,11 +33,11 @@ export class GiWordSearchPage {
   selectedPTags: any[] = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private databaseService: DatabaseProvider, private locationTracker: LocationTrackerProvider) {
-    
+   
   }
 
   ionViewDidLoad() {
-    this.databaseService.getRisingPictureFromDataBase().subscribe(data => {
+    this.databaseService.getWordSearchFromDataBase().subscribe(data => {
       this.database = data;
       console.log("data", data);
       console.log("???", this.database[0][0]);

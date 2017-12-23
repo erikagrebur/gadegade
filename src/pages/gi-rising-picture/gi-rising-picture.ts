@@ -1,8 +1,9 @@
 import { Component, NgZone} from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, Platform } from 'ionic-angular';
 import { LocationTrackerProvider } from '../../providers/location-tracker/location-tracker';
 import { ThreeQuestionPage } from '../three-question/three-question';
 import { DatabaseProvider } from '../../providers/database/database';
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'page-gi-rising-picture',
@@ -34,7 +35,13 @@ export class GiRisingPicturePage {
 
   wrongWayPTag: any = 'none';
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private locationTracker: LocationTrackerProvider, private ngZone: NgZone, private databaseService: DatabaseProvider) {
+  risingImageUrl: string;
+
+  constructor(public navCtrl: NavController, platform: Platform, public navParams: NavParams, private locationTracker: LocationTrackerProvider, private ngZone: NgZone, private databaseService: DatabaseProvider) {
+    platform.ready().then(() => {
+      const storageRef = firebase.storage().ref().child('game_00/risingPicture/library.jpg');
+      storageRef.getDownloadURL().then(url => this.risingImageUrl = url);
+    });
     this.locationTracker.startTracking();
     this.locationTracker.backGeolocation.subscribe((location) => {
       this.ngZone.run(() => {
