@@ -21,17 +21,6 @@ export class GameDescriptionPage {
   thorImageUrl: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, platform: Platform) {
-    var config = {
-      apiKey: "AIzaSyB6Kyact4Y6iooiaKHPaFXCEmTl8DtlACY",
-      authDomain: "tryagain-b5737.firebaseapp.com",
-      databaseURL: "https://tryagain-b5737.firebaseio.com",
-      projectId: "tryagain-b5737",
-      storageBucket: "tryagain-b5737.appspot.com",
-      messagingSenderId: "158844905597"
-    };
-
-    firebase.initializeApp(config);
-
     platform.ready().then(() => {
       const storageRef = firebase.storage().ref().child('game_00/description/odin.JPG');
       storageRef.getDownloadURL().then(url => this.odinImageUrl = url);
