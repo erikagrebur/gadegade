@@ -40,12 +40,11 @@ export class ThreeQuestionPage {
     this.currentThirdOptionIndex = Math.floor(Math.random() * this.thirdOptions.length);
     console.log(this.currentFirstOptionIndex);
     
-    this.databaseService.getRisingPictureFromDataBase().subscribe(data => {
+    this.databaseService.getThreeQuestionFromDataBase().subscribe(data => {
       this.database = data;
+      console.log('jönátt?', this.database);
       console.log("data", data);
-      console.log("???", this.database[0][0]);
     });
-    console.log('A', this.database);
   }
 
   getNextFirstOption() {

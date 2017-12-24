@@ -12,11 +12,12 @@
 
 
 <ion-content padding>
-  <p class="leftSide rightSide">You found the professor but unfortunatelly he don't belive that Thor is actually Thor. So you should <strong>answer</strong> his <strong>three questions correctly</strong> and with it you can provide that your friend is the real Thor.</p>
+  <div *ngFor="let data of database">
+  <p class="leftSide rightSide">{{data["description"]}}</p>
   <div id="questionsContainer" class="leftSide rightSide">
     <div class="questionDiv">
       <div class="questionContainer">
-        <p class="questionTitle">Who is the guard of the Bifrost bridge?</p>
+        <p class="questionTitle">{{data["firstQuestion"]}}</p>
       </div>
       <div class="answerContainer">
         <!-- <div class="arrowContainer"> -->
@@ -32,7 +33,7 @@
     </div>
     <div class="questionDiv">
       <div class="questionContainer">
-        <p class="questionTitle">What is the name of Thor's father?</p>
+        <p class="questionTitle">{{data["secondQuestion"]}}</p>
       </div>
       <div class="answerContainer">
         <div class="leftArrow" (click)="getPrevSecondOption()"></div>
@@ -44,7 +45,7 @@
     </div>
     <div class="questionDiv">
       <div class="questionContainer">
-        <p class="questionTitle">Where does Loki come from?</p>
+        <p class="questionTitle">{{data["thirdQuestion"]}}</p>
       </div>
       <div class="answerContainer">
         <div id="thirdLeftArrow" class="leftArrow" (click)="getPrevThirdOption()"></div>
@@ -57,5 +58,6 @@
   </div>
   <div class="bottomContainer">
       <p id="slide" class="rightSide" (click)="getNexGameItem()" [ngStyle]="slideStyle">Next <ion-icon name="arrow-forward"></ion-icon></p>
+  </div>
   </div>
 </ion-content>

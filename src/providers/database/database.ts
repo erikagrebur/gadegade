@@ -11,6 +11,7 @@ export class DatabaseProvider {
   private wordSearchCollection: AngularFirestoreCollection<any>;
   private risingPictureCollection: AngularFirestoreCollection<any>;
   private threeQuestionCollection: AngularFirestoreCollection<any>;
+  private tryCollection: AngularFirestoreCollection<any>;
   
   constructor(public db: AngularFirestore) {
     this.letterCollection = db.collection<any>('letters');
@@ -18,6 +19,7 @@ export class DatabaseProvider {
     this.wordSearchCollection = db.collection<any>('wordSearch');
     this.risingPictureCollection = db.collection<any>('realRisingPicture');
     this.threeQuestionCollection = db.collection<any>('threeQuestion');
+    this.tryCollection = db.collection<any>('bu');
   }
 
   checkLettersChanges(): Observable<any> {
@@ -79,6 +81,19 @@ export class DatabaseProvider {
   getThreeQuestionFromDataBase() : Observable<any> {
     return Observable.create( observable => {
       this.checkThreeQuestionChanges().subscribe(data => {
+        observable.next(data);
+        observable.complete();
+      })
+    })
+  }
+
+  checkTryChanges(): Observable<any> {
+    return this.tryCollection.valueChanges();
+  }
+
+  getTryFromDataBase() : Observable<any> {
+    return Observable.create( observable => {
+      this.checkTryChanges().subscribe(data => {
         observable.next(data);
         observable.complete();
       })
