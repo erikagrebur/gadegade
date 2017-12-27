@@ -34,6 +34,9 @@ import { GoogleMaps } from '@ionic-native/google-maps';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 
+import { IonicStorageModule } from '@ionic/storage';
+import { StorageProvider } from '../providers/storage/storage';
+
 export const firebaseConfig = {
   production: false,
   firebase: {
@@ -72,7 +75,8 @@ export const firebaseConfig = {
     BrowserModule,
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(firebaseConfig.firebase),
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -104,7 +108,8 @@ export const firebaseConfig = {
     Geolocation,
     BackgroundGeolocation,
     DatabaseProvider,
-    GoogleMaps
+    GoogleMaps,
+    StorageProvider
   ]
 })
 export class AppModule {}

@@ -7,13 +7,10 @@
 <ion-content>
   <div class="darkBluePolygon">
     <div class="titleDiv">
-      <h1 id="firstTitle">What's good in</h1>
+      <h1 id="firstTitle" (click)="test()">What's good in</h1>
       <input list="citySelection" name="browser" class="leftSide citySelection" placeholder="Enter location">
       <datalist id="citySelection">
-        <option value="Esbjerg" (select)="getCity()">
-        <option value="Coppenhagen">
-        <option value="Odense">
-        <option value="Ribe">
+        <option *ngFor="let keys of subDatasKeys" value="{{cityNames[keys]}}">{{cityNames[keys]}}</option>
       </datalist>
     </div>
     <img src="assets/imgs/homePageImgs/GGlogo.png" alt="Gåde Gade application's logo" class="homePagelogo">
@@ -22,29 +19,13 @@
   </div>
   <ion-grid>
     <ion-row>
-      <ion-col col-4>
+      <ion-col col-4 *ngFor="let keys of subDatasKeys">
         <div class="cityCard" (click)="getCity()">
           <div class="cityCrestIconContainer">
-            <img src="assets/imgs/cityPicker/esbjergFix.png" alt="" class="cityCrestImg">
+            <img src="{{imgSrcUrls[keys]}}" alt="{{altTitles[keys]}}" class="cityCrestImg">
           </div>
-          <p class="cityName">Esbjerg</p>
+          <p class="cityName">{{cityNames[keys]}}</p>
         </div>
-      </ion-col>
-      <ion-col col-4>
-        <div class="cityCard" (click)="getCity()">
-          <div class="cityCrestIconContainer">
-            <img src="assets/imgs/cityPicker/coppenFix.png" alt="" class="cityCrestImg">
-          </div>
-          <p class="cityName">Coppenhagen</p>
-        </div>
-      </ion-col>
-      <ion-col col-4>
-          <div class="cityCard" (click)="getCity()">
-              <div class="cityCrestIconContainer">
-                <img src="assets/imgs/cityPicker/ribeFix.png" alt="" class="cityCrestImg">
-              </div>
-              <p class="cityName">Coppenhagen</p>
-            </div>
       </ion-col>
     </ion-row>
   </ion-grid>

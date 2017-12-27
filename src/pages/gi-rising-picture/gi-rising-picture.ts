@@ -53,7 +53,7 @@ export class GiRisingPicturePage {
     this.databaseService.getRisingPictureFromDataBase().subscribe(data => {
       this.database = data;
       console.log("data", data);
-      console.log("???", this.database[0][0]);
+      //console.log("???", this.database[0][0]);
     });
     console.log('A', this.database);
   }

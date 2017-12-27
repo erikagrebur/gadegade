@@ -39,6 +39,7 @@
     "cordova-plugin-mauron85-background-geolocation": "^2.3.3",
     "cordova-plugin-splashscreen": "^4.1.0",
     "cordova-plugin-whitelist": "^1.3.3",
+    "cordova-sqlite-storage": "^2.1.4",
     "firebase": "^4.8.0",
     "ionic-angular": "3.9.2",
     "ionic-plugin-keyboard": "^2.2.1",
@@ -74,7 +75,8 @@
         "API_KEY_FOR_ANDROID": "AIzaSyDPHgUn0gKoBqrNisg1J6lBkbHzeNVsOmg",
         "API_KEY_FOR_IOS": "AIzaSyCFAMEx6L7g1O_5NXYjM9QvQi9fj08--rQ",
         "API_KEY_IOS": "AIzaSyDtWxxizxCf5BGrxr5_oqPPNxmsx5tV4Lg"
-      }
+      },
+      "cordova-sqlite-storage": {}
     },
     "platforms": [
       "android"

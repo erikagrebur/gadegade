@@ -104,4 +104,5 @@
         <variable name="API_KEY_FOR_IOS" value="AIzaSyCFAMEx6L7g1O_5NXYjM9QvQi9fj08--rQ" />
         <variable name="API_KEY_IOS" value="AIzaSyDtWxxizxCf5BGrxr5_oqPPNxmsx5tV4Lg" />
     </plugin>
+    <plugin name="cordova-sqlite-storage" spec="^2.1.4" />
 </widget>
