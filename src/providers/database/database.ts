@@ -11,15 +11,23 @@ export class DatabaseProvider {
   private wordSearchCollection: AngularFirestoreCollection<any>;
   private risingPictureCollection: AngularFirestoreCollection<any>;
   private threeQuestionCollection: AngularFirestoreCollection<any>;
+<<<<<<< HEAD
   private selectableCitysCollection: AngularFirestoreCollection<any>;
+=======
+  private tryCollection: AngularFirestoreCollection<any>;
+>>>>>>> c68701eba5ee6ebe44002218759af11134bf9255
   
   constructor(public db: AngularFirestore) {
     this.letterCollection = db.collection<any>('letters');
     this.mixedWordsCollection = db.collection<any>('mixedWords');
     this.wordSearchCollection = db.collection<any>('wordSearch');
-    this.risingPictureCollection = db.collection<any>('risingPicture');
+    this.risingPictureCollection = db.collection<any>('realRisingPicture');
     this.threeQuestionCollection = db.collection<any>('threeQuestion');
+<<<<<<< HEAD
     this.selectableCitysCollection = db.collection<any>('selectableCitys');
+=======
+    this.tryCollection = db.collection<any>('bu');
+>>>>>>> c68701eba5ee6ebe44002218759af11134bf9255
   }
 
   checkLettersChanges(): Observable<any> {
@@ -87,6 +95,7 @@ export class DatabaseProvider {
     })
   }
 
+<<<<<<< HEAD
   checkSelectableCitysChanges(): Observable<any> {
     return this.selectableCitysCollection.valueChanges();
   }
@@ -94,6 +103,15 @@ export class DatabaseProvider {
   getSelectableCitysFromDataBase() : Observable<any> {
     return Observable.create( observable => {
       this.checkSelectableCitysChanges().subscribe(data => {
+=======
+  checkTryChanges(): Observable<any> {
+    return this.tryCollection.valueChanges();
+  }
+
+  getTryFromDataBase() : Observable<any> {
+    return Observable.create( observable => {
+      this.checkTryChanges().subscribe(data => {
+>>>>>>> c68701eba5ee6ebe44002218759af11134bf9255
         observable.next(data);
         observable.complete();
       })
