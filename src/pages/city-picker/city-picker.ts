@@ -23,7 +23,7 @@ export class CityPickerPage {
   cityNames: any;
   altTitles: any;
   imgNames: any;
-  imgSrcUrls: any;
+  imgSrcUrls: any[] = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private databaseService: DatabaseProvider, platform: Platform) {
     this.databaseService.getSelectableCitysFromDataBase().subscribe(data => {
@@ -35,39 +35,18 @@ export class CityPickerPage {
       this.subDatasKeys = Object.keys(this.database[2]);
     
       console.log(this.database);
-      this.database.forEach(function(value, index, whole) {
-        console.log('value', index, value);
-        if(index === 2) {
-          console.log("kettes");
-          console.log("kettesLe", value.length);
-          console.log("kettesLe", value.count);
-          console.log("kettes[i]", value[0]);
-          //this.valueC = value;
-          
-        }
-      });
-    });
 
-    var config = {
-      apiKey: "AIzaSyB6Kyact4Y6iooiaKHPaFXCEmTl8DtlACY",
-      authDomain: "tryagain-b5737.firebaseapp.com",
-      databaseURL: "https://tryagain-b5737.firebaseio.com",
-      projectId: "tryagain-b5737",
-      storageBucket: "tryagain-b5737.appspot.com",
-      messagingSenderId: "158844905597"
-    };
-
-    firebase.initializeApp(config);
-
-    platform.ready().then(() => {
       for(let i = 0; i < this.subDatasKeys.length; i++) {
         const storageRef = firebase.storage().ref().child('selectableCitysIcons/'+this.imgNames[i]);
-        storageRef.getDownloadURL().then(url => this.imgSrcUrls.push(url));
+        storageRef.getDownloadURL().then(url => console.log(url));
+        console.log("img nave: ", this.imgNames[i]);
+        console.log("pusholt értékek: ", this.imgSrcUrls);
       }
 
-      console.log('length', this.subDatasKeys.length);
-      console.log('kepek', this.imgSrcUrls);
+      console.log("pusholt értékek végleges: ", this.imgSrcUrls);
     });
+
+    console.log("kepek", this.imgSrcUrls);
   }
 
   ionViewDidLoad() {

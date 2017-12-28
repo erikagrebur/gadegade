@@ -22,30 +22,11 @@
       <ion-col col-4 *ngFor="let keys of subDatasKeys">
         <div class="cityCard" (click)="getCity()">
           <div class="cityCrestIconContainer">
-            <img src="{{imgSrcUrls[keys]}}" alt="{{altTitles[keys]}}" class="cityCrestImg">
+            <img *ngIf="imgSrcUrls" src="{{imgSrcUrls[keys]}}" alt="{{altTitles[keys]}}" class="cityCrestImg">
           </div>
           <p class="cityName">{{cityNames[keys]}}</p>
         </div>
       </ion-col>
-<<<<<<< HEAD
-=======
-      <ion-col col-4>
-        <div class="cityCard" (click)="getCity()">
-          <div class="cityCrestIconContainer">
-            <img src="assets/imgs/cityPicker/coppenFix.png" alt="" class="cityCrestImg">
-          </div>
-          <p class="cityName">Coppenhagen</p>
-        </div>
-      </ion-col>
-      <ion-col col-4>
-          <div class="cityCard" (click)="getCity()">
-              <div class="cityCrestIconContainer">
-                <img src="assets/imgs/cityPicker/ribeFix.png" alt="" class="cityCrestImg">
-              </div>
-              <p class="cityName">Ribe</p>
-            </div>
-      </ion-col>
->>>>>>> c68701eba5ee6ebe44002218759af11134bf9255
     </ion-row>
   </ion-grid>
 </ion-content>
