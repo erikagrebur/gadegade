@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, Platform } from 'ionic-angular';
 import { TabsPage } from '../tabs/tabs';
 import { DatabaseProvider } from '../../providers/database/database';
+import { StorageProvider } from '../../providers/storage/storage';
 
 import * as firebase from 'firebase';
 
@@ -18,50 +19,31 @@ import * as firebase from 'firebase';
 })
 export class CityPickerPage {
 
-  database: any;
-  subDatasKeys: string[] = [];
+  objectKeys: string[] = [];
   cityNames: any;
-  altTitles: any;
+  imgAltProps: any;
   imgNames: any;
   imgSrcUrls: any[] = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private databaseService: DatabaseProvider, platform: Platform) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private databaseService: DatabaseProvider, platform: Platform, private storageService: StorageProvider) {
+    
     this.databaseService.getSelectableCitysFromDataBase().subscribe(data => {
-      this.database = data;
 
-      this.cityNames = this.database[2];
-      this.altTitles = this.database[0];
-      this.imgNames = this.database[1];
-      this.subDatasKeys = Object.keys(this.database[2]);
-    
-      console.log(this.database);
+      this.cityNames = data[2];
+      this.imgAltProps = data[0];
+      this.imgNames = data[1];
+      this.objectKeys = Object.keys(this.cityNames);
 
-      for(let i = 0; i < this.subDatasKeys.length; i++) {
-        const storageRef = firebase.storage().ref().child('selectableCitysIcons/'+this.imgNames[i]);
-        storageRef.getDownloadURL().then(url => console.log(url));
-        console.log("img nave: ", this.imgNames[i]);
-        console.log("pusholt értékek: ", this.imgSrcUrls);
-      }
-
-      console.log("pusholt értékek végleges: ", this.imgSrcUrls);
+      for(let i = 0; i < this.objectKeys.length; i++) {
+        
+        const storageRef = firebase.storage().ref().child(`selectableCitysIcons/${this.imgNames[i]}`);
+        storageRef.getDownloadURL().then(url => this.imgSrcUrls.push(url));
+      }    
     });
-
-    console.log("kepek", this.imgSrcUrls);
   }
 
-  ionViewDidLoad() {
-    
-  }
-
-  test() {
-    /*console.log('dataAfter', this.database);
-    console.log('nulla', this.database[0]);
-    console.log('nulla', this.database[0][0]);*/
-  }
-
-  getCity() {
-    //this.navCtrl.push(TabsPage);
-    console.log("get");
+  getCity(city) {
+    this.storageService.setData('selectedCity', city).subscribe(() => this.navCtrl.push(TabsPage));
   }
 
 }

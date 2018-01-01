@@ -1,4 +1,4 @@
-import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { AngularFireModule } from 'angularfire2';
@@ -12,6 +12,9 @@ export class DatabaseProvider {
   private risingPictureCollection: AngularFirestoreCollection<any>;
   private threeQuestionCollection: AngularFirestoreCollection<any>;
   private selectableCitysCollection: AngularFirestoreCollection<any>;
+  private gamesCollection: AngularFirestoreCollection<any>;
+  private gamesDoc: AngularFirestoreDocument<any>;
+  private basicInfoCollection: AngularFirestoreCollection<any>;
   
   constructor(public db: AngularFirestore) {
     this.letterCollection = db.collection<any>('letters');
@@ -20,6 +23,8 @@ export class DatabaseProvider {
     this.risingPictureCollection = db.collection<any>('realRisingPicture');
     this.threeQuestionCollection = db.collection<any>('threeQuestion');
     this.selectableCitysCollection = db.collection<any>('selectableCitys');
+    this.gamesCollection = db.collection<any>('games');
+    this.basicInfoCollection = db.collection<any>('basicInfo');
   }
 
   checkLettersChanges(): Observable<any> {
@@ -100,4 +105,36 @@ export class DatabaseProvider {
     })
   }
 
+  checkGamesChanges(): Observable<any> {
+    return this.gamesCollection.valueChanges();
+  }
+
+  getGamesFromDataBase() : Observable<any> {
+    return Observable.create( observable => {
+      this.checkGamesChanges().subscribe(data => {
+        observable.next(data);
+        observable.complete();
+      })
+    })
+  }
+
+  updateGames(document, selectedCity, selectedGame, value) {
+    this.gamesDoc = this.db.doc<any>(`games/${document}`);
+    return this.gamesDoc.update({
+      [`${selectedCity}.${selectedGame}.background_img_url`]: value
+    });
+  }
+
+  checkBasicInfoChanges(): Observable<any> {
+    return this.basicInfoCollection.valueChanges();
+  }
+
+  getBasicInfoFromDataBase() : Observable<any> {
+    return Observable.create( observable => {
+      this.checkBasicInfoChanges().subscribe(data => {
+        observable.next(data);
+        observable.complete();
+      })
+    })
+  }
 }

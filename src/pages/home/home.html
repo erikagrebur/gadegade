@@ -8,37 +8,37 @@
   <div class="darkBluePolygon">
     <div class="titleDiv">
       <h1 id="firstTitle">What's good in</h1>
-      <p id="selectedCity" (click)="getSelectPage()">Esbjerg</p>
+      <p id="selectedCity" (click)="getSelectPage()">{{selectedCity}}</p>
       <hr class="selectedCityLine">
     </div>
     <img src="assets/imgs/homePageImgs/GGlogo.png" alt="Gåde Gade application's logo" class="homePagelogo">
     <div class="clearFloat"></div>
-    <p class="signupLine">Try it and <strong>sign up</strong> for more fun!</p>
+    <p class="signupLine">Try it and <strong (click)="getRegistrationPage()">sign up</strong> for more fun!</p>
   </div>
-  <div class="gameCardContainer" (click)="getGameDetails()">
+  <div class="gameCardContainer" *ngFor="let key of objectKeys" (click)="getGameDetails(selectedCityGames[key].id)">
     <ion-card>
       <div class="gameCardImgContainer">
         <div class="gameCardImgDiv">
-          <img src="assets/imgs/homePageImgs/asgard.JPG" alt="game card image" class="gameCardImg">
+          <img src="{{selectedCityGames[key].background_img_url}}" alt="game background image" class="gameCardImg">
         </div>
         <div class="gameCardImgFade"></div>
-        <div class="gameCardDifficulty">easy</div>
+        <div class="gameCardDifficulty">{{selectedCityGames[key].difficulty}}</div>
       </div>
       <ion-card-content class="gameCardContent">
         <ion-card-title class="gameCardTitle">
-          A God in Esbjerg
+          {{selectedCityGames[key].title}}
         </ion-card-title>
-        <p class="gameCardInformation">45 min - (Spangsbjerg Kirkevej 103)</p>
-        <p class="gameCardDescription">A god just fell in front of you. Solve the mysteries and help him to go home. </p>
+        <p class="gameCardInformation">{{selectedCityGames[key].duration}} min - ({{selectedCityGames[key].start_street}})</p>
+        <p class="gameCardDescription">{{selectedCityGames[key].short_description}}</p>
         <div class="gameCardRatingField">
           <div class="gameCardStars">
-            <img src="assets/imgs/homePageImgs/star_full.png" alt="rating star" class="gameCardStarsItem">
-            <img src="assets/imgs/homePageImgs/star_full.png" alt="rating star" class="gameCardStarsItem">
-            <img src="assets/imgs/homePageImgs/star_full.png" alt="rating star" class="gameCardStarsItem">
-            <img src="assets/imgs/homePageImgs/star_full.png" alt="rating star" class="gameCardStarsItem">
-            <img src="assets/imgs/homePageImgs/star_full.png" alt="rating star" class="gameCardStarsItem">
+            <img [src]="Math.round(selectedCityGames[key].value_of_votes / selectedCityGames[key].number_of_votes) >= 1 ? 'assets/imgs/homePageImgs/star_full.png' : 'assets/imgs/homePageImgs/star_empty.png'" alt="rating star" class="gameCardStarsItem">
+            <img [src]="Math.round(selectedCityGames[key].value_of_votes / selectedCityGames[key].number_of_votes) >= 2 ? 'assets/imgs/homePageImgs/star_full.png' : 'assets/imgs/homePageImgs/star_empty.png'" alt="rating star" class="gameCardStarsItem">
+            <img [src]="Math.round(selectedCityGames[key].value_of_votes / selectedCityGames[key].number_of_votes) >= 3 ? 'assets/imgs/homePageImgs/star_full.png' : 'assets/imgs/homePageImgs/star_empty.png'" alt="rating star" class="gameCardStarsItem">
+            <img [src]="Math.round(selectedCityGames[key].value_of_votes / selectedCityGames[key].number_of_votes) >= 4 ? 'assets/imgs/homePageImgs/star_full.png' : 'assets/imgs/homePageImgs/star_empty.png'" alt="rating star" class="gameCardStarsItem">
+            <img [src]="Math.round(selectedCityGames[key].value_of_votes / selectedCityGames[key].number_of_votes) >= 5 ? 'assets/imgs/homePageImgs/star_full.png' : 'assets/imgs/homePageImgs/star_empty.png'" alt="rating star" class="gameCardStarsItem">
           </div>
-          <p class="gameCardRatingCount">3,456 rating</p>
+          <p class="gameCardRatingCount">{{selectedCityGames[key].number_of_votes}} rating</p>
         </div>
       </ion-card-content>
     </ion-card>

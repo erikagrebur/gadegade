@@ -27,14 +27,14 @@ page-home {
     font-size: 20px;
   }
   #selectedCity {
-    font-size: 40px;
+    font-size: 30px;
     color: $orangeColor;
     font-weight: bold;
     padding-left: $horizontalSideSpace;
   }
 
   .selectedCityLine {
-    width: 150px;
+    width: 200px;
     background-color: $fadedGreyColor;
     margin-left: $horizontalSideSpace;
     margin-top: 3px;
@@ -59,8 +59,12 @@ page-home {
 
   }
 
-  .gameCardContainer {
+  .gameCardContainer:first-child {
     margin: 0 $horizontalSideSpace;
+  }
+
+  .gameCardContainer {
+    margin: 20px $horizontalSideSpace;
     position: relative;
     top: -129px;
   }
@@ -116,6 +120,7 @@ page-home {
     color: $fontColorOnWhite;
     margin: 0px;
     padding: 0px;
+    max-width: 180px;
   }
 
   .gameCardInformation {

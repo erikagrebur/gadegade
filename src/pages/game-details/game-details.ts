@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { GiStartGamePage } from '../gi-start-game/gi-start-game';
+import { DatabaseProvider } from '../../providers/database/database';
+import { StorageProvider } from '../../providers/storage/storage';
 
 /**
  * Generated class for the GameDetailsPage page.
@@ -16,7 +18,31 @@ import { GiStartGamePage } from '../gi-start-game/gi-start-game';
 })
 export class GameDetailsPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  storedGame: string = '';
+  storedCity: string = '';
+  logged: boolean = false;
+  availableGames: any[] = [];
+  selectedGame: any[] = [];
+  Math: any;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, private databaseService: DatabaseProvider, private storageService: StorageProvider) {
+    this.Math = Math;
+    this.storageService.getData('selectedCity').subscribe(storedCity => {
+      this.storedCity = storedCity;
+      this.storageService.getData('selectedGame').subscribe(storedGame => {
+        this.storedGame = storedGame;
+        this.databaseService.getGamesFromDataBase().subscribe(data => {
+          if(this.logged) {
+            this.availableGames = data[1];
+          } else {
+            this.availableGames = data[0];
+          }
+
+          this.selectedGame = this.availableGames[this.storedCity][this.storedGame];
+          console.log(this.selectedGame);
+        });
+      });
+    });
   }
 
   getStartGame() {

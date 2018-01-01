@@ -3,7 +3,7 @@
     <name>try</name>
     <description>An awesome Ionic/Cordova app.</description>
     <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
-    <content src="index.html" />
+    <content original-src="index.html" src="http://192.168.1.164:8100" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -105,4 +105,5 @@
         <variable name="API_KEY_IOS" value="AIzaSyDtWxxizxCf5BGrxr5_oqPPNxmsx5tV4Lg" />
     </plugin>
     <plugin name="cordova-sqlite-storage" spec="^2.1.4" />
+    <plugin name="cordova.plugins.diagnostic" spec="^3.8.1" />
 </widget>

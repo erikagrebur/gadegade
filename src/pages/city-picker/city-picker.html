@@ -7,10 +7,10 @@
 <ion-content>
   <div class="darkBluePolygon">
     <div class="titleDiv">
-      <h1 id="firstTitle" (click)="test()">What's good in</h1>
-      <input list="citySelection" name="browser" class="leftSide citySelection" placeholder="Enter location">
+      <h1 id="firstTitle">What's good in</h1>
+      <input list="citySelection" class="leftSide citySelection" placeholder="Enter location">
       <datalist id="citySelection">
-        <option *ngFor="let keys of subDatasKeys" value="{{cityNames[keys]}}">{{cityNames[keys]}}</option>
+        <option *ngFor="let key of objectKeys" value="{{cityNames[key]}}">{{cityNames[key]}}</option>
       </datalist>
     </div>
     <img src="assets/imgs/homePageImgs/GGlogo.png" alt="Gåde Gade application's logo" class="homePagelogo">
@@ -19,12 +19,12 @@
   </div>
   <ion-grid>
     <ion-row>
-      <ion-col col-4 *ngFor="let keys of subDatasKeys">
-        <div class="cityCard" (click)="getCity()">
+      <ion-col col-4 *ngFor="let key of objectKeys">
+        <div class="cityCard" (click)="getCity(cityNames[key])">
           <div class="cityCrestIconContainer">
-            <img *ngIf="imgSrcUrls" src="{{imgSrcUrls[keys]}}" alt="{{altTitles[keys]}}" class="cityCrestImg">
+            <img *ngIf="imgSrcUrls" src="{{imgSrcUrls[key]}}" alt="{{imgAltProps[key]}}" class="cityCrestImg">
           </div>
-          <p class="cityName">{{cityNames[keys]}}</p>
+          <p class="cityName">{{cityNames[key]}}</p>
         </div>
       </ion-col>
     </ion-row>

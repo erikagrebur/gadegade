@@ -37,6 +37,8 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { IonicStorageModule } from '@ionic/storage';
 import { StorageProvider } from '../providers/storage/storage';
 
+import { Diagnostic } from '@ionic-native/diagnostic';
+
 export const firebaseConfig = {
   production: false,
   firebase: {
@@ -109,7 +111,8 @@ export const firebaseConfig = {
     BackgroundGeolocation,
     DatabaseProvider,
     GoogleMaps,
-    StorageProvider
+    StorageProvider,
+    Diagnostic
   ]
 })
 export class AppModule {}

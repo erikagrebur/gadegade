@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { Observable } from 'rxjs/Observable';
@@ -12,27 +11,26 @@ import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class StorageProvider {
 
-  constructor(public http: HttpClient, private storage: Storage) {
+  constructor( private storage: Storage) {
     console.log('Hello StorageProvider Provider');
   }
 
-  setCity() :Observable<any> {
+  setData(key, value) :Observable<any> {
+    console.log('kulcs', key);
+    console.log('value', value);
     return Observable.create(observ => {
-
-      observ.next(null);
-      observ.complete();
+      this.storage.set(key, value).then(() => {
+        observ.next(null);
+        observ.complete();
+      });
     });
   }
 
-  getCity() :Observable<any> {
+  getData(key) :Observable<any> {
     return Observable.create(observ => {
-      this.storage.get('city').then(city => {
-        if(!city) {
-          
-        } else {
-          observ.next(null);
+      this.storage.get(key).then(data => {
+          observ.next(data);
           observ.complete();
-        }
       });
     });
   }
