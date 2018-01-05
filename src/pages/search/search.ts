@@ -73,4 +73,14 @@ export class SearchPage {
     console.log("hopp mükszik");
   }
 
+  ionViewWillEnter() {
+    let tabs = document.querySelectorAll('.tabbar');
+    if ( tabs !== null ) {
+      Object.keys(tabs).map((key) => {
+        tabs[ key ].style.transform = 'translateY(0)';
+        tabs[ key ].style.display = 'flex';
+      });
+    } // end if
+  }
+
 }

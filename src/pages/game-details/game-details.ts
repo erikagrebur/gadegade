@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, App } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { GiStartGamePage } from '../gi-start-game/gi-start-game';
 import { DatabaseProvider } from '../../providers/database/database';
@@ -27,7 +27,7 @@ export class GameDetailsPage {
   selectedGame: any[] = [];
   Math: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private databaseService: DatabaseProvider, private storageService: StorageProvider) {
+  constructor(public navCtrl: NavController,private app: App, public navParams: NavParams, private databaseService: DatabaseProvider, private storageService: StorageProvider) {
     this.Math = Math;
     this.storageService.getData('selectedCity').subscribe(storedCity => {
       this.storedCity = storedCity;
@@ -52,15 +52,15 @@ export class GameDetailsPage {
   }
 
   getHomePage() {
-    this.navCtrl.push(HomePage);
+    this.app.getRootNav().getActiveChildNav().select(0);
   }
 
   getSearchPage() {
-    this.navCtrl.push(SearchPage);
+    this.app.getRootNav().getActiveChildNav().select(1);
   }
 
   getProfilePage() {
-    this.navCtrl.push(ProfilePage);
+    this.app.getRootNav().getActiveChildNav().select(2);
   }
 
   ionViewWillEnter() {
