@@ -6,7 +6,7 @@
 -->
 <ion-header>
   <ion-navbar color="dark" hideBackButton="true">
-    <ion-title>A God in Esbjerg</ion-title>
+    <ion-title>{{gameTitle}}</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -15,7 +15,7 @@
   <h1 id="screenTitle">Rating</h1>
   <div class="starsContainer">
       <div class="stars" *ngFor="let star of stars">
-        <img src={{star.src}} alt={{star.alt}} (click)="setRate(star.id)">
+        <img src={{star.src}} alt="rating star" (click)="setRate(star.id)">
       </div>
   </div>
   <p class="leftSide rightSide information">Please rate the story and if you want more fun then <span class="signUp" (click)="getSignUpScreen()">sign up</span> into Gade Gade.</p>

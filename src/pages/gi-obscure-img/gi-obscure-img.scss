@@ -16,6 +16,7 @@ page-gi-obscure-img {
         background: $blueColor;
         position: relative;
         margin-bottom: 150px;
+        margin-top: 25px;
     }
 
     .obscureImgsContainer {
@@ -59,11 +60,11 @@ page-gi-obscure-img {
         width: 180px;
     }
 
-    .waterImg {
+    .targetImg {
         z-index: 1;
     }
 
-    .horseImg {
+    .startImg {
         z-index: 2;
     }
 

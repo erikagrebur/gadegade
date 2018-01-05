@@ -4,6 +4,8 @@ import { HomePage } from '../home/home';
 import { GiStartGamePage } from '../gi-start-game/gi-start-game';
 import { DatabaseProvider } from '../../providers/database/database';
 import { StorageProvider } from '../../providers/storage/storage';
+import { SearchPage } from '../search/search';
+import { ProfilePage } from '../profile/profile';
 
 /**
  * Generated class for the GameDetailsPage page.
@@ -51,6 +53,14 @@ export class GameDetailsPage {
 
   getHomePage() {
     this.navCtrl.push(HomePage);
+  }
+
+  getSearchPage() {
+    this.navCtrl.push(SearchPage);
+  }
+
+  getProfilePage() {
+    this.navCtrl.push(ProfilePage);
   }
 
   ionViewWillEnter() {

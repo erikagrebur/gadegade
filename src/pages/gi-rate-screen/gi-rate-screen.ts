@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { SignUpScreenPage } from '../sign-up-screen/sign-up-screen';
+import { DatabaseProvider } from '../../providers/database/database';
+import { StorageProvider } from '../../providers/storage/storage';
+import * as firebase from 'firebase';
+import { HomePage } from '../home/home';
 
 /**
  * Generated class for the GiRateScreenPage page.
@@ -17,14 +21,76 @@ export class GiRateScreenPage {
 
   stars: any[] = [];
   isVoted: boolean = false;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.stars.push(
-      {id: 1, src: 'assets/imgs/gameImgs/09_rate/starEmpty.png', alt: 'rating - 1st star'},
-      {id: 2, src: 'assets/imgs/gameImgs/09_rate/starEmpty.png', alt: 'rating - 2nd star'},
-      {id: 3, src: 'assets/imgs/gameImgs/09_rate/starEmpty.png', alt: 'rating - 3rd star'},
-      {id: 4, src: 'assets/imgs/gameImgs/09_rate/starEmpty.png', alt: 'rating - 4th star'},
-      {id: 5, src: 'assets/imgs/gameImgs/09_rate/starEmpty.png', alt: 'rating - 5th star'}
-    );
+  storedGame: string = '';
+  storedCity: string = '';
+  logged: boolean = false;
+  availableGames: any[] = [];
+  gameTitle: string = '';
+  dataElements: string[] = [];
+  emptyStarSrcUrl: string;
+  fullStarSrcUrl: string;
+  emptyStar: string;
+  fullStar: string;
+  numberOfVotes: number;
+  valueOfVotes: number;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, private databaseService: DatabaseProvider, private storageService: StorageProvider) {
+
+    this.storageService.getData('selectedCity').subscribe(storedCity => {
+      this.storedCity = storedCity;
+      this.storageService.getData('selectedGame').subscribe(storedGame => {
+        this.storedGame = storedGame;
+        this.databaseService.getGamesFromDataBase().subscribe(data => {
+          if(this.logged) {
+            this.availableGames = data[1];
+          } else {
+            this.availableGames = data[0];
+          }
+
+          this.gameTitle = this.availableGames[this.storedCity][this.storedGame]['title'];
+          this.valueOfVotes = this.availableGames[this.storedCity][this.storedGame]['value_of_votes'];
+          this.numberOfVotes = this.availableGames[this.storedCity][this.storedGame]['number_of_votes'];
+        });
+        this.databaseService.getRatingFromDataBase().subscribe(data => {
+
+          console.log("dataRating", data);
+          
+          if(this.logged) {
+            this.dataElements = data[1];
+          } else {
+            this.dataElements = data[0];
+          }
+
+          this.emptyStar = this.dataElements[this.storedCity][this.storedGame]['empty_star'];
+          this.fullStar = this.dataElements[this.storedCity][this.storedGame]['full_star'];
+
+          console.log('empty', this.emptyStar);
+          console.log('full', this.fullStar);
+
+          let storageRefEmpty:any;
+          let storageRefFull:any;
+          if(this.logged) {
+            // TODO
+          } else {
+            storageRefEmpty = firebase.storage().ref().child(`giRating/try_games/${this.storedCity}/${this.storedGame}/${this.emptyStar}`);
+            storageRefFull = firebase.storage().ref().child(`giRating/try_games/${this.storedCity}/${this.storedGame}/${this.fullStar}`);
+          }
+          storageRefEmpty.getDownloadURL().then(url => {
+            this.emptyStarSrcUrl = url;
+            for(let i = 1; i < 6; i++) {
+              this.stars.push(
+                {id: i, src: this.emptyStarSrcUrl});
+            }
+          });
+          storageRefFull.getDownloadURL().then(url => this.fullStarSrcUrl = url);
+
+          console.log('cs', this.fullStarSrcUrl);
+          console.log('css', this.emptyStarSrcUrl);
+
+          console.log('csillagok csillagok mondjátok el nekem', this.stars);
+        })
+      });
+    });
   }
 
   getSignUpScreen() {
@@ -35,12 +101,19 @@ export class GiRateScreenPage {
     if(!this.isVoted) {
       console.log('id: ', id);
       for(let i = 0; i < id; i++) {
-        this.stars[i].src = 'assets/imgs/gameImgs/09_rate/starFull.png';
+        this.stars[i].src = this.fullStarSrcUrl;
+      }
+      this.numberOfVotes += 1;
+      this.valueOfVotes += id;
+      if(this.logged) {
+        this.databaseService.evaluation('whole_games', this.storedCity, this.storedGame, this.valueOfVotes, this.numberOfVotes);
+      } else {
+        this.databaseService.evaluation('try_games', this.storedCity, this.storedGame, this.valueOfVotes, this.numberOfVotes);
       }
       console.log('tomb', this.stars);
       this.isVoted = true;
       setTimeout(() => {
-        this.navCtrl.push(SignUpScreenPage);
+        this.navCtrl.push(HomePage);
       }, 1000);
     }
   }

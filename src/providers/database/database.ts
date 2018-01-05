@@ -15,16 +15,26 @@ export class DatabaseProvider {
   private gamesCollection: AngularFirestoreCollection<any>;
   private gamesDoc: AngularFirestoreDocument<any>;
   private basicInfoCollection: AngularFirestoreCollection<any>;
+  private descriptionCollection: AngularFirestoreCollection<any>;
+  private obscureCollection: AngularFirestoreCollection<any>;
+  private finishCollection: AngularFirestoreCollection<any>;
+  private ratingCollection: AngularFirestoreCollection<any>;
+  private usersCollection: AngularFirestoreCollection<any>;
   
   constructor(public db: AngularFirestore) {
     this.letterCollection = db.collection<any>('letters');
-    this.mixedWordsCollection = db.collection<any>('mixedWords');
-    this.wordSearchCollection = db.collection<any>('wordSearch');
-    this.risingPictureCollection = db.collection<any>('realRisingPicture');
-    this.threeQuestionCollection = db.collection<any>('threeQuestion');
+    this.mixedWordsCollection = db.collection<any>('giMixedWords');
+    this.wordSearchCollection = db.collection<any>('giWordSearch');
+    this.risingPictureCollection = db.collection<any>('giRisingPicture');
+    this.threeQuestionCollection = db.collection<any>('giThreeQuestions');
     this.selectableCitysCollection = db.collection<any>('selectableCitys');
     this.gamesCollection = db.collection<any>('games');
     this.basicInfoCollection = db.collection<any>('basicInfo');
+    this.descriptionCollection = db.collection<any>('giDescription');
+    this.obscureCollection = db.collection<any>('giObscureImage');
+    this.finishCollection = db.collection<any>('giFinal');
+    this.ratingCollection = db.collection<any>('giRating');
+    this.usersCollection = db.collection<any>('users');
   }
 
   checkLettersChanges(): Observable<any> {
@@ -132,6 +142,79 @@ export class DatabaseProvider {
   getBasicInfoFromDataBase() : Observable<any> {
     return Observable.create( observable => {
       this.checkBasicInfoChanges().subscribe(data => {
+        observable.next(data);
+        observable.complete();
+      })
+    })
+  }
+
+  checkDescriptionChanges(): Observable<any> {
+    return this.descriptionCollection.valueChanges();
+  }
+
+  getDescriptionFromDataBase() : Observable<any> {
+    return Observable.create( observable => {
+      this.checkDescriptionChanges().subscribe(data => {
+        observable.next(data);
+        observable.complete();
+      })
+    })
+  }
+
+  checkObscureImageChanges(): Observable<any> {
+    return this.obscureCollection.valueChanges();
+  }
+
+  getObscureImageFromDataBase() : Observable<any> {
+    return Observable.create( observable => {
+      this.checkObscureImageChanges().subscribe(data => {
+        observable.next(data);
+        observable.complete();
+      })
+    })
+  }
+
+  checkFinishDatasChanges(): Observable<any> {
+    return this.finishCollection.valueChanges();
+  }
+
+  getFinishDatasFromDataBase() : Observable<any> {
+    return Observable.create( observable => {
+      this.checkFinishDatasChanges().subscribe(data => {
+        observable.next(data);
+        observable.complete();
+      })
+    })
+  }
+
+  checkRatingChanges(): Observable<any> {
+    return this.ratingCollection.valueChanges();
+  }
+
+  getRatingFromDataBase() : Observable<any> {
+    return Observable.create( observable => {
+      this.checkRatingChanges().subscribe(data => {
+        observable.next(data);
+        observable.complete();
+      })
+    })
+  }
+
+  evaluation(document, selectedCity, selectedGame, valueOfVotes, numberOfVotes) {
+    this.gamesDoc = this.db.doc<any>(`games/${document}`);
+    return this.gamesDoc.update({
+      [`${selectedCity}.${selectedGame}.value_of_votes`]: valueOfVotes, 
+      [`${selectedCity}.${selectedGame}.number_of_votes`]: numberOfVotes 
+    });
+  }
+
+  checkUsersChanges(): Observable<any> {
+    return this.usersCollection.valueChanges();
+  }
+
+  getUsersFromDataBase() : Observable<any> {
+    return Observable.create( observable => {
+      this.checkUsersChanges().subscribe(data => {
         observable.next(data);
         observable.complete();
       })

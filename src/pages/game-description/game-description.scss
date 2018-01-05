@@ -11,20 +11,6 @@ page-game-description {
         margin-right: $horizontalSideSpace;
     }
 
-    .headerDiv {
-        height: auto;
-        background: $blueColor;
-    }
-
-    .headerDiv h1 {
-        font-size: 30px;
-        font-weight: bold;
-        color: $orangeColor;
-        text-align: center;
-        margin: 0px;
-        padding: 10px 0;
-    }
-
     .descriptionImgContainer {
         border: 1px solid rgba(148, 151, 153, 0.45);
         width: 150px;

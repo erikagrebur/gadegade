@@ -3,6 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { GiRisingPicturePage } from '../gi-rising-picture/gi-rising-picture';
 import { DatabaseProvider } from '../../providers/database/database';
 import { LocationTrackerProvider } from '../../providers/location-tracker/location-tracker';
+import { StorageProvider } from '../../providers/storage/storage';
 
 /**
  * Generated class for the GiWordSearchPage page.
@@ -16,33 +17,59 @@ import { LocationTrackerProvider } from '../../providers/location-tracker/locati
   templateUrl: 'gi-word-search.html',
 })
 export class GiWordSearchPage {
-  database: String[] = [];
+  
   typedWord : String;
-  answer : String = 'MJOLNIR';
-  //answer : String = 'MJ';
+  answer : String = '';
   selectedLetters : String[] = [];
   answered : Boolean = false;
   slideStyle : any = { 'color': 'rgba(148, 151, 153, 0.45)' };
-  //giNgDivStyle : any = {'backgroundColor': '#2A2F39'};
-  //giNgPStyle : any = {'color': '#ff993d'};
   currentSelectedValue: string;
   currentSelectedIdentification: string;
   currentSelectedDivTag: any;
   currentSelectedPTag: any;
   selectedDivTags: any[] = [];
   selectedPTags: any[] = [];
+  letters: string[] = [];
+  paragraphs: string[] = [];
+  dataElements: string[] = [];
+  storedGame: string = '';
+  storedCity: string = '';
+  logged: boolean = false;
+  availableGames: any[] = [];
+  gameTitle: string = '';
+  objectKeys: any[] = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private databaseService: DatabaseProvider, private locationTracker: LocationTrackerProvider) {
-   
-  }
+  constructor(public navCtrl: NavController, public navParams: NavParams, private databaseService: DatabaseProvider, private locationTracker: LocationTrackerProvider, private storageService: StorageProvider) {
+    this.storageService.getData('selectedCity').subscribe(storedCity => {
+      this.storedCity = storedCity;
+      this.storageService.getData('selectedGame').subscribe(storedGame => {
+        this.storedGame = storedGame;
+        this.databaseService.getGamesFromDataBase().subscribe(data => {
+          if(this.logged) {
+            this.availableGames = data[1];
+          } else {
+            this.availableGames = data[0];
+          }
 
-  ionViewDidLoad() {
-    this.databaseService.getWordSearchFromDataBase().subscribe(data => {
-      this.database = data;
-      console.log("data", data);
-      console.log("???", this.database[0][0]);
+          this.gameTitle = this.availableGames[this.storedCity][this.storedGame]['title'];
+        });
+        this.databaseService.getWordSearchFromDataBase().subscribe(data => {
+          
+          if(this.logged) {
+            this.dataElements = data[1];
+          } else {
+            this.dataElements = data[0];
+          }
+
+          this.answer = this.dataElements[this.storedCity][this.storedGame]['right_answer'];
+          this.paragraphs = this.dataElements[this.storedCity][this.storedGame]['prgs'];
+          this.letters = this.dataElements[this.storedCity][this.storedGame]['letters'];
+          
+          this.objectKeys = Object.keys(this.paragraphs);
+          
+        })
+      });
     });
-    console.log('A', this.database);
   }
 
   tapDown(giDivTag, giPTag, giValue, giIdentification) {
@@ -65,17 +92,12 @@ export class GiWordSearchPage {
           this.selectedDivTags.push(this.currentSelectedDivTag);
           this.selectedPTags.push(this.currentSelectedPTag);
           this.typedWord += this.currentSelectedValue;
-          console.log('cond', this.currentSelectedValue, this.answer[this.selectedLetters.length-1]);
           if(this.currentSelectedValue === this.answer[this.selectedLetters.length-1]) {
-            console.log("ideugrik if?")
             if(this.typedWord === this.answer) {
               this.slideStyle.color = '#ff993d';
               this.answered = true;
             }
-          } else {
-            console.log('ideugrik else?')
-            /*this.giNgDivStyle.backgroundColor = '#2A2F39 !important';
-            this.giNgPStyle.color = '#ff993d';*/
+          } else { 
             for(let i=0; i < this.selectedDivTags.length; i++) {
               this.selectedDivTags[i].style.backgroundColor = '#2A2F39';
               this.selectedPTags[i].style.color = '#ff993d';
@@ -97,8 +119,6 @@ export class GiWordSearchPage {
           this.currentSelectedPTag.style.color = '#ff993d';
         }
       }
-      console.log(this.typedWord);
-      console.log('selectedletters', this.selectedLetters);
     }
   }
 

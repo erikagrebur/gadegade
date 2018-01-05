@@ -6,21 +6,19 @@
 -->
 <ion-header>
   <ion-navbar color="dark" hideBackButton="true">
-    <ion-title>A God in Esbjerg</ion-title>
+    <ion-title>{{gameTitle}}</ion-title>
   </ion-navbar>
 </ion-header>
 
 
 <ion-content>
-  <div *ngFor="let data of database">
   <div>
-      <p class="leftSide rightSide textJustify">{{data[0]}}</p>
-      <p class="leftSide rightSide textJustify textDetails">{{data[1]}}</p>
+      <p class="leftSide rightSide textJustify textDetails" *ngFor="let key of objectKeys">{{paragraphs[key]}}</p>
   </div>
  
   <div id="gameItemContainer" class="leftSide rightSide">
     <div class="risingImgContainer">
-        <img src="{{risingImageUrl}}" alt="picture from library" id="clueImage" [ngStyle]="{'width': imageWidth}">
+        <img src="{{imgSrcUrl}}" alt="rising picture" id="clueImage" [ngStyle]="{'width': imageWidth}">
         <p class="wrongWay" [ngStyle]="{'display': wrongWayPTag}">You're in the wrong direction!</p>
     </div>
     <div class="risingRangeContainer">
@@ -29,6 +27,5 @@
   </div>
   <div class="bottomContainer">
     <p class="slide rightSide" (click)="getNextGameItem()" [ngStyle]="{'color': slideStyle}">Next <ion-icon name="arrow-forward"></ion-icon></p>
-  </div>
   </div>
 </ion-content>

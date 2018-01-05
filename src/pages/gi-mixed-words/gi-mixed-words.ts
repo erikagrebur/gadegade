@@ -3,6 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { DatabaseProvider } from '../../providers/database/database';
 import { LocationTrackerProvider } from '../../providers/location-tracker/location-tracker';
 import { GiObscureImgPage } from '../gi-obscure-img/gi-obscure-img';
+import { StorageProvider } from '../../providers/storage/storage';
 
 /**
  * Generated class for the GiMixedWordsPage page.
@@ -16,9 +17,9 @@ import { GiObscureImgPage } from '../gi-obscure-img/gi-obscure-img';
   templateUrl: 'gi-mixed-words.html',
 })
 export class GiMixedWordsPage {
-  mixedWordsValue: string;
+  currentStage: string;
 
-  mixedWordDatabaseValues:string[] = [];
+  mixedWordStages:string[] = [];
 
   slideStyle: any = 'rgba(148, 151, 153, 0.45)';
   rangeLong: number = 0;
@@ -42,11 +43,49 @@ export class GiMixedWordsPage {
 
   wrongWayPTag: any = 'none';
 
-  testLogFirstElem: string;
-  testLogSecondElem: string;
-  testLogThirdElem: string;
+  storedGame: string = '';
+  storedCity: string = '';
+  logged: boolean = false;
+  availableGames: any[] = [];
+  gameTitle: string = '';
+  objectKeys: any[] = [];
+  paragraphs: string[] = [];
+  dataElements: string[] = [];
+  imgSrcUrl: string;
+  imgName: string;
   
-  constructor(public navCtrl: NavController, public navParams: NavParams, private databaseService: DatabaseProvider, private locationTracker: LocationTrackerProvider, private ngZone: NgZone) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private databaseService: DatabaseProvider, private locationTracker: LocationTrackerProvider, private ngZone: NgZone, private storageService: StorageProvider) {
+
+    this.storageService.getData('selectedCity').subscribe(storedCity => {
+      this.storedCity = storedCity;
+      this.storageService.getData('selectedGame').subscribe(storedGame => {
+        this.storedGame = storedGame;
+        this.databaseService.getGamesFromDataBase().subscribe(data => {
+          if(this.logged) {
+            this.availableGames = data[1];
+          } else {
+            this.availableGames = data[0];
+          }
+
+          this.gameTitle = this.availableGames[this.storedCity][this.storedGame]['title'];
+        });
+        this.databaseService.getMixedWordsFromDataBase().subscribe(data => {
+          
+          if(this.logged) {
+            this.dataElements = data[1];
+          } else {
+            this.dataElements = data[0];
+          }
+
+          this.paragraphs = this.dataElements[this.storedCity][this.storedGame]['prgs'];          
+          this.objectKeys = Object.keys(this.paragraphs);
+          this.mixedWordStages = this.dataElements[this.storedCity][this.storedGame]['word_stages'];
+          this.currentStage = this.mixedWordStages[0];
+
+          
+        })
+      });
+    });
 
     this.locationTracker.startTracking();
     this.locationTracker.backGeolocation.subscribe((location) => {
@@ -56,16 +95,6 @@ export class GiMixedWordsPage {
         this.getDistance(this.targetLat,this.targetLng,this.currentLat,this.currentLng);
       });
     });
-  }
-
-  ionViewDidLoad() {
-    console.log("odaegyet");
-    this.databaseService.getMixedWordsFromDataBase().subscribe(mixedwords => {
-      this.mixedWordDatabaseValues = mixedwords;
-      this.mixedWordsValue = this.mixedWordDatabaseValues[0]['01stStage'];
-    });
-    console.log("mixedvordsvalue", this.mixedWordDatabaseValues);
-    console.log("mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm", this.mixedWordsValue);
   }
 
   getDistance(tLat,tLng,cLat,cLng) {
@@ -112,41 +141,35 @@ export class GiMixedWordsPage {
 
       console.log('condii', this.rangeLong < this.distanceAccuracy / 5);
       
-      if(this.rangeLong < this.distanceAccuracy / 5) {
-        this.mixedWordsValue = this.mixedWordDatabaseValues[0]['01stStage'];
-      } else if(this.rangeLong >= this.distanceAccuracy / 5 && this.rangeLong < 2* this.distanceAccuracy / 5) {
-        this.mixedWordsValue = this.mixedWordDatabaseValues[0]['02ndStage'];
-      } else if(this.rangeLong >= 2* this.distanceAccuracy / 5 && this.rangeLong < 3* this.distanceAccuracy / 5) {
-        this.mixedWordsValue = this.mixedWordDatabaseValues[0]['03rdStage'];
-      } else if(this.rangeLong >= 3* this.distanceAccuracy / 5 && this.rangeLong < 4* this.distanceAccuracy / 5) {
-        this.mixedWordsValue = this.mixedWordDatabaseValues[0]['04thStage'];
-      } else if(this.rangeLong >= 4* this.distanceAccuracy / 5 && this.rangeLong < 5* this.distanceAccuracy / 5) {
-        this.mixedWordsValue = this.mixedWordDatabaseValues[0]['05thStage'];
-      }
+      this.setStage();
       
       this.checkPointDist -= this.checkedValue * this.unitDist;
 
       
     } else if(this.checkedValue < 0) {
       this.wrongWayPTag = 'block';
-      this.rangeLong = this.checkedValue + (this.firstDist - this.checkPointDist)/this.unitDist;      
+      this.rangeLong = this.checkedValue + (this.firstDist - this.checkPointDist)/this.unitDist;
 
-      if(this.rangeLong < this.distanceAccuracy / 5) {
-        this.mixedWordsValue = this.mixedWordDatabaseValues[0]['01stStage'];
-      } else if(this.rangeLong >= this.distanceAccuracy / 5 && this.rangeLong < 2* this.distanceAccuracy / 5) {
-        this.mixedWordsValue = this.mixedWordDatabaseValues[0]['02ndStage'];
-      } else if(this.rangeLong >= 2* this.distanceAccuracy / 5 && this.rangeLong < 3* this.distanceAccuracy / 5) {
-        this.mixedWordsValue = this.mixedWordDatabaseValues[0]['03rdStage'];
-      } else if(this.rangeLong >= 3* this.distanceAccuracy / 5 && this.rangeLong < 4* this.distanceAccuracy / 5) {
-        this.mixedWordsValue = this.mixedWordDatabaseValues[0]['04thStage'];
-      } else if(this.rangeLong >= 4* this.distanceAccuracy / 5 && this.rangeLong < 5* this.distanceAccuracy / 5) {
-        this.mixedWordsValue = this.mixedWordDatabaseValues[0]['05thStage'];
-      }
+      this.setStage();
 
       this.checkPointDist -= this.checkedValue * this.unitDist;
 
     }
   }
+
+  setStage() {
+    if(this.rangeLong < this.distanceAccuracy / 5) {
+      this.currentStage = this.mixedWordStages[0];
+    } else if(this.rangeLong >= this.distanceAccuracy / 5 && this.rangeLong < 2* this.distanceAccuracy / 5) {
+      this.currentStage = this.mixedWordStages[1];
+    } else if(this.rangeLong >= 2* this.distanceAccuracy / 5 && this.rangeLong < 3* this.distanceAccuracy / 5) {
+      this.currentStage = this.mixedWordStages[2];
+    } else if(this.rangeLong >= 3* this.distanceAccuracy / 5 && this.rangeLong < 4* this.distanceAccuracy / 5) {
+      this.currentStage = this.mixedWordStages[3];
+    } else if(this.rangeLong >= 4* this.distanceAccuracy / 5 && this.rangeLong < 5* this.distanceAccuracy / 5) {
+      this.currentStage = this.mixedWordStages[4];
+    }
+  } 
 
   getNextGameItem() {
     //if(this.answered) {

@@ -53,7 +53,6 @@ export class GiStartGamePage {
   }
 
   loadMap(game) {
-    console.log("megye ################", game);
     this.map = new GoogleMap('map', {
       'controls': {
         'compass': true,

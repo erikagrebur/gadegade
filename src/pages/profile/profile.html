@@ -1,0 +1,50 @@
+<ion-content>
+  <div class="darkBluePolygon">
+    <p class="menu">Log out</p>
+    <ion-grid class="headContainer">
+      <ion-row>
+        <ion-col col-8 class="titleContainer">
+            <h1 class="title leftSide">Profile</h1>
+            <p class="userName leftSide">{{user.username}}</p>
+        </ion-col>
+        <ion-col col-4>
+            <img src="assets/imgs/homePageImgs/GGlogo.png" alt="Gåde Gade application's logo" class="pageLogo rightSide">
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <div class="clearFloat"></div>
+    <ion-grid class="statisticsContainer">
+      <ion-row>
+        <ion-col class="playedContainer" col-6>
+          <p class="playedMinutes leftSide">{{user.played_times}} min</p>
+          <p class="playedTitle leftSide">Played minutes</p>
+        </ion-col>
+        <ion-col class="accomplishedContainer" col-6>
+          <p class="accomplishedGames">{{playedGamesCount}}</p>
+          <p class="accomplishedTitle">Accomplished games</p>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <h2 class="subTitle leftSide">Finished stories</h2>
+  </div>
+  <div class="gamesContainer leftSide rightSide">
+      <ion-grid class="ionGrid">
+          <ion-row>
+            <ion-col col-6 class="gameCard" *ngFor="let game of playedGames" (click)="getDetails(game.city_id, game.id)">
+              <div class="gameCardImgContainer">
+                  <div class="gameCardImgFade"></div>
+                  <img src="{{game.background_img_url}}" alt="card background" class="gameCardImg">
+              </div>
+              <div class="gameCardContent">
+                <p class="contentTitle">
+                    {{game.title}}
+                </p>
+                <p class="creator">
+                  by {{game.creator}}
+                </p>
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+  </div>
+</ion-content>

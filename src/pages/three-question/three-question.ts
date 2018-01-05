@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { GiMixedWordsPage } from '../gi-mixed-words/gi-mixed-words';
 import { DatabaseProvider } from '../../providers/database/database';
+import { StorageProvider } from '../../providers/storage/storage';
 
 /**
  * Generated class for the ThreeQuestionPage page.
@@ -16,12 +17,11 @@ import { DatabaseProvider } from '../../providers/database/database';
 })
 export class ThreeQuestionPage {
 
-  database: string[] = [];
-  firstOptions: string[] = ["Volstagg", "Heimdall", "Sith"];
-  secondOptions: string[] = ["Odin", "Ace", "Hogun"];
-  thirdOptions: string[] = ["Jotunheim", "Earth", "Kree"];
+  firstOptions: string[] = [];
+  secondOptions: string[] = [];
+  thirdOptions: string[] = [];
 
-  answer: number[] = [1, 0, 0]; 
+  answers: number[] = []; 
   answered: boolean = false;
 
   currentFirstOptionIndex: number;
@@ -29,99 +29,130 @@ export class ThreeQuestionPage {
   currentThirdOptionIndex: number;
 
   slideStyle: any = {'color': 'rgba(148, 151, 153, 0.45)'}
-  
-  constructor(public navCtrl: NavController, public navParams: NavParams, private databaseService: DatabaseProvider) {
-    
-  }
 
-  ionViewDidLoad() {
-    this.currentFirstOptionIndex = Math.floor(Math.random() * this.firstOptions.length);
-    this.currentSecondOptionIndex = Math.floor(Math.random() * this.secondOptions.length);
-    this.currentThirdOptionIndex = Math.floor(Math.random() * this.thirdOptions.length);
-    console.log(this.currentFirstOptionIndex);
-    
-    this.databaseService.getThreeQuestionFromDataBase().subscribe(data => {
-      this.database = data;
-      console.log('jönátt?', this.database);
-      console.log("data", data);
+  storedGame: string = '';
+  storedCity: string = '';
+  logged: boolean = false;
+  availableGames: any[] = [];
+  gameTitle: string = '';
+  objectKeys: any[] = [];
+  paragraphs: string[] = [];
+  dataElements: string[] = [];
+  answerOptions: string[] = [];
+  questions: string[];
+
+  firstOptionKeys: any[] = [];
+  secondOptionKeys: any[] = [];
+  thirdOptionKeys: any[] = [];
+  
+  constructor(public navCtrl: NavController, public navParams: NavParams, private databaseService: DatabaseProvider, private storageService: StorageProvider) {
+    this.storageService.getData('selectedCity').subscribe(storedCity => {
+      this.storedCity = storedCity;
+      this.storageService.getData('selectedGame').subscribe(storedGame => {
+        this.storedGame = storedGame;
+        this.databaseService.getGamesFromDataBase().subscribe(data => {
+          if(this.logged) {
+            this.availableGames = data[1];
+          } else {
+            this.availableGames = data[0];
+          }
+
+          this.gameTitle = this.availableGames[this.storedCity][this.storedGame]['title'];
+        });
+        this.databaseService.getThreeQuestionFromDataBase().subscribe(data => {
+          
+          if(this.logged) {
+            this.dataElements = data[1];
+          } else {
+            this.dataElements = data[0];
+          }
+
+          this.paragraphs = this.dataElements[this.storedCity][this.storedGame]['prgs'];
+          this.questions =  this.dataElements[this.storedCity][this.storedGame]['questions'];
+          this.objectKeys = Object.keys(this.paragraphs);
+          this.firstOptions = this.dataElements[this.storedCity][this.storedGame]['answer_options'][0];
+          this.secondOptions = this.dataElements[this.storedCity][this.storedGame]['answer_options'][1];
+          this.thirdOptions = this.dataElements[this.storedCity][this.storedGame]['answer_options'][2];
+          this.answers = this.dataElements[this.storedCity][this.storedGame]['right_answers'];
+
+          this.firstOptionKeys = Object.keys(this.firstOptions);
+          this.secondOptionKeys = Object.keys(this.secondOptions);
+          this.thirdOptionKeys = Object.keys(this.thirdOptions);
+
+          this.currentFirstOptionIndex = Math.floor(Math.random() * this.firstOptionKeys.length);
+          this.currentSecondOptionIndex = Math.floor(Math.random() * this.secondOptionKeys.length);
+          this.currentThirdOptionIndex = Math.floor(Math.random() * this.thirdOptionKeys.length);
+          this.checkAnswers();
+        })
+      });
     });
   }
 
-  getNextFirstOption() {
+  getPrevOption(element) {
     if(!this.answered) {
-      if(this.currentFirstOptionIndex === this.firstOptions.length - 1) {
-        this.currentFirstOptionIndex = 0;
-      } else {
-        this.currentFirstOptionIndex += 1;
-      } 
+      switch (element) {
+        case 'firstOption':
+          if(this.currentFirstOptionIndex === 0) {
+            this.currentFirstOptionIndex = this.firstOptionKeys.length - 1;
+          } else {
+            this.currentFirstOptionIndex -= 1;
+          }
+        break;
+        case 'secondOption':
+          if(this.currentSecondOptionIndex === 0) {
+            this.currentSecondOptionIndex = this.secondOptionKeys.length - 1;
+          } else {
+            this.currentSecondOptionIndex -= 1;
+          }
+        break;
+        case 'thirdOption':
+          if(this.currentThirdOptionIndex === 0) {
+            this.currentThirdOptionIndex = this.thirdOptionKeys.length - 1;
+          } else {
+            this.currentThirdOptionIndex -= 1;
+          }
+        break;
+      }
+      this.checkAnswers();
     }
-    this.checkAnswers();
   }
-
-  getPrevFirstOption() {
+  
+  getNextOption(element) {
     if(!this.answered) {
-      if(this.currentFirstOptionIndex === 0) {
-        this.currentFirstOptionIndex = this.firstOptions.length - 1;
-      } else {
-        this.currentFirstOptionIndex -= 1;
-      } 
+      switch (element) {
+        case 'firstOption':
+          if(this.currentFirstOptionIndex === this.firstOptionKeys.length - 1) {
+            this.currentFirstOptionIndex = 0;
+          } else {
+            this.currentFirstOptionIndex += 1;
+          }
+        break;
+        case 'secondOption':
+          if(this.currentSecondOptionIndex === this.secondOptionKeys.length - 1) {
+            this.currentSecondOptionIndex = 0;
+          } else {
+            this.currentSecondOptionIndex += 1;
+          }
+        break;
+        case 'thirdOption':
+          if(this.currentThirdOptionIndex === this.thirdOptionKeys.length - 1) {
+            this.currentThirdOptionIndex = 0;
+          } else {
+            this.currentThirdOptionIndex += 1;
+          }
+        break;
+      }
+      this.checkAnswers(); 
     }
-    this.checkAnswers();
-  }
-
-  getNextSecondOption() {
-    if(!this.answered) {
-      if(this.currentSecondOptionIndex === this.firstOptions.length - 1) {
-        this.currentSecondOptionIndex = 0;
-      } else {
-        this.currentSecondOptionIndex += 1;
-      } 
-    }
-    this.checkAnswers();
-  }
-
-  getPrevSecondOption() {
-    if(!this.answered) {
-      if(this.currentSecondOptionIndex === 0) {
-        this.currentSecondOptionIndex = this.firstOptions.length - 1;
-      } else {
-        this.currentSecondOptionIndex -= 1;
-      } 
-    }
-    this.checkAnswers();
-  }
-
-  getNextThirdOption() {
-    if(!this.answered) {
-      if(this.currentThirdOptionIndex === this.firstOptions.length - 1) {
-        this.currentThirdOptionIndex = 0;
-      } else {
-        this.currentThirdOptionIndex += 1;
-      } 
-    }
-    this.checkAnswers();
-  }
-
-  getPrevThirdOption() {
-    if(!this.answered) {
-      if(this.currentThirdOptionIndex === 0) {
-        this.currentThirdOptionIndex = this.firstOptions.length - 1;
-      } else {
-        this.currentThirdOptionIndex -= 1;
-      } 
-    }
-    this.checkAnswers();
   }
 
   checkAnswers() {
+
     if(
-      this.currentFirstOptionIndex === this.answer[0] &&
-      this.currentSecondOptionIndex === this.answer[1] &&
-      this.currentThirdOptionIndex === this.answer[2]
+      this.currentFirstOptionIndex === this.answers[0] &&
+      this.currentSecondOptionIndex === this.answers[1] &&
+      this.currentThirdOptionIndex === this.answers[2]
     ) {
-      console.log('cond1', this.currentFirstOptionIndex, this.answer[0]);
-      console.log('cond2', this.currentSecondOptionIndex, this.answer[1]);
-      console.log('cond3', this.currentThirdOptionIndex, this.answer[2]);
       this.answered = true;
       this.slideStyle.color = '#ff993d';
     }

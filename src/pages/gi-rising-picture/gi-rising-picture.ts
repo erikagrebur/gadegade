@@ -4,6 +4,7 @@ import { LocationTrackerProvider } from '../../providers/location-tracker/locati
 import { ThreeQuestionPage } from '../three-question/three-question';
 import { DatabaseProvider } from '../../providers/database/database';
 import * as firebase from 'firebase';
+import { StorageProvider } from '../../providers/storage/storage';
 
 @Component({
   selector: 'page-gi-rising-picture',
@@ -37,11 +38,57 @@ export class GiRisingPicturePage {
 
   risingImageUrl: string;
 
-  constructor(public navCtrl: NavController, platform: Platform, public navParams: NavParams, private locationTracker: LocationTrackerProvider, private ngZone: NgZone, private databaseService: DatabaseProvider) {
-    platform.ready().then(() => {
-      const storageRef = firebase.storage().ref().child('game_00/risingPicture/library.jpg');
-      storageRef.getDownloadURL().then(url => this.risingImageUrl = url);
+  storedGame: string = '';
+  storedCity: string = '';
+  logged: boolean = false;
+  availableGames: any[] = [];
+  gameTitle: string = '';
+  objectKeys: any[] = [];
+  paragraphs: string[] = [];
+  dataElements: string[] = [];
+  imgSrcUrl: string;
+  imgName: string;
+
+  constructor(public navCtrl: NavController, platform: Platform, public navParams: NavParams, private locationTracker: LocationTrackerProvider, private ngZone: NgZone, private databaseService: DatabaseProvider, private storageService: StorageProvider) {
+
+    this.storageService.getData('selectedCity').subscribe(storedCity => {
+      this.storedCity = storedCity;
+      this.storageService.getData('selectedGame').subscribe(storedGame => {
+        this.storedGame = storedGame;
+        this.databaseService.getGamesFromDataBase().subscribe(data => {
+          if(this.logged) {
+            this.availableGames = data[1];
+          } else {
+            this.availableGames = data[0];
+          }
+
+          this.gameTitle = this.availableGames[this.storedCity][this.storedGame]['title'];
+        });
+        this.databaseService.getRisingPictureFromDataBase().subscribe(data => {
+          
+          if(this.logged) {
+            this.dataElements = data[1];
+          } else {
+            this.dataElements = data[0];
+          }
+
+          this.paragraphs = this.dataElements[this.storedCity][this.storedGame]['prgs'];
+          this.imgName = this.dataElements[this.storedCity][this.storedGame]['img'];
+
+          let storageRef:any;
+          if(this.logged) {
+            // TODO
+          } else {
+            storageRef = firebase.storage().ref().child(`giRisingPicture/try_games/${this.storedCity}/${this.storedGame}/${this.imgName}`);
+          }
+          storageRef.getDownloadURL().then(url => this.imgSrcUrl = url);
+          
+          this.objectKeys = Object.keys(this.paragraphs);
+          
+        })
+      });
     });
+
     this.locationTracker.startTracking();
     this.locationTracker.backGeolocation.subscribe((location) => {
       this.ngZone.run(() => {

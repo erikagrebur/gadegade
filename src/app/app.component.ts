@@ -11,6 +11,7 @@ import { GiStartGamePage } from '../pages/gi-start-game/gi-start-game';
 import { GiMixedWordsPage } from '../pages/gi-mixed-words/gi-mixed-words';
 import { GiWordSearchPage } from '../pages/gi-word-search/gi-word-search';
 import { GameDescriptionPage } from '../pages/game-description/game-description';
+import { ThreeQuestionPage } from '../pages/three-question/three-question';
 
 @Component({
   templateUrl: 'app.html'

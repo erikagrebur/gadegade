@@ -1,0 +1,58 @@
+$shapeContainerHeight: 210px;
+$shapeRightHeight: 0.78;
+
+page-search {
+    .backgroundShape {
+        height: $shapeContainerHeight;
+        width: 100%;
+        -webkit-clip-path: polygon(0 0, 100% 0, 100% $shapeRightHeight, 0 100%);
+        clip-path: polygon(0 0, 100% 0, 100% 78%, 0 100%);
+        background-color: $blueColor;
+    }
+    
+    .logo {
+        float: right;
+        width: 110px;
+        margin-top: 25px;
+        margin-right: $horizontalSideSpace;
+    }
+
+    .citySelection {
+        background: #2A2F39 !important;
+        border: none;
+        border-bottom: 1px solid #6D6D6D;
+        width: 230px;
+        font-size: 25px;
+        color: #6D6D6D;
+      }
+
+      .leftSide {
+          margin-left: $horizontalSideSpace;
+      }
+
+      datalist {
+          background: $fadedGreyColor;
+      }
+
+      .searchIcon {
+        width: 150px;
+        display: inline-block;
+        height: auto;
+        font-size: 52px;
+        margin-top: 33px;
+      }
+
+      #map {
+        width: 100%;
+        height: calc(100% - #{$shapeContainerHeight} * #{$shapeRightHeight});
+        position: absolute;
+        top: 0;
+        margin-top: calc(#{$shapeContainerHeight} * #{$shapeRightHeight});
+        left: 0;
+      }
+
+      .searchContainer {
+          height: 100%;
+          position: relative;
+      }
+}

@@ -6,58 +6,52 @@
 -->
 <ion-header>
   <ion-navbar color="dark" hideBackButton="true">
-    <ion-title>A God in Esbjerg</ion-title>
+    <ion-title>{{gameTitle}}</ion-title>
   </ion-navbar>
 </ion-header>
 
 
 <ion-content padding>
-  <div *ngFor="let data of database">
-  <p class="leftSide rightSide">{{data["description"]}}</p>
+  <p class="leftSide rightSide" *ngFor="let key of objectKeys">{{paragraphs[key]}}</p>
   <div id="questionsContainer" class="leftSide rightSide">
     <div class="questionDiv">
       <div class="questionContainer">
-        <p class="questionTitle">{{data["firstQuestion"]}}</p>
+        <p class="questionTitle" *ngIf="questions">{{questions[0]}}</p>
       </div>
       <div class="answerContainer">
-        <!-- <div class="arrowContainer"> -->
-            <div class="leftArrow" (click)="getPrevFirstOption(firstLeftArrow)" #firstLeftArrow></div>
-        <!-- </div> -->
+        <div class="leftArrow" (click)="getPrevOption('firstOption')"></div>
         <div class="optionContent">
-          <p id="firstOption" class="optionStyle">{{firstOptions[currentFirstOptionIndex]}}</p>
+          <p class="optionStyle" *ngIf="firstOptions">{{firstOptions[currentFirstOptionIndex]}}</p>
         </div>
-        <!-- <div class="arrowContainer"> -->
-            <div class="rightArrow" (click)="getNextFirstOption(firstRightArrow)" #firstRightArrow></div>
-        <!-- </div> -->
+        <div class="rightArrow" (click)="getNextOption('firstOption')"></div>
       </div>
     </div>
     <div class="questionDiv">
       <div class="questionContainer">
-        <p class="questionTitle">{{data["secondQuestion"]}}</p>
+        <p class="questionTitle" *ngIf="questions">{{questions[1]}}</p>
       </div>
       <div class="answerContainer">
-        <div class="leftArrow" (click)="getPrevSecondOption()"></div>
+        <div class="leftArrow" (click)="getPrevOption('secondOption')"></div>
         <div class="optionContent">
-          <p id="secondOption" class="optionStyle">{{secondOptions[currentSecondOptionIndex]}}</p>
+          <p class="optionStyle" *ngIf="secondOptions">{{secondOptions[currentSecondOptionIndex]}}</p>
         </div>
-        <div id="secondRightArrow" class="rightArrow" (click)="getNextSecondOption()"></div>
+        <div class="rightArrow" (click)="getNextOption('secondOption')"></div>
       </div>
     </div>
     <div class="questionDiv">
       <div class="questionContainer">
-        <p class="questionTitle">{{data["thirdQuestion"]}}</p>
+        <p class="questionTitle" *ngIf="questions">{{questions[2]}}</p>
       </div>
       <div class="answerContainer">
-        <div id="thirdLeftArrow" class="leftArrow" (click)="getPrevThirdOption()"></div>
+        <div class="leftArrow" (click)="getPrevOption('thirdOption')"></div>
         <div class="optionContent">
-          <p id="thirdOption" class="optionStyle">{{thirdOptions[currentThirdOptionIndex]}}</p>
+          <p class="optionStyle" *ngIf="thirdOptions">{{thirdOptions[currentThirdOptionIndex]}}</p>
         </div>
-        <div id="thirdRightArrow" class="rightArrow" (click)="getNextThirdOption()"></div>
+        <div class="rightArrow" (click)="getNextOption('thirdOption')"></div>
       </div>
     </div>
   </div>
   <div class="bottomContainer">
       <p id="slide" class="rightSide" (click)="getNexGameItem()" [ngStyle]="slideStyle">Next <ion-icon name="arrow-forward"></ion-icon></p>
-  </div>
   </div>
 </ion-content>

@@ -6,20 +6,17 @@
 -->
 <ion-header>
   <ion-navbar color="dark" hideBackButton="true">
-    <ion-title>A God in Esbjerg</ion-title>
+    <ion-title>{{gameTitle}}</ion-title>
   </ion-navbar>
 </ion-header>
 
 
 <ion-content>
-  <p class="leftSide rightSide textJustify">Professor now belive in you. He wants to help but unfortunatelly he can't give the correct location of the hammer. He just thinks that there is the greatest chance of finding it on the main square. Furthermore he has some Asgardian notes what maybe help you, although over time they mixed up a bit.</p>
-  <p class="leftSide rightSide textJustify">But you have to hurry because people maybe find the hammer before you and then the area will be closed. So let's go now and as long as you get there the <strong>text becomes more and more meaningful.</strong></p>
-  <p>Lat: {{currentLat}}</p>
-  <p>Lng: {{currentLng}}</p>
-  <p>Range: {{rangeLong}}</p>
+  <p class="leftSide rightSide textJustify" *ngFor="let key of objectKeys">{{paragraphs[key]}}</p>
+
   <div id="gameItemContainer" class="leftSide rightSide">
     <div class="mixedWordsContainer">
-        <p class="mixedWordsValue">{{mixedWordsValue}}</p>
+        <p class="mixedWordsValue">{{currentStage}}</p>
         <p class="wrongWay" [ngStyle]="{'display': wrongWayPTag}">You're in the wrong direction!</p>
     </div>
     <div class="mixedRangeContainer">

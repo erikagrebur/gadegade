@@ -6,19 +6,17 @@
 -->
 <ion-header>
   <ion-navbar color="dark" hideBackButton="true">
-    <ion-title>A God in Esbjerg</ion-title>
+    <ion-title>{{gameTitle}}</ion-title>
   </ion-navbar>
 </ion-header>
 
 
 <ion-content>
-  <p class="leftSide rightSide information">"Follow the horse's eyes??!! It's not very helpful. Let's go and figure it out, what the hell is going on" - you think.</p>
-  <p class="leftSide rightSide information">While you are walking, you notice that the <strong>picture is changing</strong>.</p>
-  <p class="leftSide rightSide information">"I hope there will be the hammer"</p>
+  <p class="leftSide rightSide information" *ngFor="let key of objectKeys">{{paragraphs[key]}}</p>
   <div id="gameItemContainer" class="leftSide rightSide">
     <div class="obscureImgsContainer">
-      <img src="assets/imgs/gameImgs/06_obscure/horse.jpg" alt="horse statue" class="obscureImg horseImg" [ngStyle]="{'opacity': hourseImgStyle}">
-      <img src="assets/imgs/gameImgs/06_obscure/vand.jpg" alt="water tower" class="obscureImg waterImg" [ngStyle]="{'opacity': waterImgStyle}">
+      <img *ngIf="imgSrcUrls[0]" src="{{imgSrcUrls[0]}}" alt="start image" class="obscureImg startImg" [ngStyle]="{'opacity': startImgStyle}">
+      <img *ngIf="imgSrcUrls[1]" src="{{imgSrcUrls[1]}}" alt="target image" class="obscureImg targetImg" [ngStyle]="{'opacity': targetImgStyle}">
       <p class="wrongWay" [ngStyle]="{'display': wrongWayPTag}">You're in the wrong direction!</p>
     </div>
     <div class="obscureRangeContainer">

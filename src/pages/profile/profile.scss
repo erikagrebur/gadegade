@@ -1,0 +1,152 @@
+page-profile {
+    .darkBluePolygon {
+        height: 400px;
+        width: 100%;
+        -webkit-clip-path: polygon(0 0, 100% 0, 100% 78%, 0 100%);
+        clip-path: polygon(0 0, 100% 0, 100% 78%, 0 100%);
+        background: $blueColor;
+    }
+
+    .headContainer {
+        padding: 80px 0 0 0;
+        margin-bottom: 15px;
+    }
+
+    .titleContainer {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        padding: 0;
+    }
+
+    .title {
+        color: $orangeColor;
+        font-weight: normal;
+        font-size: 15px;
+        margin: 0 0 8px 0;
+    }
+
+    .userName {
+        color: $orangeColor;
+        font-size: 24px;
+        margin: 0;
+        font-weight: 900;
+    }
+
+    .leftSide {
+        margin-left: $horizontalSideSpace;
+    }
+
+    .rightSide {
+        margin-right: $horizontalSideSpace;
+    }
+
+    .pageLogo {
+        margin: 0;
+    }
+
+    .statisticsContainer {
+        color: $orangeColor;
+    }
+
+    .playedContainer {
+        border-right: 2px solid $fadedGreyColor;
+        height: 100%;
+    }
+
+    .playedMinutes {
+        font-size: 25px;
+        font-weight: 900;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .playedTitle {
+        text-align: center;
+        margin: 0 auto;
+    }
+
+    .accomplishedContainer {
+        height: 100%;
+    }
+
+    .accomplishedGames {
+        font-size: 25px;
+        font-weight: 900;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .accomplishedTitle {
+        text-align: center;
+        margin: 0 auto;
+    }
+
+    .subTitle {
+        color: $orangeColor;
+        font-size: 15px;
+        margin-top: 35px;
+    }
+
+    .gamesContainer {
+        padding: 0;
+    }
+
+    .gameCard {
+        width: 50px;
+    padding: 0 10px;
+    }
+
+    .gameCardImgContainer {
+        width: 100%;
+        height: 50px;
+        position: relative;
+    }
+
+    .gameCardImgFade {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(255,255,255,0.4);
+    }
+
+    .gameCardImg {
+        border-radius: 10px 10px 0 0;
+        height: 50px;
+        width: 100%;
+    }
+
+    .gameCardContent {
+        padding: 5px;
+        border-left: 1px solid $fadedGreyColor;
+        border-right: 1px solid $fadedGreyColor;
+        border-bottom: 1px solid $fadedGreyColor;
+    }
+
+    .contentTitle {
+        font-size: 15px;
+    padding: 0;
+    margin: 0;
+    font-weight: 900;
+    }
+
+    .creator {
+        font-size: 12px;
+        margin-top: 2px;
+    }
+
+    .ionGrid {
+        padding: 0;
+    }
+
+    .menu {
+        margin: 0px;
+        position: absolute;
+        right: $horizontalSideSpace;
+        top: $horizontalSideSpace;
+        color: $orangeColor;
+        font-size: 16px;
+    }
+}

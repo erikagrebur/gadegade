@@ -4,6 +4,8 @@ import { GiWordSearchPage } from '../gi-word-search/gi-word-search';
 
 import * as firebase from 'firebase';
 import { AngularFireModule } from 'angularfire2';
+import { DatabaseProvider } from '../../providers/database/database';
+import { StorageProvider } from '../../providers/storage/storage';
 
 /**
  * Generated class for the GameDescriptionPage page.
@@ -17,17 +19,66 @@ import { AngularFireModule } from 'angularfire2';
   templateUrl: 'game-description.html',
 })
 export class GameDescriptionPage {
-  odinImageUrl: string;
-  thorImageUrl: string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, platform: Platform) {
-    platform.ready().then(() => {
-      const storageRef = firebase.storage().ref().child('game_00/description/odin.JPG');
-      storageRef.getDownloadURL().then(url => this.odinImageUrl = url);
-      const thorRef = firebase.storage().ref().child('game_00/description/thor.png');
-      thorRef.getDownloadURL().then(url => this.thorImageUrl = url);
+  imgNames: string[] = [];
+  imgAltProps: string[] = [];
+  imgSrcUrls: string[] = [];
+  paragraphs: string[] = [];
+  logged: boolean = false;
+  dataElements: string[] = [];
+  storedCity: string = '';
+  storedGame: string = '';
+  objectKeys: any[] = [];
+  gameTitle: string;
+  availableGames: any[] = [];
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, platform: Platform, private databaseService: DatabaseProvider, private storageService: StorageProvider) {
+    
+    this.storageService.getData('selectedCity').subscribe(storedCity => {
+      this.storedCity = storedCity;
+      this.storageService.getData('selectedGame').subscribe(storedGame => {
+        this.storedGame = storedGame;
+        this.databaseService.getDescriptionFromDataBase().subscribe(data => {
+          console.log('data', data);
+          
+          if(this.logged) {
+            this.dataElements = data[1];
+          } else {
+            this.dataElements = data[0];
+          }
+
+          this.imgAltProps = this.dataElements[this.storedCity][this.storedGame]['alts'];
+          this.imgNames = this.dataElements[this.storedCity][this.storedGame]['imgs'];
+          this.paragraphs = this.dataElements[this.storedCity][this.storedGame]['prgs'];
+
+          this.objectKeys = Object.keys(this.paragraphs);
+
+          if(this.logged) {
+            //hiányzó ág
+          } else {
+            for(let i = 0; i < this.objectKeys.length; i++) {
+              if(this.imgNames[i] != "") {
+                const storageRef = firebase.storage().ref().child(`giDescription/try_games/${this.storedCity}/${this.storedGame}/${this.imgNames[i]}`);
+                storageRef.getDownloadURL().then(url => this.imgSrcUrls.push(url));
+              } else {
+                this.imgSrcUrls.push(this.imgNames[i]);
+              }
+            }
+          }
+
+          this.databaseService.getGamesFromDataBase().subscribe(data => {
+            if(this.logged) {
+              this.availableGames = data[1];
+            } else {
+              this.availableGames = data[0];
+            }
+
+            this.gameTitle = this.availableGames[this.storedCity][this.storedGame]['title'];
+          });
+          
+        });    
+      });
     });
-
   }
 
   getGiWordSearch() {

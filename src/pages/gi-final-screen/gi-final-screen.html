@@ -6,15 +6,15 @@
 -->
 <ion-header>
   <ion-navbar color="dark" hideBackButton="true">
-    <ion-title>A God in Esbjerg</ion-title>
+    <ion-title>{{gameTitle}}</ion-title>
   </ion-navbar>
 </ion-header>
 
 
 <ion-content>
-  <img src="assets/imgs/gameImgs/08_finish/finish.png" alt="memorial with hammer" class="finishImg">
-  <p class="congrat">You made it!</p>
-  <p class="leftSide rightSide information">Odin forgave Thor, who hurriedly thanked for your help and ran for his hammer.</p>
+  <img src="{{imgSrcUrl}}" alt="{{altProp}}" class="finishImg">
+  <p class="congrat">{{congrat}}</p>
+  <p class="leftSide rightSide information" *ngFor="let key of objectKeys">{{paragraphs[key]}}</p>
   <div class="bottomContainer">
     <p class="slide rightSide" (click)="getNextGameItem()">Next <ion-icon name="arrow-forward"></ion-icon></p>
   </div>

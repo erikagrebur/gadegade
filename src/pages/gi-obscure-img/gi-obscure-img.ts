@@ -2,6 +2,9 @@ import { Component, NgZone } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { LocationTrackerProvider } from '../../providers/location-tracker/location-tracker';
 import { GiFinalScreenPage } from '../gi-final-screen/gi-final-screen';
+import { StorageProvider } from '../../providers/storage/storage';
+import { DatabaseProvider } from '../../providers/database/database';
+import * as firebase from 'firebase';
 
 /**
  * Generated class for the GiObscureImgPage page.
@@ -35,10 +38,67 @@ export class GiObscureImgPage {
   checkedValue: number;
 
   wrongWayPTag: any = 'none';
-  hourseImgStyle: any = '1';
-  waterImgStyle: any = '0';
+  startImgStyle: any = '1';
+  targetImgStyle: any = '0';
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private locationTracker: LocationTrackerProvider, private ngZone: NgZone) {
+  storedGame: string = '';
+  storedCity: string = '';
+  logged: boolean = false;
+  availableGames: any[] = [];
+  gameTitle: string = '';
+  objectKeys: any[] = [];
+  imageKeys: any[] = [];
+  paragraphs: string[] = [];
+  dataElements: string[] = [];
+  imgSrcUrls: string[] = [];
+  imgNames: string[] = [];
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, private locationTracker: LocationTrackerProvider, private ngZone: NgZone, private storageService: StorageProvider, private databaseService: DatabaseProvider) {
+    
+    this.storageService.getData('selectedCity').subscribe(storedCity => {
+      this.storedCity = storedCity;
+      this.storageService.getData('selectedGame').subscribe(storedGame => {
+        this.storedGame = storedGame;
+        this.databaseService.getGamesFromDataBase().subscribe(data => {
+          if(this.logged) {
+            this.availableGames = data[1];
+          } else {
+            this.availableGames = data[0];
+          }
+
+          this.gameTitle = this.availableGames[this.storedCity][this.storedGame]['title'];
+        });
+        this.databaseService.getObscureImageFromDataBase().subscribe(data => {
+          
+          console.log("data", data);
+          if(this.logged) {
+            this.dataElements = data[1];
+          } else {
+            this.dataElements = data[0];
+          }
+
+          this.paragraphs = this.dataElements[this.storedCity][this.storedGame]['prgs'];
+          this.objectKeys = Object.keys(this.paragraphs);
+          this.imgNames = this.dataElements[this.storedCity][this.storedGame]['imgs'];
+          this.imageKeys = Object.keys(this.imgNames);
+
+          console.log('imgs', this.imgNames);
+
+          let storageRef:any;
+          if(this.logged) {
+            // TODO
+          } else {
+            for(let i = 0; i < this.imageKeys.length; i++) {
+              storageRef = firebase.storage().ref().child(`giObscureImage/try_games/${this.storedCity}/${this.storedGame}/${this.imgNames[i]}`);
+              storageRef.getDownloadURL().then(url => this.imgSrcUrls.push(url));
+            }
+          }
+
+          console.log('imgs', this.imgSrcUrls);
+        })
+      });
+    });
+    
     this.locationTracker.startTracking();
     this.locationTracker.backGeolocation.subscribe((location) => {
       this.ngZone.run(() => {
@@ -89,8 +149,8 @@ export class GiObscureImgPage {
       this.wrongWayPTag = 'none';
       this.rangeLong = this.checkedValue + (this.firstDist - this.checkPointDist)/this.unitDist;
 
-      this.hourseImgStyle = 1 - 1/this.distanceAccuracy*(this.checkedValue + (this.firstDist - this.checkPointDist)/this.unitDist);
-      this.waterImgStyle = 1/this.distanceAccuracy*(this.checkedValue + (this.firstDist - this.checkPointDist)/this.unitDist);
+      this.startImgStyle = 1 - 1/this.distanceAccuracy*(this.checkedValue + (this.firstDist - this.checkPointDist)/this.unitDist);
+      this.targetImgStyle = 1/this.distanceAccuracy*(this.checkedValue + (this.firstDist - this.checkPointDist)/this.unitDist);
       
       this.checkPointDist -= this.checkedValue * this.unitDist;
 
@@ -99,8 +159,8 @@ export class GiObscureImgPage {
       this.wrongWayPTag = 'block';
       this.rangeLong = this.checkedValue + (this.firstDist - this.checkPointDist)/this.unitDist;      
 
-      this.hourseImgStyle = 1 - 1/this.distanceAccuracy*(this.checkedValue + (this.firstDist - this.checkPointDist)/this.unitDist);
-      this.waterImgStyle = 1/this.distanceAccuracy*(this.checkedValue + (this.firstDist - this.checkPointDist)/this.unitDist);
+      this.startImgStyle = 1 - 1/this.distanceAccuracy*(this.checkedValue + (this.firstDist - this.checkPointDist)/this.unitDist);
+      this.targetImgStyle = 1/this.distanceAccuracy*(this.checkedValue + (this.firstDist - this.checkPointDist)/this.unitDist);
 
       this.checkPointDist -= this.checkedValue * this.unitDist;
 
