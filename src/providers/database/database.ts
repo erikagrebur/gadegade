@@ -21,6 +21,7 @@ export class DatabaseProvider {
   private ratingCollection: AngularFirestoreCollection<any>;
   private usersCollection: AngularFirestoreCollection<any>;
   private citiesCollection: AngularFirestoreCollection<any>;
+  private usersDoc: AngularFirestoreDocument<any>;
   
   constructor(public db: AngularFirestore) {
     this.letterCollection = db.collection<any>('letters');
@@ -212,6 +213,15 @@ export class DatabaseProvider {
 
   checkUsersChanges(): Observable<any> {
     return this.usersCollection.valueChanges();
+  }
+
+  updateUserStatistics(document, selectedCities, selectedGames, playedTimes) {
+    this.usersDoc = this.db.doc<any>(`users/${document}`);
+    return this.usersDoc.update({
+      [`completed_games.games_city`] : selectedCities,
+      [`completed_games.games_name`] : selectedGames,
+      [`played_times`] : playedTimes
+    });
   }
 
   getUsersFromDataBase() : Observable<any> {

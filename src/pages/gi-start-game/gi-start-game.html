@@ -39,7 +39,7 @@
   </div>
   <p class="information leftSide rightSide" (click)="test()">{{basicInfo[0]?.gps_introduction}}</p>
   <div class="bottomContainer">
-    <img src="assets/imgs/gameImgs/00_start/noGPS.PNG" alt="no GPS icon" id="noGpsIcon" class="leftSide">
+    <img src="assets/imgs/gameImgs/00_start/noGPS.PNG" alt="no GPS icon" id="noGpsIcon" class="leftSide" [ngStyle]="{'display': noGpsIconStyle}">
     <p id="slide" (click)="getFirstGameItem()" class="rightSide">Next <ion-icon name="arrow-forward"></ion-icon></p>
   </div>
 </ion-content>

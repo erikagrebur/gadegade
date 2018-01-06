@@ -63,11 +63,12 @@ export class SearchPage {
           this.cityCoordinates = data[0];
         }
       });
+      
       this.locationTracker.startTracking();
-      this.locationTracker.backGeolocation.subscribe((location) => {
-      this.ngZone.run(() => {
+    this.locationTracker.backGeolocation.subscribe((location) => {
+      
+        console.log('value1', location[0].value, location[1].value)
         this.loadMap(location[0].value, location[1].value);
-      });
     });
     });
   }

@@ -22,6 +22,7 @@ export class GiStartGamePage {
   availableGames: any[] = [];
   selectedGame: any[] = [];
   basicInfo: any[] = [];
+  noGpsIconStyle: string = 'block';
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, private googleMaps: GoogleMaps, private storageService: StorageProvider, private databaseService: DatabaseProvider, private diagnostic: Diagnostic, private ngZone: NgZone) {
     this.databaseService.getBasicInfoFromDataBase().subscribe(data => {console.log(data); this.basicInfo = data});
@@ -94,8 +95,8 @@ export class GiStartGamePage {
   }
 
   checkLocation() {
-    let successCallback = (isAvailable) => { console.log('Is available? ' + isAvailable); };
-    let errorCallback = (e) => console.error(e);
+    let successCallback = (isAvailable) => { this.noGpsIconStyle = 'none' };
+    let errorCallback = (e) => { this.noGpsIconStyle = 'block' };
 
     this.diagnostic.isLocationAuthorized().then(successCallback).catch(errorCallback);
 
