@@ -8,7 +8,7 @@
   <div class="darkBluePolygon">
     <div class="titleDiv">
       <h1 id="firstTitle">What's good in</h1>
-      <input list="citySelection" class="leftSide citySelection" placeholder="Enter location">
+      <input list="citySelection" class="leftSide citySelection" placeholder="Enter location" (input)="valueChange($event.target.value)">
       <datalist id="citySelection">
         <option *ngFor="let key of objectKeys" value="{{cityNames[key]}}">{{cityNames[key]}}</option>
       </datalist>

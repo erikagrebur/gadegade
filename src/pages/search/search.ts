@@ -2,6 +2,7 @@ import { Component, NgZone } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { DatabaseProvider } from '../../providers/database/database';
 import { GoogleMaps, GoogleMap, GoogleMapsEvent } from '@ionic-native/google-maps';
+import { LocationTrackerProvider } from '../../providers/location-tracker/location-tracker';
 
 /**
  * Generated class for the SearchPage page.
@@ -25,7 +26,7 @@ export class SearchPage {
   gamesKey: any;
   cityCoordinates: any[] = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private databaseService: DatabaseProvider, private googleMaps: GoogleMaps, private ngZone: NgZone) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private databaseService: DatabaseProvider, private googleMaps: GoogleMaps, private ngZone: NgZone, private locationTracker: LocationTrackerProvider) {
     this.databaseService.getSelectableCitysFromDataBase().subscribe(data => {
 
       this.cityNames = data[2];
@@ -62,7 +63,12 @@ export class SearchPage {
           this.cityCoordinates = data[0];
         }
       });
-      this.loadMap("55.472376", "8.442486");
+      this.locationTracker.startTracking();
+      this.locationTracker.backGeolocation.subscribe((location) => {
+      this.ngZone.run(() => {
+        this.loadMap(location[0].value, location[1].value);
+      });
+    });
     });
   }
 

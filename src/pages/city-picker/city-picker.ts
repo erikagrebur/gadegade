@@ -44,6 +44,10 @@ export class CityPickerPage {
     });
   }
 
+  valueChange(city) {
+    this.storageService.setData('selectedCity', city).subscribe(() => this.navCtrl.push(TabsPage));
+  }
+
   getCity(city) {
     this.storageService.setData('selectedCity', city).subscribe(() => this.navCtrl.push(TabsPage));
   }
