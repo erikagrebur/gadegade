@@ -10,13 +10,15 @@
     <img src="assets/imgs/sliderImgs/GGlogo.png" alt="Gåde Gade logo" class="pageLogo">
     <h1 class="pageTitle leftSide rightSide">Log into Gåde Gade and discover the city!</h1>
     <div class="leftSide rightSide">
-      <ion-item class="inputContainer">
-          <ion-input type="text" value="" placeholder="Enter email or username" class="inputField"></ion-input>
-        </ion-item>
+      <form [formGroup]="loginForm" (submit)="loginUser()" novalidate>
         <ion-item class="inputContainer">
-          <ion-input type="text" value="" placeholder="Password" class="inputField"></ion-input>
-        </ion-item>
-      <button ion-button class="signupButton">Log in</button>
+            <ion-input type="email" value="" placeholder="Enter email or username" class="inputField" formControlName="email" [class.invalid]="!loginForm.controls.email.valid && blur"></ion-input>
+          </ion-item>
+          <ion-item class="inputContainer">
+            <ion-input type="password" formControlName="password" value="" placeholder="Password" class="inputField" [class.invalid]="!loginForm.controls.password.valid && blur"></ion-input>
+          </ion-item>
+        <button ion-button class="signupButton" type="submit" [disabled]="!loginForm.valid">Log in</button>
+      </form> 
       <p class="logInForward">Don't have an account? <strong (click)="getSignUpPage()">Sign up</strong></p>
     </div>
   </ion-content>

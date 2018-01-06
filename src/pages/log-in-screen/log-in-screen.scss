@@ -3,6 +3,10 @@ page-log-in-screen {
         background: $blueColor;
     }
 
+    .invalid {
+        border-bottom: 1px solid #FF6153;
+    }
+
     .pageLogo {
         width: 86px;
         margin-left: -43px;

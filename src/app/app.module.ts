@@ -40,6 +40,7 @@ import { IonicStorageModule } from '@ionic/storage';
 import { StorageProvider } from '../providers/storage/storage';
 
 import { Diagnostic } from '@ionic-native/diagnostic';
+import { AuthProvider } from '../providers/auth/auth';
 
 export const firebaseConfig = {
   production: false,
@@ -116,7 +117,8 @@ export const firebaseConfig = {
     DatabaseProvider,
     GoogleMaps,
     StorageProvider,
-    Diagnostic
+    Diagnostic,
+    AuthProvider
   ]
 })
 export class AppModule {}

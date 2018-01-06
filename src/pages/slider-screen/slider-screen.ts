@@ -18,16 +18,6 @@ export class SliderScreenPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     //dbp.getLettersFromDataBase().subscribe(letters => console.log(letters));
-    var config = {
-      apiKey: "AIzaSyB6Kyact4Y6iooiaKHPaFXCEmTl8DtlACY",
-      authDomain: "tryagain-b5737.firebaseapp.com",
-      databaseURL: "https://tryagain-b5737.firebaseio.com",
-      projectId: "tryagain-b5737",
-      storageBucket: "tryagain-b5737.appspot.com",
-      messagingSenderId: "158844905597"
-    };
-
-    firebase.initializeApp(config);
   }
 
   ionViewDidLoad() {
