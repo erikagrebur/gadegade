@@ -20,6 +20,7 @@ export class DatabaseProvider {
   private finishCollection: AngularFirestoreCollection<any>;
   private ratingCollection: AngularFirestoreCollection<any>;
   private usersCollection: AngularFirestoreCollection<any>;
+  private citiesCollection: AngularFirestoreCollection<any>;
   
   constructor(public db: AngularFirestore) {
     this.letterCollection = db.collection<any>('letters');
@@ -35,6 +36,7 @@ export class DatabaseProvider {
     this.finishCollection = db.collection<any>('giFinal');
     this.ratingCollection = db.collection<any>('giRating');
     this.usersCollection = db.collection<any>('users');
+    this.citiesCollection = db.collection<any>('cities');
   }
 
   checkLettersChanges(): Observable<any> {
@@ -215,6 +217,19 @@ export class DatabaseProvider {
   getUsersFromDataBase() : Observable<any> {
     return Observable.create( observable => {
       this.checkUsersChanges().subscribe(data => {
+        observable.next(data);
+        observable.complete();
+      })
+    })
+  }
+
+  checkCitiesChanges(): Observable<any> {
+    return this.citiesCollection.valueChanges();
+  }
+
+  getCitiesFromDataBase() : Observable<any> {
+    return Observable.create( observable => {
+      this.checkCitiesChanges().subscribe(data => {
         observable.next(data);
         observable.complete();
       })

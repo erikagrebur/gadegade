@@ -23,6 +23,7 @@ export class SearchPage {
   logged: boolean = false;
 
   gamesKey: any;
+  cityCoordinates: any[] = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private databaseService: DatabaseProvider, private googleMaps: GoogleMaps, private ngZone: NgZone) {
     this.databaseService.getSelectableCitysFromDataBase().subscribe(data => {
@@ -53,12 +54,21 @@ export class SearchPage {
           }
         }
       });
-      this.loadMap();
+
+      this.databaseService.getCitiesFromDataBase().subscribe(data => {
+        if(this.logged) {
+          this.cityCoordinates = data[1];
+        } else {
+          this.cityCoordinates = data[0];
+        }
+      });
+      this.loadMap("55.472376", "8.442486");
     });
   }
 
-  loadMap() {
-    console.log("futik a mapsz");
+  loadMap(lat, lng) {
+    console.log("futik a mapsz", lat);
+    console.log("futik a long", lng);
     this.map = new GoogleMap('map', {
       'controls': {
         'compass': true,
@@ -73,8 +83,8 @@ export class SearchPage {
       },
       'camera': {
         'target': {
-          lat: 55.472376,
-          lng: 8.442486
+          lat: lat,
+          lng: lng
         },
         'tilt': 0,
         'zoom': 17
@@ -97,8 +107,13 @@ export class SearchPage {
     });
   }
 
-  test() {
-    console.log("hopp mükszik");
+  valueChange(city) {
+    for(let i = 0; i < this.objectKeys.length; i++) {
+      if(this.cityNames[i] === city) {
+        console.log("lat", this.cityCoordinates[city].lat);
+        this.loadMap(this.cityCoordinates[city].lat, this.cityCoordinates[city].lng);
+      }
+    }
   }
 
   ionViewWillEnter() {

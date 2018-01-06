@@ -3,7 +3,7 @@
     <div class="backgroundShape">
         <ion-icon name="icon-ownSearchIcon" class="leftSide searchIcon" color="primary"></ion-icon>
         <img src="assets/imgs/homePageImgs/GGlogo.png" alt="Gade Gade logo" class="logo">
-        <input list="citySelection" class="leftSide citySelection" placeholder="Search for..." (input)="valueChange()">
+        <input list="citySelection" class="leftSide citySelection" placeholder="Search for..." (input)="valueChange($event.target.value)" #city>
           <datalist id="citySelection">
             <option *ngFor="let key of objectKeys" value="{{cityNames[key]}}">{{cityNames[key]}}</option>
           </datalist>
