@@ -1,6 +1,8 @@
 <ion-content>
   <div class="darkBluePolygon">
-    <p class="menu">Log out</p>
+      <button ion-button color="dark" clear icon-only (click)="showMenu($event)" class="menuButton">
+        <ion-icon name="more" class="menu"></ion-icon>
+      </button>
     <ion-grid class="headContainer">
       <ion-row>
         <ion-col col-8 class="titleContainer">

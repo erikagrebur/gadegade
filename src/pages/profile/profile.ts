@@ -3,6 +3,8 @@ import { NavController } from 'ionic-angular';
 import { DatabaseProvider } from '../../providers/database/database';
 import { StorageProvider } from '../../providers/storage/storage';
 import { GameDetailsPage } from '../game-details/game-details';
+import { PopoverController } from 'ionic-angular/components/popover/popover-controller';
+import { PopoverPage } from '../popover/popover';
 
 @Component({
   selector: 'page-profile',
@@ -17,7 +19,7 @@ export class ProfilePage {
   playedGames: any[] = [];
   playedGamesCount: number;
 
-  constructor(public navCtrl: NavController, private databaseService: DatabaseProvider, private storageService: StorageProvider) {
+  constructor(public navCtrl: NavController, private databaseService: DatabaseProvider, private storageService: StorageProvider, public popover: PopoverController) {
     this.storageService.setData('token', '123').subscribe(token => {
       this.storageService.getData('token').subscribe(store => {
         let token='';
@@ -71,5 +73,12 @@ export class ProfilePage {
         tabs[ key ].style.display = 'flex';
       });
     } // end if
+  }
+
+  showMenu(myEvent) {
+    let popover = this.popover.create(PopoverPage);
+    popover.present({
+      ev: myEvent
+    });
   }
 }

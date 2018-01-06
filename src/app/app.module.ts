@@ -22,6 +22,7 @@ import { SignUpScreenPage } from '../pages/sign-up-screen/sign-up-screen';
 import { CityPickerPage } from '../pages/city-picker/city-picker';
 import { LogInScreenPage } from '../pages/log-in-screen/log-in-screen';
 import { SearchPage } from '../pages/search/search';
+import { PopoverPage } from '../pages/popover/popover';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -72,7 +73,8 @@ export const firebaseConfig = {
     SignUpScreenPage,
     CityPickerPage,
     LogInScreenPage,
-    SearchPage
+    SearchPage,
+    PopoverPage
   ],
   imports: [
     BrowserModule,
@@ -101,7 +103,8 @@ export const firebaseConfig = {
     SignUpScreenPage,
     CityPickerPage,
     LogInScreenPage,
-    SearchPage
+    SearchPage,
+    PopoverPage
   ],
   providers: [
     StatusBar,
