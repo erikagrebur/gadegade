@@ -42,12 +42,7 @@ export class ProfilePage {
           this.playedGamesCount = this.objectKeys.length;
           
           this.databaseService.getGamesFromDataBase().subscribe(games => {
-            console.log('games', games[1]);
-            console.log(this.objectKeys);
             for(let i = 0; i < this.objectKeys.length; i++) {
-              console.log('hozzaadott', games[0][this.cityNames[i]][this.gameNames[i]])
-              console.log(this.cityNames[i])
-              console.log(this.gameNames[i])
               this.playedGames.push(games[0][this.cityNames[i]][this.gameNames[i]]);
             }
             console.log('played', this.playedGames)
