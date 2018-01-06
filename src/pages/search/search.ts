@@ -66,6 +66,18 @@ export class SearchPage {
     });
   }
 
+  changeLocation(lat, lng){
+    this.map.animateCamera({
+      'target': {
+        lat: lat,
+        lng: lng
+      }, 
+      'zoom': 12
+    });
+
+    return this.map;
+  }
+
   loadMap(lat, lng) {
     console.log("futik a mapsz", lat);
     console.log("futik a long", lng);
@@ -111,7 +123,7 @@ export class SearchPage {
     for(let i = 0; i < this.objectKeys.length; i++) {
       if(this.cityNames[i] === city) {
         console.log("lat", this.cityCoordinates[city].lat);
-        this.loadMap(this.cityCoordinates[city].lat, this.cityCoordinates[city].lng);
+        this.changeLocation(this.cityCoordinates[city].lat, this.cityCoordinates[city].lng);
       }
     }
   }
