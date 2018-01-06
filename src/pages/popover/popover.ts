@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { ViewController } from 'ionic-angular/navigation/view-controller';
+import { AuthProvider } from '../../providers/auth/auth';
+import { SliderScreenPage } from '../slider-screen/slider-screen';
 
 /**
  * Generated class for the PopoverPage page.
@@ -15,7 +17,7 @@ import { ViewController } from 'ionic-angular/navigation/view-controller';
 })
 export class PopoverPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public authProvider: AuthProvider, public viewCtrl: ViewController) {
   }
 
   ionViewDidLoad() {
@@ -24,5 +26,12 @@ export class PopoverPage {
 
   getSettings() {
     this.viewCtrl.dismiss();
+  }
+  logout() {
+    this.authProvider.logoutUser().then(() => {
+      this.navCtrl.push(SliderScreenPage);
+    }, (error) => {
+      console.log("something went wrong");
+    });
   }
 }

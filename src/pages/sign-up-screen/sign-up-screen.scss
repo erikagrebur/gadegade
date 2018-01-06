@@ -2,6 +2,10 @@ page-sign-up-screen {
     #contentContainer {
         background: $blueColor;
     }
+    
+    .invalid { 
+        border-bottom: 1px solid #FF6153; 
+      }
 
     .pageLogo {
         width: 86px;
