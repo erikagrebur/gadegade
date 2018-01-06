@@ -3,17 +3,10 @@ import { Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { SliderScreenPage } from '../pages/slider-screen/slider-screen';
-import { GiObscureImgPage } from '../pages/gi-obscure-img/gi-obscure-img';
-import { GiFinalScreenPage } from '../pages/gi-final-screen/gi-final-screen';
-import { HomePage } from '../pages/home/home';
-import { GiRateScreenPage } from '../pages/gi-rate-screen/gi-rate-screen';
-import { GiStartGamePage } from '../pages/gi-start-game/gi-start-game';
-import { GiMixedWordsPage } from '../pages/gi-mixed-words/gi-mixed-words';
-import { GiWordSearchPage } from '../pages/gi-word-search/gi-word-search';
-import { GameDescriptionPage } from '../pages/game-description/game-description';
-import { ThreeQuestionPage } from '../pages/three-question/three-question';
 import * as firebase from 'firebase';
 import { TabsPage } from '../pages/tabs/tabs';
+import { StorageProvider } from '../providers/storage/storage';
+import { CityPickerPage } from '../pages/city-picker/city-picker';
 
 @Component({
   templateUrl: 'app.html'
@@ -21,7 +14,7 @@ import { TabsPage } from '../pages/tabs/tabs';
 export class MyApp {
   rootPage:any
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
+  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, private storageService: StorageProvider) {
     var config = {
       apiKey: "AIzaSyB6Kyact4Y6iooiaKHPaFXCEmTl8DtlACY",
       authDomain: "tryagain-b5737.firebaseapp.com",
@@ -38,9 +31,14 @@ export class MyApp {
           this.rootPage = SliderScreenPage;
           unsubscribe();
         } else { 
-          console.log("user", user);
-          this.rootPage = TabsPage;
-          unsubscribe();
+          this.storageService.getData('selectedCity').subscribe(store => {
+            if(store) {
+              this.rootPage = TabsPage;
+            } else {
+              this.rootPage = CityPickerPage;
+            }
+            unsubscribe();
+          });
         }
       });
       statusBar.styleDefault();

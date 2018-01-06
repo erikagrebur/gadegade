@@ -13,7 +13,8 @@
     </div>
     <img src="assets/imgs/homePageImgs/GGlogo.png" alt="Gåde Gade application's logo" class="homePagelogo">
     <div class="clearFloat"></div>
-    <p class="signupLine">Try it and <strong (click)="getRegistrationPage()">sign up</strong> for more fun!</p>
+    <p class="signupLine" *ngIf="!logged" >Try it and <strong (click)="getRegistrationPage()">sign up</strong> for more fun!</p>
+    <p class="signupLine" *ngIf="logged" >Choose a game and have fun!</p>
   </div>
   <div class="gameCardContainer" *ngFor="let key of objectKeys" (click)="getGameDetails(selectedCityGames[key].id)">
     <ion-card>

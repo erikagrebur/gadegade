@@ -54,7 +54,13 @@ export class GiObscureImgPage {
   imgNames: string[] = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private locationTracker: LocationTrackerProvider, private ngZone: NgZone, private storageService: StorageProvider, private databaseService: DatabaseProvider) {
-    
+    firebase.auth().onAuthStateChanged(user => {
+      if(!user) {
+        this.logged = false;
+      } else {
+        this.logged = true;
+      }
+    });
     this.storageService.getData('selectedCity').subscribe(storedCity => {
       this.storedCity = storedCity;
       this.storageService.getData('selectedGame').subscribe(storedGame => {
@@ -86,7 +92,10 @@ export class GiObscureImgPage {
 
           let storageRef:any;
           if(this.logged) {
-            // TODO
+            for(let i = 0; i < this.imageKeys.length; i++) {
+              storageRef = firebase.storage().ref().child(`giObscureImage/whole_games/${this.storedCity}/${this.storedGame}/${this.imgNames[i]}`);
+              storageRef.getDownloadURL().then(url => this.imgSrcUrls.push(url));
+            }
           } else {
             for(let i = 0; i < this.imageKeys.length; i++) {
               storageRef = firebase.storage().ref().child(`giObscureImage/try_games/${this.storedCity}/${this.storedGame}/${this.imgNames[i]}`);

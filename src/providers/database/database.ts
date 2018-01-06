@@ -215,11 +215,11 @@ export class DatabaseProvider {
     return this.usersCollection.valueChanges();
   }
 
-  updateUserStatistics(document, selectedCities, selectedGames, playedTimes) {
+  updateUserStatistics(document, completedCities, completedGames, playedTimes) {
     this.usersDoc = this.db.doc<any>(`users/${document}`);
     return this.usersDoc.update({
-      [`completed_games.games_city`] : selectedCities,
-      [`completed_games.games_name`] : selectedGames,
+      [`completed_games.games_city`] : completedCities,
+      [`completed_games.games_name`] : completedGames,
       [`played_times`] : playedTimes
     });
   }

@@ -7,6 +7,7 @@ import { GoogleMaps, GoogleMap, GoogleMapsEvent } from '@ionic-native/google-map
 import { DatabaseProvider } from '../../providers/database/database';
 import { StorageProvider } from '../../providers/storage/storage';
 import { Diagnostic } from '@ionic-native/diagnostic';
+import * as firebase from 'firebase';
 
 
 @Component({
@@ -25,6 +26,13 @@ export class GiStartGamePage {
   noGpsIconStyle: string = 'block';
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, private googleMaps: GoogleMaps, private storageService: StorageProvider, private databaseService: DatabaseProvider, private diagnostic: Diagnostic, private ngZone: NgZone) {
+    firebase.auth().onAuthStateChanged(user => {
+      if(!user) {
+        this.logged = false;
+      } else {
+        this.logged = true;
+      }
+    });
     this.databaseService.getBasicInfoFromDataBase().subscribe(data => {console.log(data); this.basicInfo = data});
     this.storageService.getData('selectedCity').subscribe(storedCity => {
       this.storedCity = storedCity;

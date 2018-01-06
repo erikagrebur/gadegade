@@ -12,7 +12,7 @@
     <div class="leftSide rightSide">
       <form [formGroup]="loginForm" (submit)="loginUser()" novalidate>
         <ion-item class="inputContainer">
-            <ion-input type="email" value="" placeholder="Enter email or username" class="inputField" formControlName="email" [class.invalid]="!loginForm.controls.email.valid && blur"></ion-input>
+            <ion-input type="email" value="" placeholder="Enter email" class="inputField" formControlName="email" [class.invalid]="!loginForm.controls.email.valid && blur"></ion-input>
           </ion-item>
           <ion-item class="inputContainer">
             <ion-input type="password" formControlName="password" value="" placeholder="Password" class="inputField" [class.invalid]="!loginForm.controls.password.valid && blur"></ion-input>

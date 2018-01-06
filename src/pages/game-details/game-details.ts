@@ -6,6 +6,7 @@ import { DatabaseProvider } from '../../providers/database/database';
 import { StorageProvider } from '../../providers/storage/storage';
 import { SearchPage } from '../search/search';
 import { ProfilePage } from '../profile/profile';
+import * as firebase from 'firebase';
 
 /**
  * Generated class for the GameDetailsPage page.
@@ -29,6 +30,13 @@ export class GameDetailsPage {
 
   constructor(public navCtrl: NavController,private app: App, public navParams: NavParams, private databaseService: DatabaseProvider, private storageService: StorageProvider) {
     this.Math = Math;
+    firebase.auth().onAuthStateChanged(user => {
+      if(!user) {
+        this.logged = false;
+      } else {
+        this.logged = true;
+      }
+    });
     this.storageService.getData('selectedCity').subscribe(storedCity => {
       this.storedCity = storedCity;
       this.storageService.getData('selectedGame').subscribe(storedGame => {
@@ -41,7 +49,6 @@ export class GameDetailsPage {
           }
 
           this.selectedGame = this.availableGames[this.storedCity][this.storedGame];
-          console.log(this.selectedGame);
         });
       });
     });

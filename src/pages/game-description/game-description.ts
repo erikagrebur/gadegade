@@ -33,7 +33,13 @@ export class GameDescriptionPage {
   availableGames: any[] = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, platform: Platform, private databaseService: DatabaseProvider, private storageService: StorageProvider) {
-    
+    firebase.auth().onAuthStateChanged(user => {
+      if(!user) {
+        this.logged = false;
+      } else {
+        this.logged = true;
+      }
+    });
     this.storageService.getData('selectedCity').subscribe(storedCity => {
       this.storedCity = storedCity;
       this.storageService.getData('selectedGame').subscribe(storedGame => {
@@ -54,7 +60,14 @@ export class GameDescriptionPage {
           this.objectKeys = Object.keys(this.paragraphs);
 
           if(this.logged) {
-            //hiányzó ág
+            for(let i = 0; i < this.objectKeys.length; i++) {
+              if(this.imgNames[i] != "") {
+                const storageRef = firebase.storage().ref().child(`giDescription/whole_games/${this.storedCity}/${this.storedGame}/${this.imgNames[i]}`);
+                storageRef.getDownloadURL().then(url => this.imgSrcUrls.push(url));
+              } else {
+                this.imgSrcUrls.push(this.imgNames[i]);
+              }
+            }
           } else {
             for(let i = 0; i < this.objectKeys.length; i++) {
               if(this.imgNames[i] != "") {

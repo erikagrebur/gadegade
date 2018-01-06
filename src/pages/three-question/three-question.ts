@@ -3,13 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { GiMixedWordsPage } from '../gi-mixed-words/gi-mixed-words';
 import { DatabaseProvider } from '../../providers/database/database';
 import { StorageProvider } from '../../providers/storage/storage';
-
-/**
- * Generated class for the ThreeQuestionPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'page-three-question',
@@ -46,6 +40,14 @@ export class ThreeQuestionPage {
   thirdOptionKeys: any[] = [];
   
   constructor(public navCtrl: NavController, public navParams: NavParams, private databaseService: DatabaseProvider, private storageService: StorageProvider) {
+    firebase.auth().onAuthStateChanged(user => {
+      if(!user) {
+        this.logged = false;
+      } else {
+        this.logged = true;
+      }
+    });
+    
     this.storageService.getData('selectedCity').subscribe(storedCity => {
       this.storedCity = storedCity;
       this.storageService.getData('selectedGame').subscribe(storedGame => {

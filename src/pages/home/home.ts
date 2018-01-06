@@ -18,16 +18,24 @@ export class HomePage {
   availableGames: any[] = [];
   objectKeys: string[] = [];
   selectedCityGames: any[] = [];
-  Math: any
+  Math: any;
 
   constructor(public navCtrl: NavController, private storageService: StorageProvider, private databaseService: DatabaseProvider) {
     this.Math = Math;
+    firebase.auth().onAuthStateChanged(user => {
+      if(!user) {
+        this.logged = false;
+      } else {
+        this.logged = true;
+      }
+    });
     this.storageService.getData('selectedCity').subscribe(store => {
       this.selectedCity = store;
       console.log('store', store);
       this.databaseService.getGamesFromDataBase().subscribe(data => {
         console.log(data)
   
+
         if(this.logged) {
           this.availableGames = data[1];
         } else {
@@ -40,7 +48,22 @@ export class HomePage {
         this.objectKeys = Object.keys(this.selectedCityGames);
   
         if(this.logged) {
-          //whole games
+          for (let i = 1; i <= this.objectKeys.length; i++) {
+            let aux = '';
+            if (i < 10) {
+              aux = 'game_0' + i;
+            } else {
+              aux = 'game_' + i;
+            }
+            
+            const storageRef = firebase.storage().ref().child(`games/whole_games/${this.selectedCity}/game_${i}/${this.selectedCityGames[aux].background_img}`);
+            storageRef.getDownloadURL().then(url => {
+              this.selectedCityGames[aux]['background_img_url'] = url;
+              let path = this.selectedCity.concat('.', aux, '.background_img_url');
+              this.databaseService.updateGames('whole_games', this.selectedCity, aux, url);
+            });
+           
+          }
         } else {
           for (let i = 1; i <= this.objectKeys.length; i++) {
             let aux = '';
@@ -50,21 +73,15 @@ export class HomePage {
               aux = 'game_' + i;
             }
             
-            console.log('tömb', this.selectedCityGames[aux]);
             const storageRef = firebase.storage().ref().child(`games/try_games/${this.selectedCity}/game_${i}/${this.selectedCityGames[aux].background_img}`);
             storageRef.getDownloadURL().then(url => {
-              console.log('url', url);
               this.selectedCityGames[aux]['background_img_url'] = url;
-              console.log('ukép url címe', this.selectedCityGames[aux]['background_img_url']);
-              console.log('storageRef', storageRef);
               let path = this.selectedCity.concat('.', aux, '.background_img_url');
               this.databaseService.updateGames('try_games', this.selectedCity, aux, url);
             });
            
           }
         }
-  
-        console.log(this.selectedCityGames);
       });
     });
   }

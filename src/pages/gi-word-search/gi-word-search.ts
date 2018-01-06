@@ -4,13 +4,7 @@ import { GiRisingPicturePage } from '../gi-rising-picture/gi-rising-picture';
 import { DatabaseProvider } from '../../providers/database/database';
 import { LocationTrackerProvider } from '../../providers/location-tracker/location-tracker';
 import { StorageProvider } from '../../providers/storage/storage';
-
-/**
- * Generated class for the GiWordSearchPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'page-gi-word-search',
@@ -40,6 +34,14 @@ export class GiWordSearchPage {
   objectKeys: any[] = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private databaseService: DatabaseProvider, private locationTracker: LocationTrackerProvider, private storageService: StorageProvider) {
+    firebase.auth().onAuthStateChanged(user => {
+      if(!user) {
+        this.logged = false;
+      } else {
+        this.logged = true;
+      }
+    });
+    
     this.storageService.getData('selectedCity').subscribe(storedCity => {
       this.storedCity = storedCity;
       this.storageService.getData('selectedGame').subscribe(storedGame => {

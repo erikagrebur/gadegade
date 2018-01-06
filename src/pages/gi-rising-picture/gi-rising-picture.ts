@@ -50,7 +50,13 @@ export class GiRisingPicturePage {
   imgName: string;
 
   constructor(public navCtrl: NavController, platform: Platform, public navParams: NavParams, private locationTracker: LocationTrackerProvider, private ngZone: NgZone, private databaseService: DatabaseProvider, private storageService: StorageProvider) {
-
+    firebase.auth().onAuthStateChanged(user => {
+      if(!user) {
+        this.logged = false;
+      } else {
+        this.logged = true;
+      }
+    });
     this.storageService.getData('selectedCity').subscribe(storedCity => {
       this.storedCity = storedCity;
       this.storageService.getData('selectedGame').subscribe(storedGame => {
@@ -77,7 +83,7 @@ export class GiRisingPicturePage {
 
           let storageRef:any;
           if(this.logged) {
-            // TODO
+            storageRef = firebase.storage().ref().child(`giRisingPicture/whole_games/${this.storedCity}/${this.storedGame}/${this.imgName}`);
           } else {
             storageRef = firebase.storage().ref().child(`giRisingPicture/try_games/${this.storedCity}/${this.storedGame}/${this.imgName}`);
           }

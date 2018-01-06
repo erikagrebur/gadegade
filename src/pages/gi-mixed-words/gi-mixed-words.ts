@@ -4,13 +4,7 @@ import { DatabaseProvider } from '../../providers/database/database';
 import { LocationTrackerProvider } from '../../providers/location-tracker/location-tracker';
 import { GiObscureImgPage } from '../gi-obscure-img/gi-obscure-img';
 import { StorageProvider } from '../../providers/storage/storage';
-
-/**
- * Generated class for the GiMixedWordsPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'page-gi-mixed-words',
@@ -55,7 +49,13 @@ export class GiMixedWordsPage {
   imgName: string;
   
   constructor(public navCtrl: NavController, public navParams: NavParams, private databaseService: DatabaseProvider, private locationTracker: LocationTrackerProvider, private ngZone: NgZone, private storageService: StorageProvider) {
-
+    firebase.auth().onAuthStateChanged(user => {
+      if(!user) {
+        this.logged = false;
+      } else {
+        this.logged = true;
+      }
+    });
     this.storageService.getData('selectedCity').subscribe(storedCity => {
       this.storedCity = storedCity;
       this.storageService.getData('selectedGame').subscribe(storedGame => {

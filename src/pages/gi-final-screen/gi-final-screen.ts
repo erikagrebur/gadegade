@@ -30,8 +30,18 @@ export class GiFinalScreenPage {
   imgName: string;
   congrat: string;
   altProp: string;
+  userGamesCities: any[] = [];
+  userGamesNames: string[] = [];
+  userPlayedTimes: number[] = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private databaseService: DatabaseProvider, private storageService: StorageProvider) {
+    firebase.auth().onAuthStateChanged(user => {
+      if(!user) {
+        this.logged = false;
+      } else {
+        this.logged = true;
+      }
+    });
     this.storageService.getData('selectedCity').subscribe(storedCity => {
       this.storedCity = storedCity;
       this.storageService.getData('selectedGame').subscribe(storedGame => {
@@ -61,12 +71,32 @@ export class GiFinalScreenPage {
 
           let storageRef:any;
           if(this.logged) {
-            // TODO
+            storageRef = firebase.storage().ref().child(`giFinal/whole_games/${this.storedCity}/${this.storedGame}/${this.imgName}`);
           } else {
             storageRef = firebase.storage().ref().child(`giFinal/try_games/${this.storedCity}/${this.storedGame}/${this.imgName}`);
           }
           storageRef.getDownloadURL().then(url => this.imgSrcUrl = url);
-          
+
+          this.databaseService.getUsersFromDataBase().subscribe(user => {
+            this.storageService.getData('signedEmail').subscribe(storedEmail => {
+              
+              for(let key in user) {
+                if(user[key].email === storedEmail) {
+                  this.userGamesCities = user[key].completed_games.games_city;
+                  this.userGamesNames = user[key].completed_games.games_name;
+                  
+                  const userGamesKey = Object.keys(this.userGamesCities);
+                  this.userGamesCities[userGamesKey.length] = this.storedCity;
+                  this.userGamesNames[userGamesKey.length] = this.storedGame;
+
+                  this.userPlayedTimes = user[key].played_times + this.availableGames[this.storedCity][this.storedGame]['duration'];
+                }
+              } 
+              this.storageService.getData('signedToken').subscribe(signedToken => {
+                this.databaseService.updateUserStatistics(signedToken, this.userGamesCities, this.userGamesNames, this.userPlayedTimes);
+              });              
+            });
+          });
         })
       });
     });
