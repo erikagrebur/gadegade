@@ -17,8 +17,8 @@ export class GiRisingPicturePage {
   currentLng: number;
   currentLat: number;
 
-  targetLat: number = 46.290340;
-  targetLng: number = 18.519392;
+  targetLat: number;
+  targetLng: number;
 
   distance: number;
   distanceMeter: number;
@@ -80,6 +80,8 @@ export class GiRisingPicturePage {
 
           this.paragraphs = this.dataElements[this.storedCity][this.storedGame]['prgs'];
           this.imgName = this.dataElements[this.storedCity][this.storedGame]['img'];
+          this.targetLat = Number(this.dataElements[this.storedCity][this.storedGame]['target_point_lat']);
+          this.targetLng = Number(this.dataElements[this.storedCity][this.storedGame]['target_point_lng']);
 
           let storageRef:any;
           if(this.logged) {

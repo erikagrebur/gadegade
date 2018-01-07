@@ -11,7 +11,7 @@ export class AuthProvider {
   loginUser(email: string, password: string): Promise<any> {
     return firebase.auth().signInWithEmailAndPassword(email, password)
     .then(signedUser => {
-      this.storageService.setData("signedToken", signedUser.uid).subscribe(()=> {});
+      this.storageService.setData("signedToken", signedUser.uid).subscribe(()=> {})
     });
   }
 
@@ -39,6 +39,7 @@ export class AuthProvider {
   }
 
   logoutUser(): Promise<void> {
+    this.storageService.removeStorage().subscribe(() => {});
     return firebase.auth().signOut();
   }
 }

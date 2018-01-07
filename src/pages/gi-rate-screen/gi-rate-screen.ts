@@ -35,7 +35,13 @@ export class GiRateScreenPage {
   valueOfVotes: number;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private databaseService: DatabaseProvider, private storageService: StorageProvider) {
-
+    firebase.auth().onAuthStateChanged(user => {
+      if(!user) {
+        this.logged = false;
+      } else {
+        this.logged = true;
+      }
+    });
     this.storageService.getData('selectedCity').subscribe(storedCity => {
       this.storedCity = storedCity;
       this.storageService.getData('selectedGame').subscribe(storedGame => {
@@ -70,7 +76,8 @@ export class GiRateScreenPage {
           let storageRefEmpty:any;
           let storageRefFull:any;
           if(this.logged) {
-            // TODO
+            storageRefEmpty = firebase.storage().ref().child(`giRating/whole_games/${this.storedCity}/${this.storedGame}/${this.emptyStar}`);
+            storageRefFull = firebase.storage().ref().child(`giRating/whole_games/${this.storedCity}/${this.storedGame}/${this.fullStar}`);
           } else {
             storageRefEmpty = firebase.storage().ref().child(`giRating/try_games/${this.storedCity}/${this.storedGame}/${this.emptyStar}`);
             storageRefFull = firebase.storage().ref().child(`giRating/try_games/${this.storedCity}/${this.storedGame}/${this.fullStar}`);

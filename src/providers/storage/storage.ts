@@ -34,4 +34,12 @@ export class StorageProvider {
       });
     });
   }
+
+  removeStorage() :Observable<any> {
+    return Observable.create(observ => {
+      this.storage.clear();
+      observ.next(null);
+      observ.complete();
+    });
+  }
 }

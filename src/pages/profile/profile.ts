@@ -12,7 +12,7 @@ import { PopoverPage } from '../popover/popover';
 })
 export class ProfilePage {
 
-  user: any[] = [];
+  userData: any[] = [];
   objectKeys: any[] = [];
   cityNames: string[] = [];
   gameNames: string[] = [];
@@ -20,24 +20,20 @@ export class ProfilePage {
   playedGamesCount: number;
 
   constructor(public navCtrl: NavController, private databaseService: DatabaseProvider, private storageService: StorageProvider, public popover: PopoverController) {
-    this.storageService.setData('token', '123').subscribe(token => {
-      this.storageService.getData('token').subscribe(store => {
-        let token='';
-        let user: any[] = [];
-        token = store;
+      this.storageService.getData('signedEmail').subscribe(store => {
+        let signedEmail = '';
+        let userData = [];
+        signedEmail = store;
         this.databaseService.getUsersFromDataBase().subscribe(data => {
           
-          console.log('local token', token);
           data.forEach(function(value, key) {
-            console.log('adatb token', value['token']);
-            console.log('adatb', value);
-            if(token == value['token']) {
-              user = value;
+            if(signedEmail == value['email']) {
+              userData = value;
             }
           });
-          this.user = user;
-          this.gameNames = this.user['completed_games']['games_name'];
-          this.cityNames = this.user['completed_games']['games_city'];
+          this.userData = userData;
+          this.gameNames = this.userData['completed_games']['games_name'];
+          this.cityNames = this.userData['completed_games']['games_city'];
           this.objectKeys = Object.keys(this.cityNames);
           this.playedGamesCount = this.objectKeys.length;
           
@@ -45,11 +41,9 @@ export class ProfilePage {
             for(let i = 0; i < this.objectKeys.length; i++) {
               this.playedGames.push(games[0][this.cityNames[i]][this.gameNames[i]]);
             }
-            console.log('played', this.playedGames)
           });
         });
       });
-    });
   }
 
   getDetails(city, game) {

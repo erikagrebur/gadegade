@@ -22,6 +22,14 @@ export class HomePage {
 
   constructor(public navCtrl: NavController, private storageService: StorageProvider, private databaseService: DatabaseProvider) {
     this.Math = Math;
+    this.showContent();
+  }
+
+  getGameDetails(id) {
+    this.storageService.setData('selectedGame', id).subscribe(() => this.navCtrl.push(GameDetailsPage));
+  }
+
+  showContent() {
     firebase.auth().onAuthStateChanged(user => {
       if(!user) {
         this.logged = false;
@@ -86,11 +94,9 @@ export class HomePage {
     });
   }
 
-  getGameDetails(id) {
-    this.storageService.setData('selectedGame', id).subscribe(() => this.navCtrl.push(GameDetailsPage));
-  }
-
   ionViewWillEnter() {
+    console.log("JÁRITT??");
+    this.showContent();
     let tabs = document.querySelectorAll('.tabbar');
     if ( tabs !== null ) {
       Object.keys(tabs).map((key) => {

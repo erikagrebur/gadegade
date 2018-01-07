@@ -7,7 +7,7 @@
       <ion-row>
         <ion-col col-8 class="titleContainer">
             <h1 class="title leftSide">Profile</h1>
-            <p class="userName leftSide">{{user.username}}</p>
+            <p class="userName leftSide">{{userData.username}}</p>
         </ion-col>
         <ion-col col-4>
             <img src="assets/imgs/homePageImgs/GGlogo.png" alt="Gåde Gade application's logo" class="pageLogo rightSide">
@@ -18,7 +18,7 @@
     <ion-grid class="statisticsContainer">
       <ion-row>
         <ion-col class="playedContainer" col-6>
-          <p class="playedMinutes leftSide">{{user.played_times}} min</p>
+          <p class="playedMinutes leftSide">{{userData.played_times}} min</p>
           <p class="playedTitle leftSide">Played minutes</p>
         </ion-col>
         <ion-col class="accomplishedContainer" col-6>

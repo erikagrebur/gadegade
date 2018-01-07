@@ -3,6 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { SignUpScreenPage } from '../sign-up-screen/sign-up-screen';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { AuthProvider } from '../../providers/auth/auth';
+import { TabsPage } from '../tabs/tabs';
 import { HomePage } from '../home/home';
 import { EmailValidator } from '../../validators/email-validator';
 import { StorageProvider } from '../../providers/storage/storage';
@@ -33,16 +34,17 @@ export class LogInScreenPage {
     } // end if
   }
 
-  loginUser(): void {
+  loginUser(){
     if (!this.loginForm.valid){
       console.log("something went wrong");
-    } else {
-      this.authProvider.loginUser(this.loginForm.value.email, this.loginForm.value.password)
-      .then( authData => {
-        this.storageService.setData('signedEmail', this.loginForm.value.email).subscribe(() => this.navCtrl.setRoot(HomePage));
-      }, error => {
-        console.log("something went wrong");
-      });
+    } else {     
+        this.authProvider.loginUser(this.loginForm.value.email, this.loginForm.value.password)
+        .then(() => {
+          this.storageService.setData('signedEmail', this.loginForm.value.email).subscribe(() => this.navCtrl.push(TabsPage));
+        }, (error) => {
+          console.log("something went wrong");
+        });
+      
     }
   }
 

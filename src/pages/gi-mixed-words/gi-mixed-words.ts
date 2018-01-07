@@ -23,8 +23,8 @@ export class GiMixedWordsPage {
   currentLat: number;
   currentLng: number;
   
-  targetLat: number = 46.290983;
-  targetLng: number = 18.519511;
+  targetLat: number;
+  targetLng: number;
 
   distance: number;
   isFirstDistance: boolean = true;
@@ -81,6 +81,8 @@ export class GiMixedWordsPage {
           this.objectKeys = Object.keys(this.paragraphs);
           this.mixedWordStages = this.dataElements[this.storedCity][this.storedGame]['word_stages'];
           this.currentStage = this.mixedWordStages[0];
+          this.targetLat = Number(this.dataElements[this.storedCity][this.storedGame]['target_point_lat']);
+          this.targetLng = Number(this.dataElements[this.storedCity][this.storedGame]['target_point_lng']);
 
           
         })

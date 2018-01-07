@@ -25,8 +25,8 @@ export class GiObscureImgPage {
   currentLat: number;
   currentLng: number;
   
-  targetLat: number = 46.291164;
-  targetLng: number = 18.518293;
+  targetLat: number;
+  targetLng: number;
 
   distance: number;
   isFirstDistance: boolean = true;
@@ -87,6 +87,8 @@ export class GiObscureImgPage {
           this.objectKeys = Object.keys(this.paragraphs);
           this.imgNames = this.dataElements[this.storedCity][this.storedGame]['imgs'];
           this.imageKeys = Object.keys(this.imgNames);
+          this.targetLat = this.dataElements[this.storedCity][this.storedGame]['target_point_lat'];
+          this.targetLng = this.dataElements[this.storedCity][this.storedGame]['target_point_lng'];
 
           console.log('imgs', this.imgNames);
 
