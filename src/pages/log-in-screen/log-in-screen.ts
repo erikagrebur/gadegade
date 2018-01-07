@@ -48,10 +48,6 @@ export class LogInScreenPage {
     }
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad LogInScreenPage');
-  }
-
   getSignUpPage() {
     this.navCtrl.push(SignUpScreenPage);
   }

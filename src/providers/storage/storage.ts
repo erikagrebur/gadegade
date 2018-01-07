@@ -12,12 +12,9 @@ import { Observable } from 'rxjs/Observable';
 export class StorageProvider {
 
   constructor( private storage: Storage) {
-    console.log('Hello StorageProvider Provider');
   }
 
   setData(key, value) :Observable<any> {
-    console.log('kulcs', key);
-    console.log('value', value);
     return Observable.create(observ => {
       this.storage.set(key, value).then(() => {
         observ.next(null);

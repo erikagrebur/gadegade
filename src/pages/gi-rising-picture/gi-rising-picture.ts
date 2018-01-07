@@ -114,10 +114,7 @@ export class GiRisingPicturePage {
   ionViewDidLoad() {
     this.databaseService.getRisingPictureFromDataBase().subscribe(data => {
       this.database = data;
-      console.log("data", data);
-      //console.log("???", this.database[0][0]);
     });
-    console.log('A', this.database);
   }
 
   getDistance(tLat,tLng,cLat,cLng) {
@@ -178,7 +175,7 @@ export class GiRisingPicturePage {
   }
 
   getNextGameItem() {
-    this.navCtrl.push(ThreeQuestionPage);
+    this.navCtrl.setRoot(ThreeQuestionPage);
   }
 
 

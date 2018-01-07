@@ -162,7 +162,7 @@ export class ThreeQuestionPage {
 
   getNexGameItem() {
     if(this.answered) {
-      this.navCtrl.push(GiMixedWordsPage);
+      this.navCtrl.setRoot(GiMixedWordsPage);
     }
   }
 

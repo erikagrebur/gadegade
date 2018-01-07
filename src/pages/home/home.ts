@@ -6,6 +6,7 @@ import { SignUpScreenPage } from '../sign-up-screen/sign-up-screen';
 import { StorageProvider } from '../../providers/storage/storage';
 import { DatabaseProvider } from '../../providers/database/database';
 import * as firebase from 'firebase';
+import { LogInScreenPage } from '../log-in-screen/log-in-screen';
 
 @Component({
   selector: 'page-home',
@@ -39,19 +40,13 @@ export class HomePage {
     });
     this.storageService.getData('selectedCity').subscribe(store => {
       this.selectedCity = store;
-      console.log('store', store);
       this.databaseService.getGamesFromDataBase().subscribe(data => {
-        console.log(data)
-  
-
         if(this.logged) {
           this.availableGames = data[1];
         } else {
           this.availableGames = data[0];
         }
-        
-        console.log('logged', this.availableGames);
-        console.log(this.selectedCity)
+
         this.selectedCityGames = this.availableGames[this.selectedCity];
         this.objectKeys = Object.keys(this.selectedCityGames);
   
@@ -95,7 +90,6 @@ export class HomePage {
   }
 
   ionViewWillEnter() {
-    console.log("JÁRITT??");
     this.showContent();
     let tabs = document.querySelectorAll('.tabbar');
     if ( tabs !== null ) {
@@ -112,6 +106,10 @@ export class HomePage {
 
   getRegistrationPage() {
     this.navCtrl.push(SignUpScreenPage);
+  }
+
+  getLoginPage() {
+    this.navCtrl.push(LogInScreenPage);
   }
 
 }

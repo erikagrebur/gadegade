@@ -45,7 +45,6 @@ export class GameDescriptionPage {
       this.storageService.getData('selectedGame').subscribe(storedGame => {
         this.storedGame = storedGame;
         this.databaseService.getDescriptionFromDataBase().subscribe(data => {
-          console.log('data', data);
           
           if(this.logged) {
             this.dataElements = data[1];
@@ -95,7 +94,7 @@ export class GameDescriptionPage {
   }
 
   getGiWordSearch() {
-    this.navCtrl.push(GiWordSearchPage);
+    this.navCtrl.setRoot(GiWordSearchPage);
   }
 
   ionViewDidLoad() {

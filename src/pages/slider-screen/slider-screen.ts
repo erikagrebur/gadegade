@@ -17,11 +17,6 @@ import * as firebase from 'firebase';
 export class SliderScreenPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-    //dbp.getLettersFromDataBase().subscribe(letters => console.log(letters));
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad SliderScreenPage');
   }
 
   getHomePage() {

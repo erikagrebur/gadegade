@@ -82,7 +82,6 @@ export class GiWordSearchPage {
       this.currentSelectedIdentification = giIdentification;
       this.currentSelectedDivTag = giDivTag;
       this.currentSelectedPTag = giPTag;
-      console.log("valuee", giValue);
     }
   }
 
@@ -127,7 +126,7 @@ export class GiWordSearchPage {
   getNextGameItem() {
     if(this.answered) {
       this.answered = false;
-      this.navCtrl.push(GiRisingPicturePage);
+      this.navCtrl.setRoot(GiRisingPicturePage);
     }
   }
 

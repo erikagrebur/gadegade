@@ -38,9 +38,7 @@ export class CityPickerPage {
         
         const storageRef = firebase.storage().ref().child(`selectableCitysIcons/${this.imgNames[i]}`);
         storageRef.getDownloadURL().then(url => this.imgSrcUrls.push(url));
-      }    
-
-      console.log('sf', this.imgSrcUrls);
+      }
     });
   }
 
