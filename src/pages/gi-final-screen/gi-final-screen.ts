@@ -33,6 +33,7 @@ export class GiFinalScreenPage {
   userGamesCities: any[] = [];
   userGamesNames: string[] = [];
   userPlayedTimes: number[] = [];
+  storedEarlier: boolean = false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private databaseService: DatabaseProvider, private storageService: StorageProvider) {
     firebase.auth().onAuthStateChanged(user => {
@@ -86,15 +87,23 @@ export class GiFinalScreenPage {
                   this.userGamesNames = user[key].completed_games.games_name;
                   
                   const userGamesKey = Object.keys(this.userGamesCities);
-                  this.userGamesCities[userGamesKey.length] = this.storedCity;
-                  this.userGamesNames[userGamesKey.length] = this.storedGame;
+                  for(let k in this.userGamesCities) {
+                    if(this.userGamesCities[k] === this.storedCity && this.userGamesNames[k] === this.storedGame){
+                      this.storedEarlier = true
+                    }
+                  }
+                  if(!this.storedEarlier) {
+                    this.userGamesCities[userGamesKey.length] = this.storedCity;
+                    this.userGamesNames[userGamesKey.length] = this.storedGame;
 
-                  this.userPlayedTimes = user[key].played_times + this.availableGames[this.storedCity][this.storedGame]['duration'];
+                    this.userPlayedTimes = user[key].played_times + this.availableGames[this.storedCity][this.storedGame]['duration'];
+                    
+                    this.storageService.getData('signedToken').subscribe(signedToken => {
+                      this.databaseService.updateUserStatistics(signedToken, this.userGamesCities, this.userGamesNames, this.userPlayedTimes);
+                    });
+                  }
                 }
-              } 
-              this.storageService.getData('signedToken').subscribe(signedToken => {
-                this.databaseService.updateUserStatistics(signedToken, this.userGamesCities, this.userGamesNames, this.userPlayedTimes);
-              });              
+              }         
             });
           });
         })
