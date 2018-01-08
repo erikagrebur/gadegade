@@ -12,7 +12,6 @@ import { StorageProvider } from '../../providers/storage/storage';
 })
 export class GiRisingPicturePage {
 
-  database: string[] = [];
   rangeLong: number = 0;
   currentLng: number;
   currentLat: number;
@@ -21,7 +20,6 @@ export class GiRisingPicturePage {
   targetLng: number;
 
   distance: number;
-  distanceMeter: number;
 
   imageWidth: string = '15px';
   imageUnit: number;
@@ -111,12 +109,6 @@ export class GiRisingPicturePage {
 
   }
 
-  ionViewDidLoad() {
-    this.databaseService.getRisingPictureFromDataBase().subscribe(data => {
-      this.database = data;
-    });
-  }
-
   getDistance(tLat,tLng,cLat,cLng) {
     let R: number = 6371; // Radius of the earth in km
     let dLat: number = this.degToRad(cLat-tLat);  // deg2rad below
@@ -128,7 +120,6 @@ export class GiRisingPicturePage {
       ; 
     let c: number = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
     this.distance = R * c; // Distance in km
-    this.distanceMeter = this.distance*1000;
     
     if(this.isFirstDistance) {
       this.firstDist = this.distance;

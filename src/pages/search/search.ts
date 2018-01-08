@@ -36,7 +36,18 @@ export class SearchPage {
     
       this.databaseService.getGamesFromDataBase().subscribe(games => {
         if(this.logged) {
-
+          for(let i = 0; i < this.objectKeys.length; i++) {
+            this.gamesKey = Object.keys(games[1][this.cityNames[i]]);
+            for(let j = 1; j <= this.gamesKey.length; j++) {
+              let aux = '';
+              if(j < 10) {
+                aux = 'game_0' + j;
+              } else {
+                aux = 'game_' + j;
+              }
+              this.games.push(games[0][this.cityNames[i]][aux]);
+            }
+          }
         } else {
           
           for(let i = 0; i < this.objectKeys.length; i++) {

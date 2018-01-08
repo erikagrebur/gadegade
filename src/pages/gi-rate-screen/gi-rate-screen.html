@@ -18,5 +18,6 @@
         <img src={{star.src}} alt="rating star" (click)="setRate(star.id)">
       </div>
   </div>
-  <p class="leftSide rightSide information">Please rate the story and if you want more fun then <span class="signUp" (click)="getSignUpScreen()">sign up</span> into Gade Gade.</p>
+  <p *ngIf="!logged" class="leftSide rightSide information">Please rate the story and if you want more fun then <span class="signUp" (click)="getSignUpScreen()">sign up</span> into Gade Gade.</p>
+  <p *ngIf="logged" class="leftSide rightSide information">Please rate the story and if you want <span class="signUp" (click)="getHomeScreen()">choose</span> another story.</p>
 </ion-content>

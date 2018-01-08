@@ -43,7 +43,11 @@ export class CityPickerPage {
   }
 
   valueChange(city) {
-    this.storageService.setData('selectedCity', city).subscribe(() => this.navCtrl.push(TabsPage));
+    for(let i = 0; i < this.objectKeys.length; i++) {
+      if (this.cityNames[i] === city) {
+        this.storageService.setData('selectedCity', city).subscribe(() => this.navCtrl.push(TabsPage));
+      }
+    }
   }
 
   getCity(city) {

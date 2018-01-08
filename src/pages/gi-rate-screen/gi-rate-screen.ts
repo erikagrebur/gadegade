@@ -113,4 +113,8 @@ export class GiRateScreenPage {
     }
   }
 
+  getHomeScreen() {
+    this.navCtrl.push(HomePage);
+  }
+
 }

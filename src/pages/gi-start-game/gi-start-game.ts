@@ -139,8 +139,4 @@ export class GiStartGamePage {
     this.diagnostic.isLocationAvailable().then(successCallback).catch(errorCallback);
 
   }
-
-  test() {
-    this.checkLocation();
-  }
 }
