@@ -76,7 +76,6 @@ export class GiObscureImgPage {
         });
         this.databaseService.getObscureImageFromDataBase().subscribe(data => {
           
-          console.log("data", data);
           if(this.logged) {
             this.dataElements = data[1];
           } else {
@@ -89,8 +88,6 @@ export class GiObscureImgPage {
           this.imageKeys = Object.keys(this.imgNames);
           this.targetLat = this.dataElements[this.storedCity][this.storedGame]['target_point_lat'];
           this.targetLng = this.dataElements[this.storedCity][this.storedGame]['target_point_lng'];
-
-          console.log('imgs', this.imgNames);
 
           let storageRef:any;
           if(this.logged) {
@@ -105,7 +102,6 @@ export class GiObscureImgPage {
             }
           }
 
-          console.log('imgs', this.imgSrcUrls);
         })
       });
     });
@@ -131,7 +127,6 @@ export class GiObscureImgPage {
       ; 
     let c: number = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
     this.distance = R * c; // Distance in km
-    console.log("distance",this.distance);
     //this.distanceMeter = this.distance*1000;
     
     if(this.isFirstDistance) {
@@ -179,7 +174,7 @@ export class GiObscureImgPage {
   }
 
   getNextGameItem() {
-    this.navCtrl.push(GiFinalScreenPage);
+    this.navCtrl.setRoot(GiFinalScreenPage);
   }
 
 }

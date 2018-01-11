@@ -112,7 +112,7 @@ export class GiFinalScreenPage {
   }
 
   getNextGameItem() {
-    this.navCtrl.push(GiRateScreenPage);
+    this.navCtrl.setRoot(GiRateScreenPage);
   }
 
 }

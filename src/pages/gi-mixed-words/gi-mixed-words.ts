@@ -110,7 +110,7 @@ export class GiMixedWordsPage {
       ; 
     let c: number = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
     this.distance = R * c; // Distance in km
-    console.log("distance",this.distance);
+
     //this.distanceMeter = this.distance*1000;
     
     if(this.isFirstDistance) {
@@ -140,8 +140,6 @@ export class GiMixedWordsPage {
     if( this.checkedValue > 0 ) {
       this.wrongWayPTag = 'none';
       this.rangeLong = this.checkedValue + (this.firstDist - this.checkPointDist)/this.unitDist;
-
-      console.log('condii', this.rangeLong < this.distanceAccuracy / 5);
       
       this.setStage();
       
@@ -175,7 +173,7 @@ export class GiMixedWordsPage {
 
   getNextGameItem() {
     //if(this.answered) {
-      this.navCtrl.push(GiObscureImgPage);
+      this.navCtrl.setRoot(GiObscureImgPage);
     //}
   }
 }

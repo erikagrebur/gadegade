@@ -20,10 +20,6 @@ export class PopoverPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public authProvider: AuthProvider, public viewCtrl: ViewController) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad PopoverPage');
-  }
-
   getSettings() {
     this.viewCtrl.dismiss();
   }

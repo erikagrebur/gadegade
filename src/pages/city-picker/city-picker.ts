@@ -38,14 +38,16 @@ export class CityPickerPage {
         
         const storageRef = firebase.storage().ref().child(`selectableCitysIcons/${this.imgNames[i]}`);
         storageRef.getDownloadURL().then(url => this.imgSrcUrls.push(url));
-      }    
-
-      console.log('sf', this.imgSrcUrls);
+      }
     });
   }
 
   valueChange(city) {
-    this.storageService.setData('selectedCity', city).subscribe(() => this.navCtrl.push(TabsPage));
+    for(let i = 0; i < this.objectKeys.length; i++) {
+      if (this.cityNames[i] === city) {
+        this.storageService.setData('selectedCity', city).subscribe(() => this.navCtrl.push(TabsPage));
+      }
+    }
   }
 
   getCity(city) {

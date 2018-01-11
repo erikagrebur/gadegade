@@ -8,6 +8,7 @@ import { DatabaseProvider } from '../../providers/database/database';
 import { StorageProvider } from '../../providers/storage/storage';
 import { Diagnostic } from '@ionic-native/diagnostic';
 import * as firebase from 'firebase';
+import { LocationTrackerProvider } from '../../providers/location-tracker/location-tracker';
 
 
 @Component({
@@ -24,8 +25,11 @@ export class GiStartGamePage {
   selectedGame: any[] = [];
   basicInfo: any[] = [];
   noGpsIconStyle: string = 'block';
+  slideStyle: string = 'rgba(148, 151, 153, 0.45)';
+  distance: number;
+  isHere: boolean = false;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, private googleMaps: GoogleMaps, private storageService: StorageProvider, private databaseService: DatabaseProvider, private diagnostic: Diagnostic, private ngZone: NgZone) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, private googleMaps: GoogleMaps, private storageService: StorageProvider, private databaseService: DatabaseProvider, private diagnostic: Diagnostic, private ngZone: NgZone, private locationTracker: LocationTrackerProvider) {
     firebase.auth().onAuthStateChanged(user => {
       if(!user) {
         this.logged = false;
@@ -33,7 +37,7 @@ export class GiStartGamePage {
         this.logged = true;
       }
     });
-    this.databaseService.getBasicInfoFromDataBase().subscribe(data => {console.log(data); this.basicInfo = data});
+    this.databaseService.getBasicInfoFromDataBase().subscribe(data => {this.basicInfo = data});
     this.storageService.getData('selectedCity').subscribe(storedCity => {
       this.storedCity = storedCity;
       this.storageService.getData('selectedGame').subscribe(storedGame => {
@@ -46,19 +50,47 @@ export class GiStartGamePage {
           }
 
           this.selectedGame = this.availableGames[this.storedCity][this.storedGame];
-          console.log(this.selectedGame);
           this.loadMap(this.selectedGame);
+          
+          this.locationTracker.startTracking();
+          this.locationTracker.backGeolocation.subscribe((location) => {
+            this.ngZone.run(() => {
+              this.getDistance(this.selectedGame['start_point_lat'], this.selectedGame['start_point_lng'], location[0].value, location[1].value);
+              this.checkLocation();
+            });
+          });
         });
       });
     });
   }
 
-  ionViewDidLoad() {
+  getDistance(tLat,tLng,cLat,cLng) {
+    let R: number = 6371; // Radius of the earth in km
+    let dLat: number = this.degToRad(cLat-tLat);  // deg2rad below
+    let dLon: number = this.degToRad(cLng-tLng); 
+    let a: number = 
+      Math.sin(dLat/2) * Math.sin(dLat/2) +
+      Math.cos(this.degToRad(tLat)) * Math.cos(this.degToRad(cLat)) * 
+      Math.sin(dLon/2) * Math.sin(dLon/2)
+      ; 
+    let c: number = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+    this.distance = R * c; // Distance in km
     
+    if(this.distance <= 0.005) {
+      this.slideStyle = '#ff993d';
+      this.isHere = true;
+    } else {
+      this.slideStyle = 'rgba(148, 151, 153, 0.45)';
+      this.isHere = false;
+    }
+  }
+  
+  degToRad(deg) {
+    return deg * (Math.PI/180)
   }
 
   getFirstGameItem() {
-    this.navCtrl.push(GameDescriptionPage);
+    this.navCtrl.setRoot(GameDescriptionPage);
   }
 
   loadMap(game) {
@@ -83,13 +115,11 @@ export class GiStartGamePage {
         'zoom': 17
       }
     });
-    console.info('this.map', JSON.stringify(this.map));
     this.map.on(GoogleMapsEvent.MAP_READY)
     .subscribe(() => {
       this.ngZone.run(() => {
         this.checkLocation();
       });
-      console.log('Map is ready');
       this.map.addMarker({
         title: game['title'],
         icon: 'red',
@@ -106,11 +136,7 @@ export class GiStartGamePage {
     let successCallback = (isAvailable) => { this.noGpsIconStyle = 'none' };
     let errorCallback = (e) => { this.noGpsIconStyle = 'block' };
 
-    this.diagnostic.isLocationAuthorized().then(successCallback).catch(errorCallback);
+    this.diagnostic.isLocationAvailable().then(successCallback).catch(errorCallback);
 
-  }
-
-  test() {
-    this.checkLocation();
   }
 }

@@ -3,6 +3,8 @@ import { NavController, NavParams } from 'ionic-angular';
 import { DatabaseProvider } from '../../providers/database/database';
 import { GoogleMaps, GoogleMap, GoogleMapsEvent } from '@ionic-native/google-maps';
 import { LocationTrackerProvider } from '../../providers/location-tracker/location-tracker';
+import { StorageProvider } from '../../providers/storage/storage';
+import { GameDetailsPage } from '../game-details/game-details';
 
 /**
  * Generated class for the SearchPage page.
@@ -26,7 +28,7 @@ export class SearchPage {
   gamesKey: any;
   cityCoordinates: any[] = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private databaseService: DatabaseProvider, private googleMaps: GoogleMaps, private ngZone: NgZone, private locationTracker: LocationTrackerProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private databaseService: DatabaseProvider, private googleMaps: GoogleMaps, private ngZone: NgZone, private locationTracker: LocationTrackerProvider, private storageService: StorageProvider) {
     this.databaseService.getSelectableCitysFromDataBase().subscribe(data => {
 
       this.cityNames = data[2];
@@ -34,12 +36,8 @@ export class SearchPage {
     
       this.databaseService.getGamesFromDataBase().subscribe(games => {
         if(this.logged) {
-
-        } else {
-          
           for(let i = 0; i < this.objectKeys.length; i++) {
-            this.gamesKey = Object.keys(games[0][this.cityNames[i]]);
-            console.log('város neve', games[0][this.cityNames[i]]);
+            this.gamesKey = Object.keys(games[1][this.cityNames[i]]);
             for(let j = 1; j <= this.gamesKey.length; j++) {
               let aux = '';
               if(j < 10) {
@@ -47,10 +45,21 @@ export class SearchPage {
               } else {
                 aux = 'game_' + j;
               }
-              console.log('aux', aux);
-              console.log('jatek', games[0][this.cityNames[i]][aux]);
               this.games.push(games[0][this.cityNames[i]][aux]);
-              console.log('gamestömb', this.games);
+            }
+          }
+        } else {
+          
+          for(let i = 0; i < this.objectKeys.length; i++) {
+            this.gamesKey = Object.keys(games[0][this.cityNames[i]]);
+            for(let j = 1; j <= this.gamesKey.length; j++) {
+              let aux = '';
+              if(j < 10) {
+                aux = 'game_0' + j;
+              } else {
+                aux = 'game_' + j;
+              }
+              this.games.push(games[0][this.cityNames[i]][aux]);
             }
           }
         }
@@ -67,7 +76,6 @@ export class SearchPage {
       this.locationTracker.startTracking();
     this.locationTracker.backGeolocation.subscribe((location) => {
       
-        console.log('value1', location[0].value, location[1].value)
         this.loadMap(location[0].value, location[1].value);
     });
     });
@@ -86,8 +94,6 @@ export class SearchPage {
   }
 
   loadMap(lat, lng) {
-    console.log("futik a mapsz", lat);
-    console.log("futik a long", lng);
     this.map = new GoogleMap('map', {
       'controls': {
         'compass': true,
@@ -109,7 +115,6 @@ export class SearchPage {
         'zoom': 17
       }
     });
-    console.info('this.map', JSON.stringify(this.map));
     this.map.on(GoogleMapsEvent.MAP_READY)
     .subscribe(() => {
       for(let i=0; i<this.games.length; i++){
@@ -121,15 +126,27 @@ export class SearchPage {
             lat: this.games[i].start_point_lat, 
             lng: this.games[i].start_point_lng
           }
+        }).then(marker => {
+          marker.on(GoogleMapsEvent.MARKER_CLICK)
+            .subscribe(() => {
+              this.goToDetailsScreen(this.games[i].city_id, this.games[i].id);
+            });
         });
       }
+    });
+  }
+
+  goToDetailsScreen(city, game) {
+    this.storageService.setData('selectedCity', city).subscribe(() => {
+      this.storageService.setData('selectedGame', game).subscribe(() => {
+        this.navCtrl.push(GameDetailsPage);
+      });
     });
   }
 
   valueChange(city) {
     for(let i = 0; i < this.objectKeys.length; i++) {
       if(this.cityNames[i] === city) {
-        console.log("lat", this.cityCoordinates[city].lat);
         this.changeLocation(this.cityCoordinates[city].lat, this.cityCoordinates[city].lng);
       }
     }

@@ -58,8 +58,6 @@ export class GiRateScreenPage {
           this.numberOfVotes = this.availableGames[this.storedCity][this.storedGame]['number_of_votes'];
         });
         this.databaseService.getRatingFromDataBase().subscribe(data => {
-
-          console.log("dataRating", data);
           
           if(this.logged) {
             this.dataElements = data[1];
@@ -69,9 +67,6 @@ export class GiRateScreenPage {
 
           this.emptyStar = this.dataElements[this.storedCity][this.storedGame]['empty_star'];
           this.fullStar = this.dataElements[this.storedCity][this.storedGame]['full_star'];
-
-          console.log('empty', this.emptyStar);
-          console.log('full', this.fullStar);
 
           let storageRefEmpty:any;
           let storageRefFull:any;
@@ -90,11 +85,6 @@ export class GiRateScreenPage {
             }
           });
           storageRefFull.getDownloadURL().then(url => this.fullStarSrcUrl = url);
-
-          console.log('cs', this.fullStarSrcUrl);
-          console.log('css', this.emptyStarSrcUrl);
-
-          console.log('csillagok csillagok mondjátok el nekem', this.stars);
         })
       });
     });
@@ -106,7 +96,6 @@ export class GiRateScreenPage {
 
   setRate(id) {
     if(!this.isVoted) {
-      console.log('id: ', id);
       for(let i = 0; i < id; i++) {
         this.stars[i].src = this.fullStarSrcUrl;
       }
@@ -117,12 +106,15 @@ export class GiRateScreenPage {
       } else {
         this.databaseService.evaluation('try_games', this.storedCity, this.storedGame, this.valueOfVotes, this.numberOfVotes);
       }
-      console.log('tomb', this.stars);
       this.isVoted = true;
       setTimeout(() => {
-        this.navCtrl.push(HomePage);
+        this.navCtrl.setRoot(HomePage);
       }, 1000);
     }
+  }
+
+  getHomeScreen() {
+    this.navCtrl.push(HomePage);
   }
 
 }
